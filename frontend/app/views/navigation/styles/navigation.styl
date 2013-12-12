@@ -1,0 +1,107 @@
+@import 'nib'
+
+.navigation
+  
+  font-family:sans-serif
+
+  a
+    display:block
+  
+  .navigation-buttons a
+    text-align:center
+    font-weight:bold
+    color:#fff
+
+    &:hover,
+    &.active
+      background-color:#25282e
+  
+  .navigation-action-bar
+    clearfix()
+    height:2.5rem
+    background-color:#1d1d21
+    color:#fff
+    z-index:999
+    width:100%
+    font-size:1.3rem
+
+    li
+      float:left
+
+    a
+      width:2.5rem
+      height:2.5rem
+      line-height:2.5rem
+      
+    .btn
+      z-index:1
+
+    .menu-btn
+      margin-left:-100%
+      border-right:solid #2d2e32 1px
+
+    .search-btn
+      margin-left:-2.57rem /* 2.5rem + border */
+      border-left:solid #2d2e32 1px
+
+      a.active
+        background-color:#4ab685
+
+    .new-review-btn
+      margin-left:-5rem
+      border-left:solid #2d2e32 1px
+
+    .section-name
+      width:100%
+      padding-left:2.5rem
+      padding-right:5rem
+      text-align:center
+      font-weight:normal
+
+      a
+        width:100%
+      
+      a:hover
+        background-color:#1d1d21 /* no hover color */
+        cursor:default
+
+
+/* Desktop view ---------- */
+@media only screen and (min-width: 480px)
+
+  .navigation
+
+    display:block
+
+    .navigation-action-bar
+      position:fixed
+      height:100%
+      width:3.2rem
+      overflow:hidden
+
+      li
+        float:none
+
+      a
+        width:100%
+
+      .section-name
+        display:none
+
+      .menu-btn
+        margin-left:0
+
+      .search-btn
+        margin-left:0
+        position:absolute
+        width:100%
+        bottom:0
+
+      .new-review-btn
+        display:none
+        margin-left:0
+
+/* High resolution screens ---------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5){
+  
+}

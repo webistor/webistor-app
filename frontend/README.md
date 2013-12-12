@@ -1,4 +1,4 @@
-# Webistor App - Version 0.0.1 Alpha
+# Tuble App - Version 0.0.2 Alpha
 
 This is an HTML5 application, built with
 [Brunch](http://brunch.io) and
@@ -14,7 +14,7 @@ Please refer to the README in the root folder.
 * Watch the project with brunch for auto-building:
     
 ```sh
-cd ~/webistor-app
+cd ~/Tuble/frontend
 brunch watch
 ```
 

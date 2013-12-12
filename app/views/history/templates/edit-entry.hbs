@@ -1,0 +1,53 @@
+<form action="#" method="{{#if id}}put{{else}}post{{/if}}" class="edit-entry-form">
+
+  <div class="inner">
+      
+      <div class="ctrlHolder">
+        <label for="l_url">URL</label>
+        <input id="l_url" type="text" name="url" value="" />
+      </div>
+  
+      <div class="ctrlHolder">
+        <label for="l_title">Title</label>
+        <input id="l_title" type="text" name="title" value="" />
+      </div>
+  
+      <div class="ctrlHolder">
+        <label for="l_tags">Tags</label>
+        <input autofocus id="l_tags" type="text" name="tags" value="" />
+      </div>
+  
+      <div class="ctrlHolder" hidden>
+        <label for="l_quotes">Quotes</label>
+        <textarea  id="l_quotes" name="quotes"></textarea>
+      </div>
+    
+    </div> <!-- /.inner -->
+    
+    <div class="notes">
+
+      <div class="ctrlHolder" hidden>
+        <label for="l_notes">Notes</label>
+        <textarea id="l_notes" name="notes"></textarea>
+      </div>
+  
+      <div class="ctrlHolder" hidden>
+        <label for="l_location">Location</label>
+        <input id="l_location" type="text" name="location" value="" />
+      </div>
+  
+      <div class="ctrlHolder" hidden>
+        <label for="l_context">Context</label>
+        <input id="l_context" type="text" name="context" value="" />
+      </div>
+    
+    </div> <!-- /.notes -->
+    
+    <div class="ctrlHolder">
+      <input type="submit" value="Save" />
+      {{#if id}}
+        <input type="button" value="Cancel" class="js-cancel button blue" />
+      {{/if}}
+    </div>
+
+</form>

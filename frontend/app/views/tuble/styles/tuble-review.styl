@@ -1,0 +1,41 @@
+.tuble-review
+  padding:0.8rem 1rem
+  display:block
+  border-bottom:solid #e0e0e0 1px
+
+  /** #TODO.
+    * want: er zitten nietszeggende DIVs rondom de tuble-review DIVs
+    */
+  &:nth-child(2n)
+    background-color:#f9f9f9
+
+  .meta
+    clearfix()
+    display:block
+    margin-bottom:2.5rem
+
+    .avatar
+      border-radius:120px
+      float:left
+      margin-right:30px
+      width:4rem
+      height:4rem
+
+    .author,
+    .rating-avg
+      position:relative;
+      top:0.8rem
+      display:block
+    
+    .icon-star
+      color:#f6b04e
+
+    .author::before
+      content: "Door: ";
+    
+    .rating-avg::before
+      content: "Beoordeling: ";
+
+  .tuble-review-text
+    clear:both;
+    margin-bottom:1rem

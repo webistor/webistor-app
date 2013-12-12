@@ -1,0 +1,108 @@
+// nib is a powerful lib for stylus that provides cross-browser css3 mixins.
+// No more vendor prefixes. http://visionmedia.github.com/nib/
+@import 'nib'
+
+*
+  box-sizing: border-box
+
+html
+  font-size:16px
+  font-family:serif
+
+body
+  background-color: #f2f0e8
+  
+  &.no-scroll
+    overflow:hidden
+
+a
+  text-decoration:none
+  color:#517fa4
+
+  &:visited
+    color:#3d627e
+
+h1, h2, h3, h4, h5, h6
+  margin:0
+  padding:0
+  font-family:sans-serif
+
+ul
+  margin:0
+  padding:0
+
+li
+  list-style:none
+  margin:0
+  padding:0
+  vertical-align:top
+
+.non-mobile
+  display:none
+
+.inner-padding
+  padding:0.8rem 1rem
+
+h1.page-title
+  margin:20px 0
+  font-size:1.4rem
+
+/**
+ * Forms
+ */
+
+.form .btn
+  padding: 0.5rem 0.6rem
+  font-size:1rem
+  margin:0 auto;
+  display:block;
+  border-radius:0.25rem;
+  boprder:none;
+  box-shadow:0;
+
+.form .btn-primary
+  color:#fff;
+  background-color:#4ab685
+
+/**
+ * Tabs
+ */
+
+.tabs
+  display:table
+  width:100%
+  font-family:sans-serif
+ 
+  li
+    display:table-cell
+    width:50%
+
+  a
+    display:block
+    color:#000
+    background-color:#efefef
+    text-transform:uppercase
+    height:2rem
+    line-height:2rem
+    text-align:center
+    font-weight:bold
+    font-size:0.8rem
+
+    &:hover,
+    &.active
+      background-color:#fff
+
+@media only screen and (min-width: 480px)
+  
+  body
+    background-color: #fff
+
+  .on-mobile
+    display:none !important
+
+  .non-mobile
+    display:block
+
+  .page-container
+
+    margin-left:4.5rem

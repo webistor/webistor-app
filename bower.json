@@ -1,0 +1,33 @@
+{
+  "name": "Webistor",
+  "version": "0.0.1-alpha",
+  "main": "public/javascripts/app.js",
+  "dependencies": {
+    "chaplin": ">=0.10.0",
+    "console-polyfill": ">=0.1.0",
+    "lodash": ">=1.3.1",
+    "jquery": ">=2.0.2",
+    "normalize-css": ">=2.1.2",
+    "h5bp-helpers": ">=0.1.0",
+    "font-awesome": ">=3.2.1",
+    "backbone.stickit": "*"
+  },
+  "overrides": {
+    "backbone": {
+      "dependencies": {
+        "lodash": "*",
+        "jquery": "*"
+      },
+      "main": "backbone.js"
+    },
+    "font-awesome": {
+      "main": [
+        "font",
+        "css/font-awesome.css"
+      ]
+    },
+    "backbone.stickit": {
+      "main": "backbone.stickit.js"
+    }
+  }
+}

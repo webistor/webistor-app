@@ -1,0 +1,78 @@
+@import 'nib'
+
+.tuble-container
+  
+  .tuble-header
+    font-family:sans-serif
+    width:100%;
+    background-size:cover
+    height:12rem
+    color:#fff;
+    text-transform:uppercase;
+    
+    .tuble-title
+      height:8rem
+      font-size:1.6rem
+      margin-bottom:0.5rem
+      margin-left:0.8rem
+      position:relative
+
+      span
+        position:absolute
+        bottom:0
+        left:0
+
+    h2
+      margin-left:0.8rem
+      font-size:0.6rem
+      font-weight:semibold;
+  
+      .tuble-rating
+        margin-left:1rem
+
+  .tuble-information-container
+    position:relative
+    top:-1.8rem
+
+    .tab-contents
+      margin:0
+      background-color:#fff
+      color:#000
+      font-size:0.8rem
+      line-height:1.2rem
+    
+      p:first-child
+        margin-top:0
+
+/* Desktop view ---------- */
+@media only screen and (min-width: 400px)
+
+  .tuble-sidebar-container
+    width:455px
+    float:left
+
+    .tuble-information-container
+      padding:0
+      top:0
+
+      .row
+        background-color:#fff8f1
+        padding:0.8rem 1rem
+
+        &:nth-child(2n)
+          background-color:#f5f7f8
+
+        p:first-child
+          margin-top:0
+          padding-top:0.8rem
+
+        p:last-child
+          margin-bottom:0
+
+  .tuble-content-container
+    float:left
+    width:500px
+    height:100%
+
+    .tuble-review:nth-child(2n+1)
+      background-color:#fbfbfb
