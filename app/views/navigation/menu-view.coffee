@@ -1,4 +1,5 @@
 PanelView = require './base/panel-view'
+Me = require 'models/me'
 
 module.exports = class MenuView extends PanelView
   
@@ -16,3 +17,12 @@ module.exports = class MenuView extends PanelView
     @unsubscribeEvent 'panel:open:menu', @show
     @unsubscribeEvent 'panel:close', @hide
     @show()
+  
+  initialize: ->
+    @model = new Me
+    @model.fetch().then => @render()
+    super
+  
+  render: ->
+    super
+    console.log 'Menu render'

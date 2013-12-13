@@ -6,6 +6,17 @@
   <li><a href="javascript:window.location.href='http://webistor.net/?method=add&amp;url='+location.href+'&amp;title='+document.title;" class="bookmarklet-btn"><span>Bookmarklet</span></a></li>
 </ul>
 <ul id="profile-nav">
-  <li><span>Avatar</span></li>
-  <li><a href="profiles/me" class="profile-btn"><span>Username</span> <i class="fa fa-caret-down"></i></i></a></li>
+  {{!-- <li><span>Avatar</span></li> --}}
+  <li>
+    {{#if username}}
+      <a href="profiles/me" class="profile-btn"><span>{{username}}</span> <i class="fa fa-caret-down"></i></a>
+      <ul class="sub-menu">
+        <li>
+          <a href="{{url "session#logout"}}" class="js-logout">Log out</a>
+        </li>
+      </ul>
+    {{else}}
+      <a href="{{url "session#login"}}" class="login-btn"><span>Log in</span></a>
+    {{/if}}
+  </li>
 </ul>
