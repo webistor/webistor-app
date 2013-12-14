@@ -1,6 +1,5 @@
 
 #nav
-  
   width: 100%;
   height: 50px;
   background: #373942;
@@ -10,35 +9,35 @@
   
   a
     color: #FFFFFF
+    display:block;
   
   h1
     font-size: 1.125em;
-    margin: 0 30px;
+    margin:0 0 0 30px;
     padding: 0;
     font-weight: 400;
     float: left;
     line-height: 50px;
-    border-right: 1px solid  #2d2f36;
-    box-shadow: inset -1px 0px 0px 0 #444650;
+    /*border-right: 1px solid  #2d2f36;*/
+    /*box-shadow: inset -1px 0px 0px 0 #444650;*/
     padding-right: 30px;
   
   ul
     margin:0
     padding:0
   
-  #main-nav li,
-  #profile-nav li
-    float:left
-    margin:0
-    padding:0
-    line-height:50px
-  
-  #main-nav li
-    margin-left:30px
-    
-    &:first-child
-      margin-left:0
-  
+    li
+      float:left
+      margin:0
+      padding:0
+      line-height:50px
+
+      a
+        padding:0 15px
+
+        &:hover
+          background:#000;
+
   #profile-nav
     float:right
     
@@ -48,16 +47,3 @@
     i
       margin-left:10px
     
-
-/* High resolution screens ----------
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5){
-  
-}
-
-/* Desktop view ---------- */
-@media only screen and (min-width: 480px)
-
-  #navigation-active-panel
-    position:relative
-    z-index:999
-

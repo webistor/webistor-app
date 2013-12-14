@@ -29,24 +29,5 @@ module.exports = class HistoryPageView extends PageView
     @subview('add-entry').$el.show()
   
   toggleAdd: (e) ->
-    
     e.preventDefault()
-
     @subview('add-entry').$el.toggle()
-    @subview('add-entry').$el.find('input:eq(0)').focus()
-
-    # Toggle button text
-    
-    btn = $(e.target).closest('a')
-    txt = btn.find('span');
-    ico = btn.find('i');
-
-    if( $(@subview('add-entry').$el).is(':visible') )
-      txt.text(txt.data('toggle-text'));
-      ico.removeClass('fa-link').addClass('fa-chevron-up');
-      btn.addClass('toggled')
-    
-    else
-      txt.text(txt.data('default-text'));
-      ico.removeClass('fa-chevron-up').addClass('fa-link');
-      btn.removeClass('toggled')

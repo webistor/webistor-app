@@ -98,18 +98,30 @@ a
 #contentbox
   width: 100%
 
-#left
-  margin: 30px
-  background: #FFFFFF
-  border: 1px solid #d4d7df
+  #left-wrapper
+    width:100%
+    float:left
+
+    #left
+      margin:30px 260px 30px 30px
+      background: #FFFFFF
+      border: 1px solid #d4d7df
+      display:block;
+
+  #right
+    float:left
+    width:200px
+    margin:30px 0 30px -230px
+    background: #FFFFFF
+    border: 1px solid #d4d7df
+    display:block
+    padding:15px
 
 /* ==== Forms ==== */
 
-#left input[type="text"]
+input[type="text"]
   font-size: 0.750em;
   font-weight: 400;
-  color: #d4d7df;
-  line-height: 30px;
   height: 30px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -192,4 +204,3 @@ input[type="submit"]
 
   .non-mobile
     display:block
-  

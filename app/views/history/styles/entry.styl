@@ -2,10 +2,21 @@
   padding: 15px;
   border-bottom: 1px solid #d4d7df;
   display: block;
+
+  &:nth-child(even)
+    background: #f7f7f7;
   
+  &:last-child
+    border: none;
+
+  &:hover
+    background-color:#eee;
+
   .title
     font-size: 1em;
-    a {color: #373942;}
+    
+    a
+      color: #373942
   
   .url
     margin: 15px 0;
@@ -16,12 +27,7 @@
     font-style: normal;
     text-transform: lowercase;
 
-  &:nth-child(even)
-    background: #f7f7f7;
-  
-  &:last-child
-    border: none;
-  
+
   .edit-entry-form
     .inner
       padding: 20px;

@@ -1,0 +1,32 @@
+<div class="entry">
+
+  <h3 class="title">
+    <a href="{{this.url}}" target="_blank">
+      {{title}}
+    </a>
+  </h3>
+
+  <div class="url">
+    <a href="{{this.url}}" target="_blank" class="link">
+      {{this.url}}
+    </a>
+  </div>
+
+  <div class="tags">
+    {{#each tags}}
+      <a href='#' class="tag orange">
+        {{title}}
+      </a>
+    {{/each}}
+  </div>
+
+  <div class="actions">
+    <a href="#" class="js-edit button green">
+      Edit
+    </a>
+    <a href="#" class="js-delete button blue">
+      Delete
+    </a>
+  </div>
+
+</div>
