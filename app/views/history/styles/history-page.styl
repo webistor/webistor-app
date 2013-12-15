@@ -11,32 +11,32 @@
       display:inline-block
       line-height:30px
 
+  .toggle-row
+    padding:5px 10px
+  
+    &:hover
+      background:#373942
+
+      .js-add-entry
+        color:#fff;
+
+  
     .js-add-entry
-      position:relative
-      top:10px
-      /*
-      transition:width 0.2s ease
-      -webkit-transition:width 0.2s ease
-      */
-      width:96px;
-      display:inline-block
+      display:block
+      text-align:center
+      margin:0 auto
       white-space:nowrap
-      overflow:hidden/*strange: margin is gone*/
+      color:#333
+
+      .fa
+        margin-right:3px;
 
       &.toggled
-        width:114px
-        /*
-        transition:width 0.2s ease
-        -webkit-transition:width 0.2s ease
-        */
+        span
+          width:75px
+          display:inline-block
 
-      span
-        overflow:hidden
-
-    .fa
-      margin-right:3px;
-
-  #actions
+  #search-form
     float: right
 
     input[type="search"]

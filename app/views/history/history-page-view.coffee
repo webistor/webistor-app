@@ -43,10 +43,10 @@ module.exports = class HistoryPageView extends PageView
 
     if( $(@subview('add-entry').$el).is(':visible') )
       txt.text(txt.data('toggle-text'));
-      ico.removeClass('fa-link').addClass('fa-chevron-up');
+      ico.removeClass('fa-link').addClass('fa-toggle-up');
       btn.addClass('toggled')
     
     else
       txt.text(txt.data('default-text'));
-      ico.removeClass('fa-chevron-up').addClass('fa-link');
+      ico.removeClass('fa-toggle-up').addClass('fa-link');
       btn.removeClass('toggled')

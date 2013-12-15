@@ -27,11 +27,37 @@
     font-style: normal;
     text-transform: lowercase;
 
-
   .edit-entry-form
-    .inner
-      padding: 20px;
+    input[type="text"], textarea
+      padding:0
+      margin-top:-2px
 
-  .inner
-    clear: both;
-    width: 100%;
+    #l_title
+      height:auto
+
+    .ctrlHolder
+      margin-bottom: 13px;
+      
+      &:last-child
+        margin-top: 15px;
+        margin-bottom: 0;
+      
+      input[type="text"], textarea
+        width: 100%;
+        font-size: 1em;
+        font-weight: 400;
+        border:0;
+        background:transparent
+        border-bottom:solid transparent 1px
+
+        &:focus
+          border:none;
+          outline-offset: 0px;
+          border-bottom:solid #ccc 1px
+
+      textarea 
+        height:100px
+
+      label
+        margin-right: 30px;
+

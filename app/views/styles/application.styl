@@ -47,6 +47,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+input, textarea{
+  outline: -webkit-focus-ring-color auto 0px;
+}
 
 .clearfix:after {
   content: ".";
@@ -68,6 +71,8 @@ html[xmlns] .clearfix {
 * html .clearfix {
   height: 1%;
 }
+
+
 
 /* ==== GENERAL ==== */
 
@@ -119,35 +124,11 @@ a
 
 /* ==== Forms ==== */
 
-input[type="text"]
-  font-size: 0.750em;
-  font-weight: 400;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding:0 0.5em;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-
-.ctrlHolder
-  margin-bottom: 30px;
-  
-  &:last-child
-    margin-bottom: 0;
-  
-  input[type="text"]
-    width: 80%;
-
-  label
-    margin-right: 30px;
-
 input[type="submit"]
   background: #90d990;
   border: 1px solid  #80c180;
   box-shadow: inset 0 1px 0 0 #afe5af;
   text-shadow: 0 1px #80c180;
-  margin: 15px;
-  margin-top: 0;
   
 /* ==== Tags ==== */
 

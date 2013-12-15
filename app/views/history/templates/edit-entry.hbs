@@ -1,23 +1,19 @@
 <form action="#" method="{{#if id}}put{{else}}post{{/if}}" class="edit-entry-form">
 
   <div class="ctrlHolder">
-    <label for="l_title">Title</label>
-    <input id="l_title" type="text" name="title" value="" />
+    <input placeholder="Title" id="l_title" type="text" name="title" value="" />
   </div>
    
   <div class="ctrlHolder">
-    <label for="l_url">URL</label>
-    <input id="l_url" type="text" name="url" value="" />
+    <input placeholder="URI" id="l_url" type="text" name="url" value="" />
   </div>
 
   <div class="ctrlHolder">
-    <label for="l_tags">Tags</label>
-    <input autofocus id="l_tags" type="text" name="tags" value="" />
+    <input placeholder="Tags" autofocus id="l_tags" type="text" name="tags" value="" />
   </div>
 
-  <div class="ctrlHolder" hidden>
-    <label for="l_notes">Notes</label>
-    <textarea  id="l_notes" name="notes"></textarea>
+  <div class="ctrlHolder">
+    <textarea  placeholder="Notes" id="l_notes" name="notes"></textarea>
   </div>
 
   <div class="ctrlHolder">
