@@ -3,7 +3,7 @@
   .header
     border-bottom: 1px solid #d4d7df
     box-shadow: 1px 3px 5px -3px #d4d7df
-    padding:30px 15px 30px 15px
+    padding:15px 15px 15px 15px
     
     h2
       margin: 0 10px 0 0
@@ -11,22 +11,11 @@
       display:inline-block
       line-height:30px
 
-  .toggle-row
-    padding:5px 10px
-  
-    &:hover
-      background:#373942
-
-      .js-add-entry
-        color:#fff;
-
-  
     .js-add-entry
-      display:block
-      text-align:center
+      float:right
+      position:relative
+      top:3px
       margin:0 auto
-      white-space:nowrap
-      color:#333
 
       .fa
         margin-right:3px;
@@ -37,7 +26,7 @@
           display:inline-block
 
   #search-form
-    float: right
+    display:inline-block
 
     input[type="search"]
       padding:0 5px;

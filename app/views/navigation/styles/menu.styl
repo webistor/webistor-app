@@ -21,13 +21,19 @@
     /*border-right: 1px solid  #2d2f36;*/
     /*box-shadow: inset -1px 0px 0px 0 #444650;*/
     padding-right: 30px;
-  
+
+  .bookmarklet-btn
+    cursor:move
+
   ul
     margin:0
     padding:0
+    position:relative
   
-    li
+    > li
       float:left
+
+    li
       margin:0
       padding:0
       line-height:50px
@@ -35,8 +41,22 @@
       a
         padding:0 15px
 
-        &:hover
+        &:hover:not(.profile-btn)
           background:#000;
+
+      ul
+        display:none
+
+      &:hover
+        ul
+          position:absolute
+          top:50px
+          display:block
+
+          li
+            background: #373942;
+            width:123px
+
 
   #profile-nav
     float:right

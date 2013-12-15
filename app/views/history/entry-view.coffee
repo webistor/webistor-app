@@ -10,7 +10,8 @@ module.exports = class EntryView extends View
     '#l_title': 'title'
     '#l_url': 'url'
     '#l_tags': 'rawTags' #TODO: custom getters or some custom binding
-  
+    '#l_notes': 'notes'
+
   events:
     'click .js-edit': 'toggleEdit'
     'click .js-cancel': 'cancel'

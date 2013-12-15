@@ -32,7 +32,7 @@ module.exports = class HistoryPageView extends PageView
     
     e.preventDefault()
 
-    @subview('add-entry').$el.toggle()
+    @subview('add-entry').$el.toggle()#TODO Append class to .edit-entry-form wrapper div.
     @subview('add-entry').$el.find('input:eq(0)').focus()
 
     # Toggle button text
