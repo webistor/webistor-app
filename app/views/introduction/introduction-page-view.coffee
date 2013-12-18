@@ -1,33 +1,29 @@
 PageView = require 'views/base/page-view'
-Entry = require 'models/entry'
-EntryView = require './entry-view'
-EntryListView = require './entry-list-view'
+UserInvite = require 'models/user-invite'
 
-module.exports = class HistoryPageView extends PageView
+module.exports = class IntroductionPageView extends PageView
   autoRender: true
-  className: 'history-page'
-  template: require './templates/history'
+  className: 'introduction-page'
+  template: require './templates/introduction'
+  
+  bindings:
+    '.email': 'email'
   
   events:
-    'click .js-add-entry': 'toggleAdd'
+    'submit .invite': 'invite'
+  
+  initialize: ->
+    @model = new UserInvite
+    super
+    $('html').addClass 'introduction'
   
   render: ->
     super
-    
-    addEntry = new EntryView {container: this.el, model:new Entry, editing:true};
-    entryList = new EntryListView {container: this.el};
-    addEntry.listView = entryList;
-    
-    @subview 'add-entry', addEntry
-    @subview 'entry-list', entryList
+    @stickit()
+    setTimeout (=> @$el.find('.email')[0].focus()), 0
   
-  edit: (id) ->
-    entry = new Entry
-    @subview('add-entry').model = entry
-    entry.set 'id', id
-    entry.fetch().then @subview('add-entry').render
-    @subview('add-entry').$el.show()
-  
-  toggleAdd: (e) ->
+  invite: (e) ->
     e.preventDefault()
-    @subview('add-entry').$el.toggle()
+    
+    @model.save().then ((result) => @$el.find('.error-message').text('Your request is being processed!'); @$el.find('.email, .request').hide(); Chaplin.helpers.redirectTo 'introduction#thankyou'),
+      ((xhr, state, message)=> @$el.find('.error-message').text(message))

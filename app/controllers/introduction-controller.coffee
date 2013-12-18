@@ -1,8 +1,11 @@
-PageController = require 'controllers/base/page-controller'
-HistoryPageView = require 'views/introduction/introduction-page-view'
+Controller = require 'controllers/base/controller'
+IntroductionView = require 'views/introduction-view'
+IntroductionPageView = require 'views/introduction/introduction-page-view'
 
-module.exports = class IntroductionController extends PageController
-
-  show: (params) ->
-    @view = @view || new IntroductionPageView
-    # @view.edit params.id if params.id
+module.exports = class IntroductionController extends Controller
+  
+  beforeAction: ->
+    @compose 'site', IntroductionView
+  
+  invite: ->
+    @view = new IntroductionPageView

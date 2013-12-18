@@ -9,6 +9,8 @@ module.exports = class MenuView extends PanelView
   listSelector: '.hob-nav'
   
   listen:
+    'session:login mediator': 'login'
+    'session:logout mediator': 'logout'
     'panel:open:menu mediator': 'show'
   
   showPermanent: ->
@@ -26,3 +28,13 @@ module.exports = class MenuView extends PanelView
   render: ->
     super
     console.log 'Menu render'
+  
+  login: ->
+    console.log 'le login'
+    @model.fetch().then => @render()
+  
+  logout: ->
+    console.log 'le logout'
+    @model = new Me
+    @render()
+  

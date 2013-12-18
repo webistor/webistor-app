@@ -1,12 +1,20 @@
-<div class="header">
-  <h2 class="title">My History</h2>
-  <div id="actions">
-    <form>
-      <input type="search" placeholder="Search">
-      <a class="button blue js-add-entry" href="#">
-        <i class="fa fa-link"></i>
-        Add Link
-      </a>
-    </form>
+<div class="header clearfix">
+  <div class="logo">
+    <img class="logo" src="#" />
+    Webistor
+  </div>
+  <div class="nav">
+    <a class="login" href="{{url 'session#login'}}">Log in</a>
   </div>
 </div>
+<p class="subtitle">Save the information you may need later on.</p>
+<div class="screenshots">
+  <img class="screenshot screenshot-left" src="#" />
+  <img class="screenshot screenshot-middle" src="#" />
+  <img class="screenshot screenshot-right" src="#" />
+</div>
+<form class="invite" method="post" action="#">
+  <div class="error-message"></div>
+  <input class="email" type="text" name="email" placeholder="your@address.com" />
+  <input class="request button red" type="submit" value="Request invite" />
+</form>

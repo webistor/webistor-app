@@ -1,5 +1,6 @@
 PageView = require 'views/base/page-view'
 UserSession = require 'models/user-session'
+mediator = require 'mediator'
 
 module.exports = class LoginPage extends PageView
   autoRender: true
@@ -20,7 +21,14 @@ module.exports = class LoginPage extends PageView
   render: ->
     super
     @stickit()
+    setTimeout (=> @$el.find('#l_email')[0].focus()), 0
   
   login: (e) ->
     e.preventDefault()
-    @model.save().then -> Chaplin.helpers.redirectTo "history#show"
+    
+    # This is a workaround for some password managers. Trigger a just-in-time change manually.
+    @$el.find('#l_password, #l_email').trigger 'change'
+    
+    @model.save().then ->
+      mediator.publish 'session:login'
+      Chaplin.helpers.redirectTo 'history#show'
