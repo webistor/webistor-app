@@ -1,16 +1,21 @@
-PageController = require 'controllers/base/page-controller'
-UserSession = require 'models/user-session'
-LoginPageView = require 'views/session/login-page-view'
+Controller = require 'controllers/base/controller'
 mediator = require 'mediator'
+Me = require 'models/me'
+UserSession = require 'models/user-session'
 
-module.exports = class HistoryController extends PageController
+_user = new Me
+
+module.exports = class SessionController extends Controller
   
-  login: ->
-    @view = new LoginPageView
-    
+  initialize: ->
+    super
+    if _user.isNew() then _user.fetch().then (-> mediator.publish 'session:login'), (-> mediator.publish 'session:logout')
+  
   logout: ->
     userSession = new UserSession
-    userSession.destroy().then ->
-      console.log 'publish logout plox'
-      Chaplin.helpers.redirectTo 'history#show'
-      mediator.publish 'session:logout'
+    userSession.destroy()
+      .then ->
+        _user = new Me
+        mediator.publish 'session:logout'
+      .always ->
+        Chaplin.helpers.redirectTo 'start#login'

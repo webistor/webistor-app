@@ -7,7 +7,7 @@ Model = require './base/model'
 ###
 
 module.exports = class UserSession extends Model
-  urlPath: '../account/user_session'
+  urlPath: 'account/user_session'
   keys: ['id', 'success', 'target_url', 'email', 'password']
   isNewVal: false
   

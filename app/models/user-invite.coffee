@@ -7,7 +7,7 @@ Model = require './base/model'
 ###
 
 module.exports = class UserInvite extends Model
-  urlPath: '../account/user_invite'
+  urlPath: 'account/user_invite'
   keys: ['id', 'success', 'target_url', 'email']
   isNewVal: false
   

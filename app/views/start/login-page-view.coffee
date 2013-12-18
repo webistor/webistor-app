@@ -2,7 +2,7 @@ PageView = require 'views/base/page-view'
 UserSession = require 'models/user-session'
 mediator = require 'mediator'
 
-module.exports = class LoginPage extends PageView
+module.exports = class LoginPageView extends PageView
   autoRender: true
   className: 'login-page'
   template: require './templates/login'
@@ -31,4 +31,4 @@ module.exports = class LoginPage extends PageView
     
     @model.save().then ->
       mediator.publish 'session:login'
-      Chaplin.helpers.redirectTo 'history#show'
+      Chaplin.helpers.redirectTo 'app#history'
