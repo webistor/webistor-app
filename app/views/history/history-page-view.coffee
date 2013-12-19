@@ -9,6 +9,7 @@ module.exports = class HistoryPageView extends PageView
   template: require './templates/history'
   
   events:
+    'submit #search-form': 'doSearch'
     'click .js-add-entry': 'toggleAdd'
   
   render: ->
@@ -50,3 +51,7 @@ module.exports = class HistoryPageView extends PageView
       txt.text(txt.data('default-text'));
       ico.removeClass('fa-toggle-up').addClass('fa-link');
       btn.removeClass('toggled')
+  
+  doSearch: (e) ->
+    e.preventDefault()
+    @subview('entry-list').search($(e.target).find('input[name=search]').val())

@@ -21,7 +21,7 @@ module.exports = class RegisterPageView extends PageView
       .fail (xhr, state, message) =>
         @$el.find('form').hide()
         @$el.find('.welcome').text('Something went wrong.')
-        @$el.find('.message').text(message).append($('<a>', {href:'invite', text:' You can request a new invite.'}))
+        @$el.find('.message').text(message+' ').append($('<a>', {href:'invite', text:'You can request a new invite.'}))
     super
     
   render: ->
