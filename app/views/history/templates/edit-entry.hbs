@@ -13,14 +13,14 @@
   </div>
 
   <div class="ctrlHolder">
-    <textarea  placeholder="Notes" id="l_notes" name="notes"></textarea>
+    <textarea placeholder="Notes" id="l_notes" name="notes"></textarea>
   </div>
 
-  <div class="ctrlHolder">
-    <input type="submit" value="Save" />
+  <div class="ctrlHolder actions">
     {{#if id}}
-      <input type="button" value="Cancel" class="js-cancel button blue" />
+      <a href="#" class="js-cancel cancel">Cancel</a>
     {{/if}}
+    <input type="submit" value="Save" class="save button green" />
   </div>
 
 </form>
