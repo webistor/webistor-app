@@ -1,12 +1,20 @@
 .invite-page
-  
+  color: #fff;
+  font-family: Lato;
+  font-weight: 300;
+
   .header
     line-height:100px
     width:100%
-    margin-bottom:2em
+    margin-bottom:29px
     
     .nav
       float:right
+      margin-top:3px
+
+      a
+        color:#fff
+        text-transform:capitalize
     
     .logo
       float:left
@@ -14,16 +22,14 @@
       font-weight:bold
       
       img
-        width:100px
-        height:100px
         margin-right:0.5em
         vertical-align:middle
   
   .subtitle
     text-align:center
     font-size:2em
-    font-weight:lighter
-    margin-bottom:1em
+    font-family:Lato, sans-serif
+    margin-bottom:38px
   
   .screenshots
     position:relative
@@ -32,24 +38,25 @@
     
     .screenshot
       position:absolute
-      border-top-left-radius:5px
-      border-top-right-radius:5px
-      height:330px
-      width:480px
+      border-top-left-radius:3px
+      border-top-right-radius:3px
+      height:325px
       background:#fff
       z-index:1
-      box-shadow:0px -4px 10px rgba(0,0,0,0.5)
+      box-shadow: 0px -3px 15px -5px #000;
+      -webkit-box-shadow: 0px -3px 15px -5px black;
+      -moz-box-shadow: 0px -3px 15px -5px black;
       
       &.screenshot-left
         bottom:0
         left:0
       
       &.screenshot-middle
-        height:400px
-        width:650px
-        left:175px
+        width: 700px;
+        height: 400px;
+        left: 210px;
         z-index:2
-      
+
       &.screenshot-right
         bottom:0
         right:0
@@ -64,8 +71,12 @@
       width:30%
       font-size:1.2em
       padding:0.5em
-    
+
     .button
       height:48px
       margin-left:1em
       padding:1em 2em
+      background: #ec7963;
+      border: 1px solid #af5a51;
+      box-shadow: inset 0 1px 0 0 #f49785;
+      text-shadow: 0 1px #af5a51;
