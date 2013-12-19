@@ -19,5 +19,6 @@ module.exports = class StartController extends PageController
   
   register: (params) ->
     claim = new UserClaim
-    claim.urlParams = {user_id:params.user_id, claim_key:params.claim_key}
+    claim.urlParams = {claim_key:params.claim_key}
+    claim.set 'id', params.user_id
     @view = new RegisterPageView claim

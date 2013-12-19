@@ -8,4 +8,4 @@ Model = require './base/model'
 
 module.exports = class UserClaim extends Model
   urlPath: 'account/user_claim'
-  keys: ['userid', 'claimkey', 'password1', 'password2']
+  keys: ['user_id', 'claim_key', 'username', 'password1', 'password2']

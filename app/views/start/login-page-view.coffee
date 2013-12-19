@@ -29,6 +29,7 @@ module.exports = class LoginPageView extends PageView
     # This is a workaround for some password managers. Trigger a just-in-time change manually.
     @$el.find('#l_password, #l_email').trigger 'change'
     
-    @model.save().then ->
+    @model.save().then (->
       mediator.publish 'session:login'
-      Chaplin.helpers.redirectTo 'app#history'
+      Chaplin.helpers.redirectTo 'app#history'),
+      ((xhr, state, message) => @$el.find('.error-message').text(message))

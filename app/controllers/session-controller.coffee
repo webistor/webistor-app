@@ -18,4 +18,5 @@ module.exports = class SessionController extends Controller
         _user = new Me
         mediator.publish 'session:logout'
       .always ->
-        Chaplin.helpers.redirectTo 'start#login'
+        Chaplin.helpers.redirectTo 'start#invite'
+        
