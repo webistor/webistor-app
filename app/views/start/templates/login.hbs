@@ -1,4 +1,12 @@
-<h1>Welcome to Webistor!</h1>
+<div class="header clearfix">
+  <div class="logo">
+    <img class="logo" src="images/logo.png" />
+  </div>
+  <div class="nav">
+    <a class="invite" href="{{url 'start#invite'}}">Request an invite</a>
+  </div>
+</div>
+<h1>Do log in, we have cookies!</h1>
 <form class="login-form" method="post" action="#">
   <div class="inner">
     <div class="ctrlHolder">
@@ -9,10 +17,9 @@
       <label for="l_password">Password</label>
       <input id="l_password" type="password" name="password" placeholder="Password" />
     </div>
-  </div>
-  <div class="buttonHolder">
-    <div class="error-message"></div>
-    <input type="submit" class="button" value="Log in">
-    <a class="button red" href="{{url "start#invite"}}">Request invite</a>
+    <div class="buttonHolder">
+      <div class="error-message"></div>
+      <input type="submit" class="button red" value="Log in">
+    </div>
   </div>
 </form>
