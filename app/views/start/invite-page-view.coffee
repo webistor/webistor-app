@@ -26,9 +26,9 @@ module.exports = class InvitePageView extends PageView
     @model.save().then ((result) => @inviteSucces(result)), ((xhr, state, message)=> @inviteError(xhr, state, message))
   
   inviteSucces: (result) ->
-    @$el.find('.error-message').text('Your request is being processed!')
+    @$el.find('.error-message').html('<div>Your request is being processed!</div>')
     @$el.find('.email, .request').hide()
     # Chaplin.helpers.redirectTo 'introduction#thankyou')
   
   inviteError: (xhr, state, message) ->
-    @$el.find('.error-message').text(message)
+    @$el.find('.error-message').html('<div>'+message+'</div>')

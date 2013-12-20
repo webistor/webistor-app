@@ -1,7 +1,11 @@
+@import 'nib'
+
 .entry
-  padding: 15px;
+  padding:20px 20px;
   border-bottom: 1px solid #d4d7df;
   display: block;
+  position:relative;
+  min-width:320px
 
   &:nth-child(even)
     background: #f7f7f7;
@@ -13,7 +17,8 @@
     background-color:#eee;
 
   .title
-    font-size: 1em;
+    font-size: 1.04rem;
+    font-weight:800
     
     a
       color: #373942
@@ -26,6 +31,42 @@
     font-weight: 400;
     font-style: normal;
     text-transform: lowercase;
+
+  .entry-actions
+    display:none
+    position:absolute
+    bottom:20px
+    right:20px
+    text-align:right;
+
+    .delete
+      margin-right:5px
+      color:#858585
+      font-size:0.85rem
+      line-height:30px
+      position:relative
+      display:inline-block
+      top:2px
+      text-transform:lowercase
+      transition:color 0.25s 0
+
+      &:hover
+        color:#555
+        transition:color 0 0
+
+  .actions
+    text-align:right
+
+    .cancel
+      color:#858585
+      font-size:0.85rem
+      position:relative
+      top:2px
+      margin-right:5px
+      text-transform:lowercase
+  
+  &:hover .entry-actions
+    display:block
 
   .edit-entry-form
     input[type="text"], textarea
