@@ -1,5 +1,5 @@
 # Environment
-production = false
+production = true
 
 # App configuration.
 module.exports =
