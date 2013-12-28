@@ -1,14 +1,15 @@
 <h1>Webistor</h1>
 <ul id="main-nav">
-  <li><a href="{{url "history#show"}}" class="history-btn">My history</a></li>
+  <li><a href="{{url "app#history"}}" class="history-btn active">My history</a></li>
   <!--<li><a href="friends" class="friends-btn">My friends</a></li>-->
-  <!--<li><a href="https://webistor.uservoice.com/" class="feedback-btn">Send feedback (new)</a></li>-->
-  <li><a href="javascript:window.location.href='http://preview.webistor.net/?method=add&amp;url='+location.href+'&amp;title='+document.title;" class="bookmarklet-btn">Bookmarklet</a></li>
+  <li><a href="https://webistor.uservoice.com/forums/230349-general" class="feedback-btn" target="_blank">Send feedback</a></li>
+  <li><a title="Drag this button to your bookmarks bar" href="javascript:window.location.href='http://webistor.net/add?title='+document.title+'&amp;url='+location.href;" class="bookmarklet-btn">Bookmarklet</a></li>
+  <li><a title="@webistor" target="_blank" href="https://twitter.com/webistor"><img src="http://www.intersport.nl/media/wysiwyg/footer/twitter-icon.png"></a></li>
 </ul>
 <ul id="profile-nav">
   {{!-- <li><span>Avatar</span></li> --}}
   <li>
-    {{#if username}}
+    {{#if level}}
       <a href="profiles/me" class="profile-btn"><span>{{username}}</span> <i class="fa fa-caret-down"></i></a>
       <ul class="sub-menu">
         <li>
@@ -16,7 +17,7 @@
         </li>
       </ul>
     {{else}}
-      <a href="{{url "session#login"}}" class="login-btn"><span>Log in</span></a>
+      <a href="{{url "start#login"}}" class="login-btn"><span>Log in</span></a>
     {{/if}}
   </li>
 </ul>

@@ -1,9 +1,11 @@
+@import 'nib'
+
 .history-page
 
   .header
     border-bottom: 1px solid #d4d7df
     box-shadow: 1px 3px 5px -3px #d4d7df
-    padding:15px 15px 15px 15px
+    padding:20px 20px
     
     h2
       margin: 0 10px 0 0
@@ -13,6 +15,7 @@
 
     .js-add-entry
       float:right
+      min-width:93px
       position:relative
       top:3px
       margin:0 auto
@@ -22,18 +25,40 @@
 
       &.toggled
         span
-          width:75px
           display:inline-block
 
   #search-form
     display:inline-block
 
+    .ctrlHolder
+      position:relative
+
+      &.search::before
+        content:"\f002"
+
     input[type="search"]
-      padding:0 5px;
-      font-size: 0.750em
       font-weight: 400
       height: 28px
       border: 1px solid #ccc
       border-radius: 3px
       -moz-border-radius: 3px
       -webkit-border-radius: 3px
+
+#right
+  .tag-list
+    display:block
+
+    .tag-row
+      clearfix()
+
+      .tag
+        display:block
+        float:left
+
+      .num
+        display:block
+        float:right
+        line-height:30px
+        color:#999
+        font-weight: 500;
+        font-family: 'Lato', sans-serif;

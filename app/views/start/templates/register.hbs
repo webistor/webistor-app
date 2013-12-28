@@ -1,0 +1,25 @@
+<h1 class="welcome">Welcome to Webistor!</h1>
+<p class="message">You can now create your account.</p>
+<form class="register-form" method="post" action="#">
+  <div class="inner">
+    <div class="ctrlHolder email">
+      E-mail: <span id="l_email"></span>
+    </div>
+    <div class="ctrlHolder">
+      <label for="l_username">Username</label>
+      <input id="l_username" type="text" name="username" placeholder="Username" />
+    </div>
+    <div class="ctrlHolder">
+      <label for="l_password1">New password</label>
+      <input id="l_password1" type="password" name="password1" placeholder="New password" />
+    </div>
+    <div class="ctrlHolder">
+      <label for="l_password2">Confirm password</label>
+      <input id="l_password2" type="password" name="password2" placeholder="Confirm password" />
+    </div>
+  </div>
+  <div class="buttonHolder">
+    <div class="error-message"></div>
+    <input type="submit" class="button" value="Register">
+  </div>
+</form>

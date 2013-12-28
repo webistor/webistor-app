@@ -1,26 +1,26 @@
 <form action="#" method="post" class="edit-entry-form">
 
-  <div class="ctrlHolder">
+  <div class="ctrlHolder has-icon title">
     <input placeholder="Title" id="l_title" type="text" name="title" value="" />
   </div>
    
-  <div class="ctrlHolder">
+  <div class="ctrlHolder has-icon url">
     <input placeholder="URI" id="l_url" type="text" name="url" value="" />
   </div>
 
-  <div class="ctrlHolder">
-    <input placeholder="Tags" autofocus id="l_tags" type="text" name="tags" value="" />
+  <div class="ctrlHolder has-icon tags">
+    <input placeholder="Tags" autofocus id="l_tags" type="text" name="tags, seperated by comma's" value="" />
   </div>
 
-  <div class="ctrlHolder">
-    <textarea  placeholder="Notes" id="l_notes" name="notes"></textarea>
+  <div class="ctrlHolder has-icon notes">
+    <textarea placeholder="Notes" id="l_notes" name="notes"></textarea>
   </div>
 
-  <div class="ctrlHolder">
-    <input type="submit" value="Save" />
+  <div class="ctrlHolder actions">
     {{#if id}}
-      <input type="button" value="Cancel" class="js-cancel button blue" />
+      <a href="#" class="js-cancel cancel">Cancel</a>
     {{/if}}
+    <input type="submit" value="Save" class="save button green" />
   </div>
 
 </form>

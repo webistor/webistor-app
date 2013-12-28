@@ -120,33 +120,72 @@ a
     background: #FFFFFF
     border: 1px solid #d4d7df
     display:block
-    padding:15px
+    padding:20px
 
 /* ==== Forms ==== */
+
+::-webkit-input-placeholder {  }
+::-moz-placeholder {  } /* firefox 19+ */
+:-ms-input-placeholder {  } /* ie */
+input:-moz-placeholder {  }
+
+.ctrlHolder
+
+  &.has-icon
+
+    &::before
+      position:absolute
+      left:10px
+      top:7px
+      color:#b4b8c1
+      font-weight: 500;
+      font-family:FontAwesome
+      display:inline-block
+      font-size:0.9rem
+
+    input, textarea
+      padding:0 0.5rem 0 33px;
 
 input[type="submit"]
   background: #90d990;
   border: 1px solid  #80c180;
   box-shadow: inset 0 1px 0 0 #afe5af;
   text-shadow: 0 1px #80c180;
-  
+
+
 /* ==== Tags ==== */
 
 .tag, .button, input[type="submit"]
+  vertical-align:middle
   padding: 0 10px;
-  font-size: 0.750em;
+  font-size: 0.85em;
   line-height: 30px;
   height: 30px;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   color: #FFFFFF;
-  text-transform: uppercase;
+  font-weight:500
   display: inline-block;
 
-.tag {
-  margin-bottom: 30px;
-}
+.tag
+  background:#858585;
+  margin-right:4px
+  margin-bottom:8px
+  padding-left:33px
+  position:relative;
+
+.tag::before
+  position:absolute
+  left:10px
+  /*top:7px*/
+  color:#fff
+  font-weight: 500;
+  font-family:FontAwesome
+  display:inline-block
+  font-size:0.9rem
+  content:"\f02b"
+  display:inline-block
 
 .green {
   background: #90d990;
@@ -178,6 +217,45 @@ input[type="submit"]
   }
 }
 
+.red
+  background:#ec7963
+  border:1px solid #af5a51
+  box-shadow:inset 0 1px 0 #f49785
+  text-shadow:0 1px #c26356
+
+/* ==== Start style ==== */
+
+html.start
+  background:#454751
+
+html.start body
+  background:none
+  color:#fff
+
+#start-container
+
+  .top-bar
+    height: 10px;
+    background:#ec7963;
+    margin-bottom:50px
+  
+  .content-wrapper
+    width:1120px;
+    margin:auto;
+
+.error-message
+  div
+    min-width: 360px;
+    text-align:center;
+    display:inline-block;
+    position: relative;
+    margin: 0 auto 30px auto;
+    padding: 15px 18px;
+    text-align: left;
+    border-radius: 5px;
+    background:rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
+
 @media only screen and (min-width: 480px)
   
   .on-mobile
@@ -185,3 +263,4 @@ input[type="submit"]
 
   .non-mobile
     display:block
+

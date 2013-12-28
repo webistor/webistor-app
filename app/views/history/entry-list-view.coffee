@@ -13,3 +13,7 @@ module.exports = class EntryListView extends CollectionView
     @collection = new SyncCollection null, model:Entry
     @collection.fetch()
     super
+  
+  search: (query) ->
+    @collection.urlParams.search = query
+    @collection.fetch()

@@ -1,8 +1,7 @@
 module.exports = (match) ->
-  match '', 'history#show'
-  match 'entries/:id', 'history#show'
-  match 'user/:username', 'archive#show'
-  match 'user/:username/:query', 'archive#show'
-  match 'tag/:tag', 'archive#show'
-  match 'login', 'session#login'
+  match '', 'app#history'
+  match 'add', 'app#history'
   match 'logout', 'session#logout'
+  match 'login', 'start#login'
+  match 'invite', 'start#invite'
+  match 'register/:user_id/:claim_key', 'start#register'

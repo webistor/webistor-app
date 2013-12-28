@@ -7,5 +7,5 @@ Model = require './base/model'
 ###
 
 module.exports = class Me extends Model
-  urlPath: '../account/me'
+  urlPath: 'account/me'
   keys: ['id', 'email', 'username', 'level', 'login', 'activity']

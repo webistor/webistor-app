@@ -1,9 +1,8 @@
-SiteView = require 'views/site-view'
 Controller = require './controller'
-NavigationController = require 'controllers/navigation-controller'
+SessionController = require 'controllers/session-controller'
 
 module.exports = class PageController extends Controller
-
+    
   beforeAction: ->
-    @compose 'site', SiteView
-    @compose 'menu', NavigationController
+    super
+    @compose 'session', SessionController

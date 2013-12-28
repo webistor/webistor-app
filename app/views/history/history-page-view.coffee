@@ -2,6 +2,7 @@ PageView = require 'views/base/page-view'
 Entry = require 'models/entry'
 EntryView = require './entry-view'
 EntryListView = require './entry-list-view'
+TagListView = require './tag-list-view'
 
 module.exports = class HistoryPageView extends PageView
   autoRender: true
@@ -9,18 +10,22 @@ module.exports = class HistoryPageView extends PageView
   template: require './templates/history'
   
   events:
+    'submit #search-form': 'doSearch'
     'click .js-add-entry': 'toggleAdd'
   
   render: ->
+
     super
     
     addEntry = new EntryView {container: this.el, model:new Entry, editing:true};
     entryList = new EntryListView {container: this.el};
     addEntry.listView = entryList;
+    tagList = new TagListView {container: '#right'};#TODO
     
     @subview 'add-entry', addEntry
     @subview 'entry-list', entryList
-  
+    @subview 'tag-list', tagList
+
   edit: (id) ->
     entry = new Entry
     @subview('add-entry').model = entry
@@ -28,16 +33,17 @@ module.exports = class HistoryPageView extends PageView
     entry.fetch().then @subview('add-entry').render
     @subview('add-entry').$el.show()
   
-  toggleAdd: (e) ->
+  toggleAdd: (e, data) ->
     
-    e.preventDefault()
+    if e
+      e.preventDefault()
 
     @subview('add-entry').$el.toggle()#TODO Append class to .edit-entry-form wrapper div.
     @subview('add-entry').$el.find('input:eq(0)').focus()
 
     # Toggle button text
     
-    btn = $(e.target).closest('a')
+    btn = $('.js-add-entry')
     txt = btn.find('span');
     ico = btn.find('i');
 
@@ -50,3 +56,13 @@ module.exports = class HistoryPageView extends PageView
       txt.text(txt.data('default-text'));
       ico.removeClass('fa-toggle-up').addClass('fa-link');
       btn.removeClass('toggled')
+
+    # Fill form with data from query string.
+    if(typeof data == 'object')
+
+      @subview('add-entry').$el.find('#l_title').val(data.title);
+      @subview('add-entry').$el.find('#l_url').val(data.url);
+
+  doSearch: (e) ->
+    e.preventDefault()
+    @subview('entry-list').search($(e.target).find('input[name=search]').val())

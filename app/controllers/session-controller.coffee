@@ -1,17 +1,22 @@
-PageController = require 'controllers/base/page-controller'
+Controller = require 'controllers/base/controller'
+mediator = require 'mediator'
+Me = require 'models/me'
 UserSession = require 'models/user-session'
-LoginPageView = require 'views/session/login-page-view'
 
-module.exports = class HistoryController extends PageController
+_user = new Me
+
+module.exports = class SessionController extends Controller
   
-  login: (params) ->
-    
-    if(params?.username)
-      userSession = new UserSession params
-      userSession.save().then -> Chaplin.helpers.redirectTo 'history#show'
-    else
-      @view = new LoginPageView
+  initialize: ->
+    super
+    if _user.isNew() then _user.fetch().then (-> mediator.publish 'session:login'), (-> mediator.publish 'session:logout')
   
   logout: ->
     userSession = new UserSession
-    userSession.destroy().then -> Chaplin.helpers.redirectTo 'history#show'
+    userSession.destroy()
+      .then ->
+        _user = new Me
+        mediator.publish 'session:logout'
+      .always ->
+        Chaplin.helpers.redirectTo 'start#invite'
+        

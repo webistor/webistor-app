@@ -8,5 +8,5 @@ VariationModel = require './base/variation-model'
 ###
 
 module.exports = class Entry extends Model
-  urlPath: 'entries'
+  urlPath: 'webhistory/entries'
   keys: ['id', 'title', 'url', 'dt_created', 'user_id', 'group_id', 'quotes', 'notes', 'location', 'context', 'song', 'tags']

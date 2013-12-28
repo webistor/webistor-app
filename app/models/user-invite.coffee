@@ -1,14 +1,14 @@
 Model = require './base/model'
 
 ###*
- * UserSession model
+ * UserInvite model
  *
  * @type {Model}
 ###
 
-module.exports = class UserSession extends Model
-  urlPath: 'account/user_session'
-  keys: ['id', 'success', 'target_url', 'email', 'password']
+module.exports = class UserInvite extends Model
+  urlPath: 'account/user_invite'
+  keys: ['id', 'success', 'target_url', 'email']
   isNewVal: false
   
   # We don't need any primary keys or what have you.

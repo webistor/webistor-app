@@ -6,9 +6,9 @@ module.exports = class MenuView extends PanelView
   className: 'menu'
   template: require './templates/menu'
   
-  listSelector: '.hob-nav'
-  
   listen:
+    'session:login mediator': 'login'
+    'session:logout mediator': 'logout'
     'panel:open:menu mediator': 'show'
   
   showPermanent: ->
@@ -22,7 +22,10 @@ module.exports = class MenuView extends PanelView
     @model = new Me
     @model.fetch().then => @render()
     super
+    
+  login: ->
+    @model.fetch().then => @render()
   
-  render: ->
-    super
-    console.log 'Menu render'
+  logout: ->
+    @model = new Me
+    @render()

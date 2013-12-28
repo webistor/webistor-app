@@ -1,0 +1,19 @@
+<div class="header clearfix">
+  <div class="logo">
+    <img class="logo" src="images/logo.png" />
+  </div>
+  <div class="nav">
+    <a class="login" href="{{url 'start#login'}}">Log in</a>
+  </div>
+</div>
+<p class="subtitle">Save the information you may need later on.</p>
+<div class="screenshots">
+  <img class="screenshot screenshot-left" src="images/start/screenshot-left.png" />
+  <img class="screenshot screenshot-middle" src="images/start/screenshot-main.png" />
+  <img class="screenshot screenshot-right" src="images/start/screenshot-right.png" />
+</div>
+<form class="invite" method="post" action="#">
+  <div class="error-message"></div>
+  <input class="email" type="text" name="email" placeholder="your@address.com" />
+  <input class="request button red" type="submit" value="Request invite" />
+</form>
