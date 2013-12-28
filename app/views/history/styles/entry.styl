@@ -1,7 +1,7 @@
 @import 'nib'
 
 .entry
-  padding:20px 20px;
+  padding:20px 20px 12px 20px;
   border-bottom: 1px solid #d4d7df;
   display: block;
   position:relative;
@@ -16,7 +16,7 @@
   &:hover
     background-color:#eee;
 
-  .title
+  h3.title
     font-size: 1.04rem;
     font-weight:800
     
@@ -33,7 +33,6 @@
     text-transform: lowercase;
 
   .entry-actions
-    display:none
     position:absolute
     bottom:20px
     right:20px
@@ -45,7 +44,7 @@
       font-size:0.85rem
       line-height:30px
       position:relative
-      display:inline-block
+      display:none
       top:2px
       text-transform:lowercase
       transition:color 0.25s 0
@@ -53,6 +52,11 @@
       &:hover
         color:#555
         transition:color 0 0
+
+  &:hover
+    .entry-actions
+      .delete
+        display:inline-block
 
   .actions
     text-align:right
@@ -70,35 +74,42 @@
 
   .edit-entry-form
     input[type="text"], textarea
-      padding:0
       margin-top:-2px
-
-    #l_title
-      height:auto
 
     .ctrlHolder
       margin-bottom: 13px;
+      position:relative
       
       &:last-child
         margin-top: 15px;
         margin-bottom: 0;
+
+      &.title::before
+        content:"\f02e"
+
+      &.url::before
+        content:"\f0ac"
       
+      &.tags::before
+        content:"\f02b"
+      
+      &.notes::before
+        content:"\f075"
+
       input[type="text"], textarea
         width: 100%;
-        font-size: 1em;
-        font-weight: 400;
+        font-weight: 500;
         border:0;
         border: 1px solid #ccc;
         border-radius: 3px;
         min-height:30px
-        padding:0 0.5em;
         -moz-border-radius: 3px;
         -webkit-border-radius: 3px;
 
-      textarea 
+      textarea
         min-height:100px
-        padding-top:4px
-        padding-bottom:4px
+        padding-top:5px
+        padding-bottom:5px
 
       label
         margin-right: 30px;

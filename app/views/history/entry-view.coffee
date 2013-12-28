@@ -1,3 +1,5 @@
+utils = require 'lib/utils'
+
 View = require 'views/base/view'
 Entry = require 'models/entry'
 
@@ -13,6 +15,7 @@ module.exports = class EntryView extends View
     '#l_notes': 'notes'
 
   events:
+    'click .tag': 'clickTag'
     'click .js-edit': 'toggleEdit'
     'click .js-cancel': 'cancel'
     'click .js-delete': 'delete'
@@ -32,6 +35,13 @@ module.exports = class EntryView extends View
     if e && e.preventDefault then e.preventDefault()
     @editing = !@editing
     @render()
+  
+  clickTag: (e, data) ->
+    
+    if e
+      e.preventDefault()
+
+    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');
   
   cancel: (e) ->
     if e && e.preventDefault then e.preventDefault()

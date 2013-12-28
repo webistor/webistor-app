@@ -1,7 +1,10 @@
 <div class="header">
   <h2 class="title">My History</h2>
   <form id="search-form">
-    <input type="search" name="search" placeholder="Search">
+    <div class="ctrlHolder has-icon search">
+      <input type="search" name="search" placeholder="Search" list="search-suggestions" />
+      <datalist id="search-suggestions"></datalist>
+    </div>
   </form>
   <a class="js-add-entry button blue" href="#">
     <i class="fa fa-link"></i>

@@ -124,6 +124,28 @@ a
 
 /* ==== Forms ==== */
 
+::-webkit-input-placeholder {  }
+::-moz-placeholder {  } /* firefox 19+ */
+:-ms-input-placeholder {  } /* ie */
+input:-moz-placeholder {  }
+
+.ctrlHolder
+
+  &.has-icon
+
+    &::before
+      position:absolute
+      left:10px
+      top:7px
+      color:#b4b8c1
+      font-weight: 500;
+      font-family:FontAwesome
+      display:inline-block
+      font-size:0.9rem
+
+    input, textarea
+      padding:0 0.5rem 0 33px;
+
 input[type="submit"]
   background: #90d990;
   border: 1px solid  #80c180;
@@ -148,7 +170,22 @@ input[type="submit"]
 
 .tag
   background:#858585;
-  margin-bottom: 0px;
+  margin-right:4px
+  margin-bottom:8px
+  padding-left:33px
+  position:relative;
+
+.tag::before
+  position:absolute
+  left:10px
+  /*top:7px*/
+  color:#fff
+  font-weight: 500;
+  font-family:FontAwesome
+  display:inline-block
+  font-size:0.9rem
+  content:"\f02b"
+  display:inline-block
 
 .green {
   background: #90d990;

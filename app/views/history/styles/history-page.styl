@@ -1,3 +1,5 @@
+@import 'nib'
+
 .history-page
 
   .header
@@ -28,12 +30,35 @@
   #search-form
     display:inline-block
 
+    .ctrlHolder
+      position:relative
+
+      &.search::before
+        content:"\f002"
+
     input[type="search"]
-      padding:0 5px;
-      font-size: 0.750em
       font-weight: 400
       height: 28px
       border: 1px solid #ccc
       border-radius: 3px
       -moz-border-radius: 3px
       -webkit-border-radius: 3px
+
+#right
+  .tag-list
+    display:block
+
+    .tag-row
+      clearfix()
+
+      .tag
+        display:block
+        float:left
+
+      .num
+        display:block
+        float:right
+        line-height:30px
+        color:#999
+        font-weight: 500;
+        font-family: 'Lato', sans-serif;

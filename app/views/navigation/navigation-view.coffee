@@ -39,7 +39,6 @@ module.exports = class NavigationView extends View
     super
     menuView = new MenuView
     @subview 'menu', menuView
-    # (If desktop then menuView.showPermanent())
     menuView.showPermanent()
     
   findButtonPanel: (el) ->

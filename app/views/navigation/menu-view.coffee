@@ -29,4 +29,3 @@ module.exports = class MenuView extends PanelView
   logout: ->
     @model = new Me
     @render()
-  
