@@ -19,7 +19,7 @@ module.exports = class InvitePageView extends PageView
   render: ->
     super
     @stickit()
-    setTimeout (=> @$el.find('.email')[0].focus()), 0
+    # setTimeout (=> @$el.find('.email')[0].focus()), 0
   
   invite: (e) ->
     e.preventDefault()

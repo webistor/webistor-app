@@ -1,3 +1,7 @@
+.login-page
+  h2
+    margin-bottom: 0.5em;
+
 .invite-page,
 .login-page
   color: #fff;
@@ -18,20 +22,14 @@
         text-transform:capitalize
         text-decoration:none
     
-    .logo
+    #logo
       float:left
       font-size:2em
-      font-weight:bold
-      
-      img
-        margin-right:0.5em
-        vertical-align:middle
-  
-  .subtitle
-    text-align:center
-    font-size:2em
-    font-family:Lato, sans-serif
-    margin-bottom:38px
+      margin-right:0.5em
+      vertical-align:middle
+      background:url(../images/logo.png) left center no-repeat
+      width:265px
+      height:106px
   
   .screenshots
     position:relative
@@ -93,3 +91,14 @@
         filter: contrast(110%);
         font-weight:500;
 
+.invite-page
+  .header
+    #logo
+      text-indent:-9999px
+
+.login-page
+  .header
+    #logo
+      a
+        text-indent:-9999px
+        display:block
