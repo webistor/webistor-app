@@ -3,7 +3,7 @@
   <li><a href="{{url "app#history"}}" class="history-btn active">My history</a></li>
   <!--<li><a href="friends" class="friends-btn">My friends</a></li>-->
   <li><a href="https://webistor.uservoice.com/forums/230349-general" class="feedback-btn" target="_blank">Send feedback</a></li>
-  <li><a title="Drag this button to your bookmarks bar" href="javascript:window.location.href='http://webistor.net/add?title='+document.title+'&amp;url='+location.href;" class="bookmarklet-btn">Bookmarklet</a></li>
+  <li><a title="Drag this button to your bookmarks bar" href="javascript:window.open('http://webistor.net/add?title='+encodeURI(document.title)+'&url='+encodeURI(location.href), '_blank');" class="bookmarklet-btn">Bookmarklet</a></li>
   <li><a title="@webistor" target="_blank" href="https://twitter.com/webistor"><img src="http://www.intersport.nl/media/wysiwyg/footer/twitter-icon.png"></a></li>
 </ul>
 <ul id="profile-nav">
