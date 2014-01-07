@@ -10,9 +10,6 @@ module.exports = class AppController extends PageController
   
   beforeAction: (params, route) ->
     
-    # Is the old add URL used ( ?method=add&url=y&title=x ) ?
-    old_add_url_used = Chaplin.utils.queryParams.parse(route['query']).method == 'add'
-
     super
 
     @compose 'login', RequireLogin
@@ -22,6 +19,9 @@ module.exports = class AppController extends PageController
   history: (params, route) ->
 
     @view = @view || new HistoryPageView
+
+    # Is the old add URL used ( ?method=add&url=y&title=x ) ?
+    old_add_url_used = Chaplin.utils.queryParams.parse(route['query']).method == 'add'
 
     # If the user wants to add a new entry -> show form.
     if route.path == 'add' || old_add_url_used

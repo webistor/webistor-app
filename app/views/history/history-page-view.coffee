@@ -61,7 +61,9 @@ module.exports = class HistoryPageView extends PageView
     if(typeof data == 'object')
 
       @subview('add-entry').$el.find('#l_title').val(data.title);
+      @subview('add-entry').model.set 'title', data.title;
       @subview('add-entry').$el.find('#l_url').val(data.url);
+      @subview('add-entry').model.set 'url', data.url;
 
   doSearch: (e) ->
     e.preventDefault()
