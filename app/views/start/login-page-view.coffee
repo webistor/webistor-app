@@ -28,7 +28,10 @@ module.exports = class LoginPageView extends PageView
     
     # This is a workaround for some password managers. Trigger a just-in-time change manually.
     @$el.find('#l_password, #l_email').trigger 'change'
-    
+
+    # Force persistent login.
+    @model.attributes.persistent = 1
+
     @model.save().then (->
       mediator.publish 'session:login'
       Chaplin.helpers.redirectTo 'app#history'),

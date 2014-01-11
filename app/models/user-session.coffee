@@ -8,7 +8,7 @@ Model = require './base/model'
 
 module.exports = class UserSession extends Model
   urlPath: 'account/user_session'
-  keys: ['id', 'success', 'target_url', 'email', 'password']
+  keys: ['id', 'success', 'target_url', 'email', 'password', 'persistent']
   isNewVal: false
   
   # We don't need any primary keys or what have you.

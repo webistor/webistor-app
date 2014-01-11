@@ -8,4 +8,4 @@ Model = require './base/model'
 
 module.exports = class Me extends Model
   urlPath: 'account/me'
-  keys: ['id', 'email', 'username', 'level', 'login', 'activity']
+  keys: ['id', 'email', 'username', 'level', 'login', 'activity', 'persistent']
