@@ -16,7 +16,7 @@ module.exports = class HistoryPageView extends PageView
   render: ->
 
     super
-    
+
     addEntry = new EntryView {container: this.el, model:new Entry, editing:true};
     entryList = new EntryListView {container: this.el};
     addEntry.listView = entryList;
@@ -25,6 +25,9 @@ module.exports = class HistoryPageView extends PageView
     @subview 'add-entry', addEntry
     @subview 'entry-list', entryList
     @subview 'tag-list', tagList
+
+    # Handle keyboard shortcuts.
+    @handleKeyboardShortcuts()
 
   edit: (id) ->
     entry = new Entry
@@ -65,6 +68,40 @@ module.exports = class HistoryPageView extends PageView
       @subview('add-entry').$el.find('#l_url').val(data.url);
       @subview('add-entry').model.set 'url', data.url;
 
+  focusSearch: (e) ->
+
+    # Find search bar.
+    bar = @$el.find('input[name=search]')
+
+    # If bar isn't already focussed.
+    if( ! bar.is(':focus') )
+      # Interrupt the (keyboard) action.
+      e.preventDefault()
+      # Then focus the search bar.
+      bar.focus()
+
   doSearch: (e) ->
     e.preventDefault()
-    @subview('entry-list').search($(e.target).find('input[name=search]').val())
+    # Get search query.
+    bar = $(e.target).find('input[name=search]')
+    # Call search method with the search term(s) as argument.
+    @subview('entry-list').search( $(e.target).find('input[name=search]').val() )
+
+  # Keyboard shortcuts handler.
+  handleKeyboardShortcuts: ->
+
+    self = this
+    
+    # Find search bar.
+    bar = @$el.find('input[name=search]')
+
+    # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
+    $(document).keydown (e) ->
+
+      # Slash? Focus search bar.
+      self.focusSearch(e) if e.which is 191
+
+      # Search bar empty & focussed + Escape?
+      if( bar.val() == '' and bar.is(':focus') and e.which == 27)
+        # Unfocus.
+        bar.blur()
