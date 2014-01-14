@@ -126,6 +126,16 @@ a
     display:block
     padding:20px
 
+    .app-updates
+      border-bottom:solid #d4d7df 1px
+      margin-bottom:16px
+
+      h1
+        font-weight:bold
+
+      ul
+        margin:16px 0
+
 /* ==== Forms ==== */
 
 ::-webkit-input-placeholder {  }
@@ -179,10 +189,12 @@ input[type="submit"]
   padding-left:33px
   position:relative;
 
+  &:hover
+    background:#777;
+
 .tag::before
   position:absolute
   left:10px
-  /*top:7px*/
   color:#fff
   font-weight: 500;
   font-family:FontAwesome
