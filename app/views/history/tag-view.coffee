@@ -17,8 +17,5 @@ module.exports = class TagView extends View
     super
 
   clickTag: (e, data) ->
-    
-    if e
-      e.preventDefault()
-
+    e?.preventDefault()
     $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');

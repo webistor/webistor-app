@@ -38,8 +38,7 @@ module.exports = class HistoryPageView extends PageView
   
   toggleAdd: (e, data) ->
     
-    if e
-      e.preventDefault()
+    e?.preventDefault()
 
     @subview('add-entry').$el.toggle()#TODO Append class to .edit-entry-form wrapper div.
     @subview('add-entry').$el.find('input:eq(0)').focus()
@@ -97,9 +96,9 @@ module.exports = class HistoryPageView extends PageView
 
     # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
     $(document).keydown (e) ->
-
-      # Slash? Focus search bar.
-      self.focusSearch(e) if e.which is 191
+      
+      # Focus the search bar when slash is pressed outside of a focussed element.
+      self.focusSearch(e) if e.which is 191 and $(document).has(':focus').length is 0
 
       # Search bar empty & focussed + Escape?
       if( bar.val() == '' and bar.is(':focus') and e.which == 27)

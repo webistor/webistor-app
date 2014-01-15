@@ -3,6 +3,7 @@ utils = require 'lib/utils'
 View = require 'views/base/view'
 Entry = require 'models/entry'
 
+#TODO: Rewrite this to use create and dispose rather than all sorts of buggy magic.
 module.exports = class EntryView extends View
   className: 'entry'
   autoRender: true
@@ -32,29 +33,24 @@ module.exports = class EntryView extends View
     @$el.hide() unless @model.id
   
   toggleEdit: (e) ->
-    if e && e.preventDefault then e.preventDefault()
+    e?.preventDefault?()
     @editing = !@editing
     @render()
   
   clickTag: (e, data) ->
-    
-    if e
-      e.preventDefault()
-
+    e?.preventDefault()
     $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');
   
   cancel: (e) ->
-    if e && e.preventDefault then e.preventDefault()
-    self = this
-    @model.fetch().then -> self.toggleEdit()
+    e?.preventDefault?()
+    @model.fetch().then => @toggleEdit()
   
   delete: ->
-    if confirm 'Really?' then @model.destroy()
+    if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
     e.preventDefault()
     
-    self = this
     if @listView
       
       # Fresh model for this add-view.
@@ -63,10 +59,10 @@ module.exports = class EntryView extends View
       @toggleEdit()
       
       # Save and send the model to the collection.
-      entry.save().then ->
-        self.listView.collection.add entry, at:0
-        self.listView.renderItem entry
+      entry.save().then =>
+        @listView.collection.add entry, at:0
+        @listView.renderItem entry
       
     else
-      @model.save().then -> self.toggleEdit()
+      @model.save().then => @toggleEdit()
       
