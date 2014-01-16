@@ -11,7 +11,7 @@ module.exports = class HistoryPageView extends PageView
   newEntry: null
   
   events:
-    'submit #search-form': 'doSearch'
+    'submit #search-form': 'submitSearch'
     'click .js-add-entry:not(.toggled)': 'createNewEntry'
     'click .js-add-entry.toggled': 'cancelNewEntry'
   
@@ -53,53 +53,25 @@ module.exports = class HistoryPageView extends PageView
     $ico[(if state is on then 'remove' else 'add') + 'Class'] 'fa-link'
     @
   
-  # edit: (id) ->
-  #   entry = new Entry
-  #   @subview('add-entry').model = entry
-  #   entry.set 'id', id
-  #   entry.fetch().then @subview('add-entry').render
-  #   @subview('add-entry').$el.show()
-  
-  toggleAdd: (e, data) ->
-    e?.preventDefault()
-    
-    # Fill form with data from query string.
-    if(typeof data == 'object')
-      @subview('add-entry').$el.find('#l_title').val(data.title);
-      @subview('add-entry').model.set 'title', data.title;
-      @subview('add-entry').$el.find('#l_url').val(data.url);
-      @subview('add-entry').model.set 'url', data.url;
-  
   focusSearch: (e) ->
+    e?.preventDefault()
+    @$el.find('input[name=search]').focus()
 
-    # Find search bar.
-    bar = @$el.find('input[name=search]')
-
-    # If bar isn't already focussed.
-    if( ! bar.is(':focus') )
-      # Interrupt the (keyboard) action.
-      e.preventDefault()
-      # Then focus the search bar.
-      bar.focus()
-
-  doSearch: (e) ->
+  submitSearch: (e) ->
     e.preventDefault()
-    # Get search query.
-    bar = $(e.target).find('input[name=search]')
-    # Call search method with the search term(s) as argument.
-    @subview('entry-list').search( $(e.target).find('input[name=search]').val() )
+    query = $(e.target).find('input[name=search]').val()
+    @subview('entry-list').search query
 
   # Keyboard shortcuts handler.
+  # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
   handleKeyboardShortcuts: ->
-    bar = @$el.find('input[name=search]')
+    
+    $bar = @$el.find('input[name=search]')
 
-    # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
     $(document).keydown (e) =>
       
       # Focus the search bar when slash is pressed outside of a focussed element.
       @focusSearch(e) if e.which is 191 and $(document).has(':focus').length is 0
-
-      # Search bar empty & focussed + Escape?
-      if( bar.val() == '' and bar.is(':focus') and e.which == 27)
-        # Unfocus.
-        bar.blur()
+      
+      # Blur the search bar when the escape key is pressed in it.
+      $bar.blur() if ($bar.is ':focus') and e.which is 27  
