@@ -20,7 +20,6 @@ module.exports = class HistoryPageView extends PageView
     @subview 'entry-list', new EntryListView {container: this.el}
     @subview 'tag-list', new TagListView {container: '#right'}
     @handleKeyboardShortcuts()
-    window.test = @
   
   createNewEntry: (e, newEntryData = null) ->
     e?.preventDefault()
