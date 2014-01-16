@@ -25,4 +25,4 @@ module.exports = class AppController extends PageController
 
     # If the user wants to add a new entry -> show form.
     if route.path == 'add' || old_add_url_used
-      @view.toggleAdd(null, Chaplin.utils.queryParams.parse(route['query']))
+      @view.createNewEntry null, Chaplin.utils.queryParams.parse route.query

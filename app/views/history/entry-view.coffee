@@ -22,47 +22,36 @@ module.exports = class EntryView extends View
     'click .js-delete': 'delete'
     'submit .edit-entry-form': 'save'
   
+  initialize: (o) ->
+    super
+    @editing = o.editing or @editing
+  
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
     return require './templates/entry'
   
   render: ->
-    @editing = !@model.id || @editing
     super
     @stickit() if @editing
-    @$el.hide() unless @model.id
-  
+    $('#l_title').focus() if @editing
+    
   toggleEdit: (e) ->
     e?.preventDefault?()
     @editing = !@editing
     @render()
+    this.trigger 'edit' + (if @editing then 'On' else 'Off')
   
   clickTag: (e, data) ->
     e?.preventDefault()
-    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');
+    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit')
   
   cancel: (e) ->
     e?.preventDefault?()
-    @model.fetch().then => @toggleEdit()
+    @toggleEdit()
   
   delete: ->
     if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
-    e.preventDefault()
-    
-    if @listView
-      
-      # Fresh model for this add-view.
-      entry = @model
-      @model = new Entry
-      @toggleEdit()
-      
-      # Save and send the model to the collection.
-      entry.save().then =>
-        @listView.collection.add entry, at:0
-        @listView.renderItem entry
-      
-    else
-      @model.save().then => @toggleEdit()
-      
+    e?.preventDefault()
+    @model.save().then => @toggleEdit()
