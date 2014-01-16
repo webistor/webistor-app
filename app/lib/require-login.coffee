@@ -10,4 +10,4 @@ module.exports = class RequireLogin extends Controller
     mediator.unsubscribe 'session:logout', @onLogout
     
   onLogout: ->
-    Chaplin.helpers.redirectTo 'start#invite'
+    Chaplin.utils.redirectTo 'start#invite'

@@ -38,7 +38,7 @@ module.exports = class RegisterPageView extends PageView
     @model.save().then ((result) => @registerSucces(result)), ((xhr, state, message)=> @registerError(xhr, state, message))
   
   registerSucces: (result) ->
-    Chaplin.helpers.redirectTo 'app#history'
+    Chaplin.utils.redirectTo 'app#history'
   
   registerError: (xhr, state, message) ->
     @$el.find('.error-message').text(message)
