@@ -8,3 +8,4 @@ Model = require './base/model'
 
 module.exports = class Tag extends Model
   urlPath: 'webhistory/tags'
+  idAttribute: 'tag_id'

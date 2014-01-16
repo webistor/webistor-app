@@ -9,13 +9,41 @@ module.exports = class TagView extends View
   
   events:
     'click .tag': 'clickTag'
+    'click .num': 'clickNum'
+    'submit .color-picker': 'submitColor'
+    'click .remove-color': 'removeColor'
   
   getTemplateFunction: ->
     return require './templates/tag'
 
-  render: ->
-    super
-
-  clickTag: (e, data) ->
+  clickTag: (e) ->
     e?.preventDefault()
     $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');
+  
+  clickNum: (e) ->
+    e?.preventDefault()
+    @showColorPicker()
+  
+  submitColor: (e) ->
+    e?.preventDefault()
+    color = @$el.find('.color-picker input').val()
+    @hideColorPicker()
+    @model.set 'color', color
+    @model.save().then =>
+      @render()
+      @model.collection.sort()
+  
+  removeColor: (e) ->
+    e?.preventDefault()
+    @hideColorPicker()
+    @model.set 'color', null
+    @model.save().then =>
+      @render()
+      @model.collection.sort()
+  
+  showColorPicker: ->
+    @$el.find('.color-picker').show()
+  
+  hideColorPicker: ->
+    @$el.find('.color-picker').hide()
+    
