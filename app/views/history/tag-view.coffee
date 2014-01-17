@@ -9,7 +9,7 @@ module.exports = class TagView extends View
   
   events:
     'click .tag': 'clickTag'
-    'click .num': 'clickNum'
+    'click .picker-trigger': 'clickNum'
     'submit .color-picker': 'submitColor'
     'click .remove-color': 'removeColor'
   

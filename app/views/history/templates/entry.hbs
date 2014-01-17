@@ -5,11 +5,11 @@
   </a>
 </h3>
 
-<div class="url">
-  <a href="{{this.url}}" target="_blank" class="link">
-    {{this.url}}
-  </a>
-</div>
+{{#if this.description}}
+  <div class="description">
+    {{this.description}}
+  </div>
+{{/if}}
 
 <div class="tags">
   {{#each tags}}
@@ -17,11 +17,25 @@
   {{/each}}
 </div>
 
-<div class="entry-actions">
-  <a href="#" class="js-delete delete">
-    Delete
-  </a>
-  <a href="#" class="js-edit edit button green">
-    Edit
-  </a>
-</div>
+<footer>
+  <ul>
+    <li class="uri">
+      <i class="fa fa-globe"></i>
+      <a href="{{this.url}}" target="_blank" class="link">{{this.url}}</a>
+    </li>
+    <li class="entry-actions">
+      <a href="#" class="js-edit">
+        <i class="fa fa-pencil"></i>
+      </a>
+      {{!--
+      <a href="#" class="js-delete delete">
+        Delete
+      </a>
+      --}}
+    </li>
+    <li class="dt-created">
+      <i class="fa fa-clock-o"></i>
+      {{this.dt_created}}
+    </li>
+  </ul>
+</footer>

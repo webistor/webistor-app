@@ -4,17 +4,41 @@
   display:block
 
   .tag-row
-    clearfix()
+    position:relative
 
     .tag
+      padding:12px 40px 12px 30px
       display:block
-      float:left
+      font-size:16px
+      color:#67737a
+      font-family:'ProximaNova Regular', sans-serif
 
-    .num
-      display: block
-      float: right
-      line-height: 30px
-      color: #999
-      font-weight: 500
-      font-family: 'Lato', sans-serif
-      cursor: pointer
+      &.pinned
+        font-family:'ProximaNova Semibold', sans-serif
+
+      &:hover
+        background-color:#dfe4e6
+
+    .picker-trigger
+      font-family:none
+      position:absolute
+      display:none
+      top:0
+      right:0
+      font-size:5px
+      width:40px
+      height:40px
+      text-align:center
+      line-height:40px
+      z-index:1
+
+      &.pinned
+        display:block
+
+      &:hover
+        background-color:#dfe4e6
+
+    &:hover
+
+      .picker-trigger
+        display:block
