@@ -3,7 +3,11 @@ utils = require 'lib/utils'
 Model = require './model'
 
 module.exports = class Collection extends Chaplin.Collection
-
+  
+  sync: (method, model, options) ->
+    options = $.extend(true, {xhrFields:{withCredentials:true}}, options)
+    return super(method, model, options)
+  
   model: Model
   urlPath: -> (_.result @model::, 'urlPath') or ''
   urlParams: {}
