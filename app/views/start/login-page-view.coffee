@@ -34,5 +34,5 @@ module.exports = class LoginPageView extends PageView
 
     @model.save().then (->
       mediator.publish 'session:login'
-      Chaplin.helpers.redirectTo 'app#history'),
+      Chaplin.utils.redirectTo 'app#history'),
       ((xhr, state, message) => @$el.find('.error-message').html('<div>'+message+'</div>'))

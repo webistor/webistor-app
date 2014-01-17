@@ -21,7 +21,7 @@ Handlebars.registerHelper 'without', (context, options) ->
 
 # Get Chaplin-declared named routes. {{url "likes#show" "105"}}
 Handlebars.registerHelper 'url', (routeName, params..., options) ->
-  Chaplin.helpers.reverse routeName, params
+  Chaplin.utils.reverse routeName, params
 
 # Pass a string to turn it into a class name (lowercase + dashify)
 Handlebars.registerHelper 'classify', (string) ->
