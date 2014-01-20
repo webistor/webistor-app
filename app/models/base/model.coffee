@@ -8,6 +8,10 @@ utils = require 'lib/utils'
 ###
 module.exports = class Model extends Chaplin.Model
   
+  sync: (method, model, options) ->
+    options = $.extend(true, {xhrFields:{withCredentials:true}}, options)
+    return super(method, model, options)
+  
   urlParams: {}
   
   ###*
