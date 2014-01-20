@@ -36,24 +36,23 @@ module.exports = class TagView extends View
   
   submitColor: (e) ->
     e?.preventDefault()
-    color = @$el.find('.color-picker input[name=color]').val()
     @hideColorPicker()
-    @model.set 'color', color
-    @model.save().then =>
-      @render()
-      @model.collection.sort()
+    @model.set 'color', @$el.find('.color-picker input[name=color]').val()
+    @save()
   
   removeColor: (e) ->
     e?.preventDefault()
     @hideColorPicker()
     @model.set 'color', null
+    @save()
+  
+  save: ->
     @model.save().then =>
       @render()
       @model.collection.sort()
   
   toggleColorPicker: ->
-    $el = @$el.find('.color-picker')
-    if $el.is(':hidden') then @showColorPicker() else @hideColorPicker()
+    if @$el.find('.color-picker').is(':hidden') then @showColorPicker() else @hideColorPicker()
   
   showColorPicker: ->
     @$el.find('.color-picker').show()
