@@ -1,11 +1,21 @@
-<a href="search/{{title}}" class="tag{{#if color}} pinned{{/if}}">
-  {{title}}
+<a href="search/{{this.title}}" class="tag{{#if this.color}} pinned{{/if}}">
+  {{this.title}}
 </a>
 
-<a href="#" title="Pin this tag by choosing a color" class="picker-trigger{{#if color}} pinned{{/if}}"{{#if color}} style="color: {{color}};"{{/if}}><i class="fa fa-circle"></i></a>
+
+<a href="#" 
+  title="{{this.num}} Bookmark(s) in this tag. Pin it by choosing a color."
+  class="picker-trigger{{#if this.color}} pinned{{/if}}"
+  {{#if color}}style="color: {{this.color}};"{{/if}}
+>
+  <i 
+    class="fa fa-circle" 
+    style="font-size:{{this.ball_size}}em;margin-top:-{{this.ball_margin}}em;margin-left:-{{this.ball_margin}}em"
+  ></i>
+</a>
 
 <form class="color-picker" hidden>
-  <input type="color" name="color" value="{{color}}">
+  <input type="color" name="color" value="{{this.color}}">
   <input type="button" class="remove-color" name="remove" value="X">
   <input type="submit" name="submit" value="&raquo;">
 </form>

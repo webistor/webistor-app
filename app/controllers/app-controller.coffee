@@ -2,27 +2,31 @@ utils = require 'lib/utils'
 
 RequireLogin = require 'lib/require-login'
 AppView = require 'views/app-view'
+MenuView = require 'views/menu-view'
 PageController = require 'controllers/base/page-controller'
 HistoryPageView = require 'views/history/history-page-view'
-NavigationController = require 'controllers/navigation-controller'
 
 module.exports = class AppController extends PageController
   
   beforeAction: (params, route) ->
-    
     super
-
     @compose 'login', RequireLogin
     @compose 'app', AppView
-    @compose 'menu', NavigationController
+    @compose 'menu', MenuView
    
   history: (params, route) ->
-
-    @view = @view || new HistoryPageView
-
-    # Is the old add URL used ( ?method=add&url=y&title=x ) ?
-    old_add_url_used = Chaplin.utils.queryParams.parse(route['query']).method == 'add'
-
-    # If the user wants to add a new entry -> show form.
-    if route.path == 'add' || old_add_url_used
-      @view.createNewEntry null, Chaplin.utils.queryParams.parse route.query
+    @view?.dispose()
+    @view = new HistoryPageView
+  
+  add: (params, route) ->
+    Entry = require 'models/entry'
+    MessageView = require 'views/message-view'
+    EntryView = require 'views/history/entry-view'
+    
+    @view?.dispose()
+    entry = new Entry Chaplin.utils.queryParams.parse route.query
+    @view = new EntryView {model: entry, editing:true, region: 'main'}
+    
+    @view.once 'editOff', =>
+      entry.dispose()
+      @view = new MessageView {region: 'main', message: 'Added a new entry. :)'}

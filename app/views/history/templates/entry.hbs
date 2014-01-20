@@ -1,19 +1,19 @@
 
 <h3 class="title">
   <a href="{{this.url}}" target="_blank">
-    {{title}}
+    {{this.title}}
   </a>
 </h3>
 
-{{#if this.description}}
+{{#if notes}}
   <div class="description">
-    {{this.description}}
+    {{this.notes}}
   </div>
 {{/if}}
 
 <div class="tags">
   {{#each tags}}
-    <a href='#' class="tag">{{title}}</a>
+    <a href='#' class="tag">{{this.title}}</a>
   {{/each}}
 </div>
 
@@ -34,7 +34,7 @@
       --}}
     </li>
     <li class="dt-created">
-      <i class="fa fa-clock-o"></i>
+      <i class="fa fa-clock-o js-delete"></i>
       {{this.dt_created}}
     </li>
   </ul>
