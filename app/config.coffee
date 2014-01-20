@@ -5,4 +5,4 @@ production = false
 module.exports =
   production: production
   api:
-    urlRoot: if production then 'http://api.webistor.net/rest/' else 'http://localhost/WebistorAPI/rest/'
+    urlRoot: if production then 'http://www.webistor.net/api/rest/' else 'http://www.webistor.net/api/rest/'

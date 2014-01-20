@@ -9,7 +9,7 @@ module.exports = class StartController extends PageController
   
   beforeAction: ->
     super
-    @compose 'start', StartView
+    @reuse 'start', StartView
   
   invite: ->
     @view = new InvitePageView

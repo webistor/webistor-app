@@ -1,5 +1,11 @@
 RewriteEngine On
+
+# Redirect non-www to www.
+#RewriteCond %{HTTP_HOST} !^www\. #TODO Add localhost
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !index
 RewriteRule (.*) index.html [L]
+
