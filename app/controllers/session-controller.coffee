@@ -3,20 +3,47 @@ mediator = require 'mediator'
 Me = require 'models/me'
 UserSession = require 'models/user-session'
 
-_user = new Me
-
 module.exports = class SessionController extends Controller
+  
+  loginStatus: null
   
   initialize: ->
     super
-    if _user.isNew() then _user.fetch().then (-> mediator.publish 'session:login'), (-> mediator.publish 'session:logout')
+    mediator.user = new Me
+    
+    @subscribeEvent '!session:login', @login
+    @subscribeEvent '!session:determineLogin', @determineLoginStatus
+    @subscribeEvent '!session:logout', @logout
+  
+  show: ->
+    #show login view
+  
+  login: (data) ->
+    @publishEvent 'session:loginAttempt'
+    @userSession = new UserSession data
+    @userSession.save().then (=> @determineLoginStatus()), ((a,b,message) => @handleLoginFailure(message))
+  
+  determineLoginStatus: ->
+    mediator.user.fetch().then (=> @handleLogin()), (=> @handleLogout()) if not @isLoginStatusDetermined()
   
   logout: ->
-    userSession = new UserSession
-    userSession.destroy()
-      .then ->
-        _user = new Me
-        mediator.publish 'session:logout'
-      .always ->
-        Chaplin.utils.redirectTo 'start#invite'
-        
+    (@userSession or new UserSession).destroy().always => @handleLogout()
+  
+  handleLogin: ->
+    @publishEvent 'session:login'
+    @publishEvent 'session:loginStatus', true
+    @loginStatus = true
+  
+  handleLogout: ->
+    mediator.user = new Me
+    @publishEvent 'session:logout'
+    @publishEvent 'session:loginStatus', false
+    @loginStatus = false
+  
+  handleLoginFailure: (message) ->
+    @publishEvent 'session:loginFailure', message
+    @publishEvent 'session:loginStatus', false
+    @loginStatus = false
+  
+  isLoginStatusDetermined: ->
+    @loginStatus is not null
