@@ -2,9 +2,9 @@ utils = require 'lib/utils'
 
 RequireLogin = require 'lib/require-login'
 AppView = require 'views/app-view'
+MenuView = require 'views/menu-view'
 PageController = require 'controllers/base/page-controller'
 HistoryPageView = require 'views/history/history-page-view'
-NavigationController = require 'controllers/navigation-controller'
 
 module.exports = class AppController extends PageController
   
@@ -12,7 +12,7 @@ module.exports = class AppController extends PageController
     super
     @compose 'login', RequireLogin
     @compose 'app', AppView
-    @compose 'menu', NavigationController
+    @compose 'menu', MenuView
    
   history: (params, route) ->
     @view?.dispose()
