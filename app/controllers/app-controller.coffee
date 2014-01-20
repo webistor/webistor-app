@@ -2,8 +2,17 @@ utils = require 'lib/utils'
 
 PageController = require 'controllers/base/page-controller'
 HistoryPageView = require 'views/history/history-page-view'
+RequireLogin = require 'lib/require-login'
+AppView = require 'views/app-view'
+MenuView = require 'views/menu-view'
 
 module.exports = class AppController extends PageController
+  
+  beforeAction: ->
+    super
+    @compose 'login', RequireLogin
+    @compose 'app', AppView
+    @compose 'menu', MenuView
   
   history: (params, route) ->
     @view = new HistoryPageView

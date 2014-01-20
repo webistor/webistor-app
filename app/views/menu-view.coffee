@@ -1,6 +1,7 @@
 View = require './base/view'
 Me = require 'models/me'
 utils = require 'lib/utils'
+mediator = require 'mediator'
 
 module.exports = class MenuView extends View
   
@@ -9,30 +10,24 @@ module.exports = class MenuView extends View
   template: require './templates/menu'
   
   listen:
-    'session:login mediator': 'login'
-    'session:logout mediator': 'logout'
+    'session:loginStatus mediator': 'render'
     'search mediator': 'updateSearch'
   
   events:
     'submit #search-form': 'submitSearch'
+    'click .js-logout': 'doLogout'
   
   initialize: ->
-    @model = new Me
-    @model.fetch().then => @render()
     super
     @handleKeyboardShortcuts()
   
   getTemplateData: ->
-    data = super
+    data = Chaplin.mediator.user?.serialize() or {}
     data.search = @search
     data
   
-  login: ->
-    @model.fetch().then => @render()
-  
-  logout: ->
-    @model = new Me
-    @render()
+  doLogout: (e) ->
+    @publishEvent '!session:logout'
   
   focusSearch: (e) ->
     e?.preventDefault()
