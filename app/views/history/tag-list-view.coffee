@@ -1,6 +1,6 @@
 CollectionView = require 'views/base/collection-view'
 TagView = require './tag-view'
-SyncCollection = require 'models/base/sync-collection'
+Collection = require 'models/base/collection'
 Tag = require 'models/tag'
 
 module.exports = class TagListView extends CollectionView
@@ -16,12 +16,8 @@ module.exports = class TagListView extends CollectionView
     return  0
   
   initialize: ->
-    @collection = new SyncCollection null, model:Tag
+    @collection = new Collection null, model:Tag
     @collection.comparator = comparator
     @subscribeEvent 'entry:sync', => @collection.fetch reset:true
     @collection.fetch()
     super
-  
-  search: (query) ->
-    @collection.urlParams.search = query
-    @collection.fetch()

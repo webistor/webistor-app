@@ -2,7 +2,9 @@
 
 <form id="search-form">
   <div class="ctrlHolder has-icon search">
-    <input type="search" name="search" placeholder="Search" list="search-suggestions" />
+    <input type="search" name="search" placeholder="Search" list="search-suggestions"
+      {{#if this.search}} value="{{this.search}}"{{/if}}
+    />
     <datalist id="search-suggestions"></datalist>
   </div>
 </form>

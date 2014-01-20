@@ -1,22 +1,17 @@
 utils = require 'lib/utils'
 
-RequireLogin = require 'lib/require-login'
-AppView = require 'views/app-view'
-MenuView = require 'views/menu-view'
 PageController = require 'controllers/base/page-controller'
 HistoryPageView = require 'views/history/history-page-view'
 
 module.exports = class AppController extends PageController
   
-  beforeAction: (params, route) ->
-    super
-    @compose 'login', RequireLogin
-    @compose 'app', AppView
-    @compose 'menu', MenuView
-   
   history: (params, route) ->
-    @view?.dispose()
     @view = new HistoryPageView
+  
+  search: (params, route) ->
+    query = decodeURIComponent params.query
+    @view = new HistoryPageView search: query
+    @publishEvent 'search', query
   
   add: (params, route) ->
     Entry = require 'models/entry'

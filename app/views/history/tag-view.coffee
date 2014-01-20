@@ -1,5 +1,4 @@
 utils = require 'lib/utils'
-
 View = require 'views/base/view'
 Tag = require 'models/tag'
 
@@ -9,7 +8,6 @@ module.exports = class TagView extends View
   template: require './templates/tag'
   
   events:
-    'click .tag': 'clickTag'
     'click .picker-trigger': 'clickPicker'
     'submit .color-picker': 'submitColor'
     'click .remove-color': 'removeColor'
@@ -25,10 +23,6 @@ module.exports = class TagView extends View
     data.ball_size = (4*score).toPrecision 2
     data.ball_margin = (score/2).toPrecision 2
     data
-  
-  clickTag: (e) ->
-    e?.preventDefault()
-    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');
   
   clickPicker: (e) ->
     e?.preventDefault()

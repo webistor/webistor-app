@@ -16,8 +16,9 @@ module.exports = class EntryView extends View
     '#l_notes': 'notes'
 
   events:
+    'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
-    'click .js-edit': 'toggleEdit'
+    'click .js-edit': 'enableEdit'
     'click .js-cancel': 'cancel'
     'click .js-delete': 'delete'
     'submit .edit-entry-form': 'save'
@@ -36,10 +37,21 @@ module.exports = class EntryView extends View
     $('#l_title').focus() if @editing
     
   toggleEdit: (e) ->
-    e?.preventDefault?()
-    @editing = !@editing
+    @[if @editing then 'disableEdit' else 'enableEdit'] e
+  
+  enableEdit: (e) ->
+    return if @editing
+    e?.preventDefault()
+    @editing = true
     @render()
-    this.trigger 'edit' + (if @editing then 'On' else 'Off')
+    this.trigger 'editOn'
+  
+  disableEdit: (e) ->
+    return if not @editing
+    e?.preventDefault()
+    @editing = false
+    @render()
+    this.trigger 'editOff'
   
   clickTag: (e, data) ->
     e?.preventDefault()
@@ -47,11 +59,11 @@ module.exports = class EntryView extends View
   
   cancel: (e) ->
     e?.preventDefault?()
-    @toggleEdit()
+    @disableEdit()
   
   delete: ->
     if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
     e?.preventDefault()
-    @model.save().then => @toggleEdit()
+    @model.save().then => @disableEdit()
