@@ -11,15 +11,17 @@ module.exports = class HistoryPageView extends PageView
   newEntry: null
   
   events:
-    'submit #search-form': 'submitSearch'
     'click .js-add-entry:not(.toggled)': 'createNewEntry'
     'click .js-add-entry.toggled': 'cancelNewEntry'
   
+  initialize: (o) ->
+    @search = o?.search or undefined
+  
   render: ->
     super
-    @subview 'entry-list', new EntryListView {container: this.el}
+    @subview 'entry-list', new EntryListView {container: this.el, search: @search}
     @subview 'tag-list', new TagListView {container: '#right'}
-    @handleKeyboardShortcuts()
+    @search = undefined
   
   createNewEntry: (e, newEntryData = null) ->
     e?.preventDefault()
@@ -52,26 +54,3 @@ module.exports = class HistoryPageView extends PageView
     $ico[(if state is on then 'add' else 'remove') + 'Class'] 'fa-toggle-up'
     $ico[(if state is on then 'remove' else 'add') + 'Class'] 'fa-link'
     @
-  
-  focusSearch: (e) ->
-    e?.preventDefault()
-    @$el.find('input[name=search]').focus()
-
-  submitSearch: (e) ->
-    e.preventDefault()
-    query = $(e.target).find('input[name=search]').val()
-    @subview('entry-list').search query
-
-  # Keyboard shortcuts handler.
-  # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
-  handleKeyboardShortcuts: ->
-    
-    $bar = @$el.find('input[name=search]')
-
-    $(document).keydown (e) =>
-      
-      # Focus the search bar when slash is pressed outside of a focussed element.
-      @focusSearch(e) if e.which is 191 and $(document).has(':focus').length is 0
-      
-      # Blur the search bar when the escape key is pressed in it.
-      $bar.blur() if ($bar.is ':focus') and e.which is 27  
