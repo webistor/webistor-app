@@ -18,7 +18,7 @@ module.exports = class TagListView extends CollectionView
   initialize: ->
     @collection = new SyncCollection null, model:Tag
     @collection.comparator = comparator
-    @subscribeEvent 'entry:sync', => @collection.fetch()
+    @subscribeEvent 'entry:sync', => @collection.fetch reset:true
     @collection.fetch()
     super
   
