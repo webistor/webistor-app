@@ -1,0 +1,32 @@
+control-height = 30px
+
+.module.color-picker
+  width: 200px
+  
+  &.over
+    position: absolute
+  
+  &.in
+    position: static
+  
+  .slide-control
+    display: none
+    height: control-height
+    position: relative
+    
+    > button
+      height: control-height
+      line-height: control-height
+      position: absolute
+    
+    .left
+      left: 0
+    
+    .right
+      right: 0
+  
+  .actions
+    position: relative
+    bottom: 0
+
+

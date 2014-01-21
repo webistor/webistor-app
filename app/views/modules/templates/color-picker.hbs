@@ -1,0 +1,22 @@
+<div class="box">
+
+  <div class="slide-control">
+    <button class="left" disabled>&laquo;</button>
+    <button class="right">&raquo;</button>
+  </div>
+
+  <div class="slides">
+    <div class="color-spectrum"></div>
+    <div class="color-palette" hidden></div>
+  </div>
+
+  <form action="#" class="actions">
+    
+    <input type="hidden" name="color" value="{{this.color}}">
+    
+    <input type="submit" name="apply" class="apply button green{{#if this.color}} hidden{{/if}}" value="Apply new Colour">
+    <input type="submit" name="remove" class="remove button red{{#unless this.color}} hidden{{/unless}}" value="Remove / Unpin">
+
+  </form>
+
+</div>
