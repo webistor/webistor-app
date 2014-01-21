@@ -9,8 +9,6 @@ module.exports = class TagView extends View
   
   events:
     'click .picker-trigger': 'clickPicker'
-    'submit .color-picker': 'submitColor'
-    'click .remove-color': 'removeColor'
   
   getTemplateData: ->
     data = super
@@ -46,11 +44,10 @@ module.exports = class TagView extends View
       @model.collection.sort()
   
   toggleColorPicker: ->
-    if @$el.find('.color-picker').is(':hidden') then @showColorPicker() else @hideColorPicker()
+    unless @subview('color-picker') then @showColorPicker() else @hideColorPicker()
   
   showColorPicker: ->
-    @$el.find('.color-picker').show()
+    @subview 'color-picker', new ColorPickerView
   
   hideColorPicker: ->
-    @$el.find('.color-picker').hide()
     

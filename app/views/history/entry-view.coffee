@@ -25,7 +25,7 @@ module.exports = class EntryView extends View
   
   initialize: (o) ->
     super
-    @editing = o.editing or @editing
+    @editing or= o.editing
   
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
@@ -47,7 +47,7 @@ module.exports = class EntryView extends View
     this.trigger 'editOn'
   
   disableEdit: (e) ->
-    return if not @editing
+    return unless @editing
     e?.preventDefault()
     @editing = false
     @render()

@@ -24,7 +24,7 @@ module.exports = class SessionController extends Controller
     @userSession.save().then (=> @determineLoginStatus()), ((a,b,message) => @handleLoginFailure(message))
   
   determineLoginStatus: ->
-    mediator.user.fetch().then (=> @handleLogin()), (=> @handleLogout()) if not @isLoginStatusDetermined()
+    mediator.user.fetch().then (=> @handleLogin()), (=> @handleLogout()) unless @isLoginStatusDetermined()
   
   logout: ->
     (@userSession or new UserSession).destroy().always => @handleLogout()

@@ -15,7 +15,7 @@ module.exports = class HistoryPageView extends PageView
     'click .js-add-entry.toggled': 'cancelNewEntry'
   
   initialize: (o) ->
-    @search = o?.search or undefined
+    @search or= o?.search
   
   render: ->
     super
@@ -43,7 +43,7 @@ module.exports = class HistoryPageView extends PageView
     @newEntry?.dispose()
     @newEntry = null
     @toggleAddButton off
-    @
+    this
   
   toggleAddButton: (state) ->
     $btn = @$el.find '.js-add-entry'
@@ -53,4 +53,4 @@ module.exports = class HistoryPageView extends PageView
     $txt.text $txt.data (if state is on then 'toggle' else 'default') + '-text'
     $ico[(if state is on then 'add' else 'remove') + 'Class'] 'fa-toggle-up'
     $ico[(if state is on then 'remove' else 'add') + 'Class'] 'fa-link'
-    @
+    this
