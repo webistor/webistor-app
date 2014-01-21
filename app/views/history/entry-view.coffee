@@ -25,7 +25,7 @@ module.exports = class EntryView extends View
   
   initialize: (o) ->
     super
-    @editing or= o.editing
+    @editing = o.editing or @editing
   
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing

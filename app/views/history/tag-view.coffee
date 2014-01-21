@@ -1,6 +1,8 @@
 utils = require 'lib/utils'
 View = require 'views/base/view'
 Tag = require 'models/tag'
+ColorPickerView = require 'views/modules/color-picker-view'
+
 
 module.exports = class TagView extends View
   className: 'tag-row'
@@ -26,28 +28,33 @@ module.exports = class TagView extends View
     e?.preventDefault()
     @toggleColorPicker()
   
-  submitColor: (e) ->
-    e?.preventDefault()
-    @hideColorPicker()
-    @model.set 'color', @$el.find('.color-picker input[name=color]').val()
-    @save()
-  
-  removeColor: (e) ->
-    e?.preventDefault()
-    @hideColorPicker()
-    @model.set 'color', null
-    @save()
+  setColor: (color) ->
+    @model.set 'color', color
+    @$el.find('.picker-trigger').css 'color', color
   
   save: ->
+    @hideColorPicker()
     @model.save().then =>
       @render()
       @model.collection.sort()
   
   toggleColorPicker: ->
-    unless @subview('color-picker') then @showColorPicker() else @hideColorPicker()
+    if not @subview('color-picker') or @subview('color-picker').disposed
+      @showColorPicker()
+    else
+      @hideColorPicker()
   
   showColorPicker: ->
-    @subview 'color-picker', new ColorPickerView
-  
-  hideColorPicker: ->
+    picker = @subview 'color-picker', new ColorPickerView
+      color: @model.get 'color'
+      arrow: 'right'
+      css:
+        top: @$el.offset().top
+        right: 270
     
+    picker.on 'changeColor', (color) => @setColor color
+    picker.on 'applyColor', (color) => @setColor color; @save()
+    picker.on 'removeColor', => @setColor null; @save()
+    
+  hideColorPicker: ->
+    @subview('color-picker')?.dispose()

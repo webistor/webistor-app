@@ -15,7 +15,7 @@ module.exports = class HistoryPageView extends PageView
     'click .js-add-entry.toggled': 'cancelNewEntry'
   
   initialize: (o) ->
-    @search or= o?.search
+    @search = o?.search or @search
   
   render: ->
     super
@@ -35,6 +35,7 @@ module.exports = class HistoryPageView extends PageView
       editing: true
     }
     @newEntry.once 'sync', =>
+      @toggleAddButton off
       @subview('entry-list').collection.unshift @newEntry
       newEntryView.dispose()
       @newEntry = null
