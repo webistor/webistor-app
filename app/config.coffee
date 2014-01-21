@@ -1,8 +1,8 @@
 # Environment
-production = false
+production = true
 
 # App configuration.
 module.exports =
   production: production
   api:
-    urlRoot: 'http://api.webistor.net/rest/'
+    urlRoot: 'http://www.webistor.net/api/rest/'
