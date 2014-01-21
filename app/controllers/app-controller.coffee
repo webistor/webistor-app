@@ -10,9 +10,9 @@ module.exports = class AppController extends PageController
   
   beforeAction: ->
     super
-    @compose 'login', RequireLogin
-    @compose 'app', AppView
-    @compose 'menu', MenuView
+    @reuse 'login', RequireLogin
+    @reuse 'app', AppView
+    @reuse 'menu', MenuView
   
   history: (params, route) ->
     @view = new HistoryPageView
