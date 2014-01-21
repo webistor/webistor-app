@@ -4,10 +4,9 @@ Controller = require 'controllers/base/controller'
 module.exports = class RequireLogin extends Controller
   
   initialize: ->
-    mediator.subscribe 'session:logout', @onLogout
-  
-  dispose: ->
-    mediator.unsubscribe 'session:logout', @onLogout
+    super
+    @subscribeEvent 'session:logout', @logout
+    @publishEvent '!session:determineLogin'
     
-  onLogout: ->
-    Chaplin.helpers.redirectTo 'start#invite'
+  logout: ->
+    @redirectTo 'start#invite'

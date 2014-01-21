@@ -8,63 +8,49 @@ module.exports = class HistoryPageView extends PageView
   autoRender: true
   className: 'history-page'
   template: require './templates/history'
+  newEntry: null
   
   events:
-    'submit #search-form': 'doSearch'
-    'click .js-add-entry': 'toggleAdd'
+    'click .js-add-entry:not(.toggled)': 'createNewEntry'
+    'click .js-add-entry.toggled': 'cancelNewEntry'
+  
+  initialize: (o) ->
+    @search or= o?.search
   
   render: ->
-
     super
-    
-    addEntry = new EntryView {container: this.el, model:new Entry, editing:true};
-    entryList = new EntryListView {container: this.el};
-    addEntry.listView = entryList;
-    tagList = new TagListView {container: '#right'};#TODO
-    
-    @subview 'add-entry', addEntry
-    @subview 'entry-list', entryList
-    @subview 'tag-list', tagList
-
-  edit: (id) ->
-    entry = new Entry
-    @subview('add-entry').model = entry
-    entry.set 'id', id
-    entry.fetch().then @subview('add-entry').render
-    @subview('add-entry').$el.show()
+    @subview 'entry-list', new EntryListView {container: this.el, search: @search}
+    @subview 'tag-list', new TagListView {container: '#right'}
+    @search = undefined
   
-  toggleAdd: (e, data) ->
-    
-    if e
-      e.preventDefault()
-
-    @subview('add-entry').$el.toggle()#TODO Append class to .edit-entry-form wrapper div.
-    @subview('add-entry').$el.find('input:eq(0)').focus()
-
-    # Toggle button text
-    
-    btn = $('.js-add-entry')
-    txt = btn.find('span');
-    ico = btn.find('i');
-
-    if( $(@subview('add-entry').$el).is(':visible') )
-      txt.text(txt.data('toggle-text'));
-      ico.removeClass('fa-link').addClass('fa-toggle-up');
-      btn.addClass('toggled')
-    
-    else
-      txt.text(txt.data('default-text'));
-      ico.removeClass('fa-toggle-up').addClass('fa-link');
-      btn.removeClass('toggled')
-
-    # Fill form with data from query string.
-    if(typeof data == 'object')
-
-      @subview('add-entry').$el.find('#l_title').val(data.title);
-      @subview('add-entry').model.set 'title', data.title;
-      @subview('add-entry').$el.find('#l_url').val(data.url);
-      @subview('add-entry').model.set 'url', data.url;
-
-  doSearch: (e) ->
-    e.preventDefault()
-    @subview('entry-list').search($(e.target).find('input[name=search]').val())
+  createNewEntry: (e, newEntryData = null) ->
+    e?.preventDefault()
+    @newEntry?.dispose()
+    @newEntry = new Entry newEntryData
+    @toggleAddButton on
+    newEntryView = new EntryView {
+      container: @subview('entry-list').el
+      containerMethod: 'prepend'
+      model: @newEntry
+      editing: true
+    }
+    @newEntry.once 'sync', =>
+      @subview('entry-list').collection.unshift @newEntry
+      newEntryView.dispose()
+      @newEntry = null
+  
+  cancelNewEntry: ->
+    @newEntry?.dispose()
+    @newEntry = null
+    @toggleAddButton off
+    this
+  
+  toggleAddButton: (state) ->
+    $btn = @$el.find '.js-add-entry'
+    $txt = $btn.find 'span'
+    $ico = $btn.find 'i'
+    $btn[(if state is on then 'add' else 'remove') + 'Class'] 'toggled'
+    $txt.text $txt.data (if state is on then 'toggle' else 'default') + '-text'
+    $ico[(if state is on then 'add' else 'remove') + 'Class'] 'fa-toggle-up'
+    $ico[(if state is on then 'remove' else 'add') + 'Class'] 'fa-link'
+    this

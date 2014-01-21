@@ -1,27 +1,41 @@
 
 <h3 class="title">
   <a href="{{this.url}}" target="_blank">
-    {{title}}
+    {{this.title}}
   </a>
 </h3>
 
-<div class="url">
-  <a href="{{this.url}}" target="_blank" class="link">
-    {{this.url}}
-  </a>
-</div>
+{{#if notes}}
+  <div class="description">
+    {{this.notes}}
+  </div>
+{{/if}}
 
 <div class="tags">
   {{#each tags}}
-    <a href='#' class="tag">{{title}}</a>
+    <a href='search/{{this.title}}' class="tag">{{this.title}}</a>
   {{/each}}
 </div>
 
-<div class="entry-actions">
-  <a href="#" class="js-delete delete">
-    Delete
-  </a>
-  <a href="#" class="js-edit edit button green">
-    Edit
-  </a>
-</div>
+<footer>
+  <ul>
+    <li class="uri">
+      <i class="fa fa-globe"></i>
+      <a href="{{this.url}}" target="_blank" class="link">{{this.url}}</a>
+    </li>
+    <li class="entry-actions">
+      <a href="#" class="js-edit">
+        <i class="fa fa-pencil"></i>
+      </a>
+      {{!--
+      <a href="#" class="js-delete delete">
+        Delete
+      </a>
+      --}}
+    </li>
+    <li class="dt-created">
+      <i class="fa fa-clock-o js-delete"></i>
+      {{this.dt_created}}
+    </li>
+  </ul>
+</footer>

@@ -3,6 +3,7 @@ utils = require 'lib/utils'
 View = require 'views/base/view'
 Entry = require 'models/entry'
 
+#TODO: Rewrite this to use create and dispose rather than all sorts of buggy magic.
 module.exports = class EntryView extends View
   className: 'entry'
   autoRender: true
@@ -15,58 +16,54 @@ module.exports = class EntryView extends View
     '#l_notes': 'notes'
 
   events:
+    'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
-    'click .js-edit': 'toggleEdit'
+    'click .js-edit': 'enableEdit'
     'click .js-cancel': 'cancel'
     'click .js-delete': 'delete'
     'submit .edit-entry-form': 'save'
+  
+  initialize: (o) ->
+    super
+    @editing or= o.editing
   
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
     return require './templates/entry'
   
   render: ->
-    @editing = !@model.id || @editing
     super
     @stickit() if @editing
-    @$el.hide() unless @model.id
-  
+    $('#l_title').focus() if @editing
+    
   toggleEdit: (e) ->
-    if e && e.preventDefault then e.preventDefault()
-    @editing = !@editing
+    @[if @editing then 'disableEdit' else 'enableEdit'] e
+  
+  enableEdit: (e) ->
+    return if @editing
+    e?.preventDefault()
+    @editing = true
     @render()
+    this.trigger 'editOn'
+  
+  disableEdit: (e) ->
+    return unless @editing
+    e?.preventDefault()
+    @editing = false
+    @render()
+    this.trigger 'editOff'
   
   clickTag: (e, data) ->
-    
-    if e
-      e.preventDefault()
-
-    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit');
+    e?.preventDefault()
+    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit')
   
   cancel: (e) ->
-    if e && e.preventDefault then e.preventDefault()
-    self = this
-    @model.fetch().then -> self.toggleEdit()
+    e?.preventDefault?()
+    @disableEdit()
   
   delete: ->
-    if confirm 'Really?' then @model.destroy()
+    if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
-    e.preventDefault()
-    
-    self = this
-    if @listView
-      
-      # Fresh model for this add-view.
-      entry = @model
-      @model = new Entry
-      @toggleEdit()
-      
-      # Save and send the model to the collection.
-      entry.save().then ->
-        self.listView.collection.add entry, at:0
-        self.listView.renderItem entry
-      
-    else
-      @model.save().then -> self.toggleEdit()
-      
+    e?.preventDefault()
+    @model.save().then => @disableEdit()

@@ -1,35 +1,37 @@
 PageView = require 'views/base/page-view'
 UserSession = require 'models/user-session'
 mediator = require 'mediator'
+utils = require 'lib/utils'
 
 module.exports = class LoginPageView extends PageView
   autoRender: true
   className: 'login-page'
   template: require './templates/login'
   
-  bindings:
-    '#l_email': 'email'
-    '#l_password': 'password'
-  
   events:
-    'submit .login-form': 'login'
+    'submit .login-form': 'doLogin'
+  
+  listen:
+    'session:login mediator': 'onLogin'
+    'session:loginFailure mediator': 'onLoginFailure'
   
   initialize: ->
-    @model = new UserSession
-    super
-    
-  render: ->
-    super
-    @stickit()
-    setTimeout (=> @$el.find('#l_email')[0].focus()), 0
+    @publishEvent '!session:determineLogin'
   
-  login: (e) ->
-    e.preventDefault()
+  doLogin: (e) ->
+    e?.preventDefault()
     
     # This is a workaround for some password managers. Trigger a just-in-time change manually.
     @$el.find('#l_password, #l_email').trigger 'change'
-    
-    @model.save().then (->
-      mediator.publish 'session:login'
-      Chaplin.helpers.redirectTo 'app#history'),
-      ((xhr, state, message) => @$el.find('.error-message').html('<div>'+message+'</div>'))
+
+    # Do a persistent login.
+    @publishEvent '!session:login',
+      persistent: 1
+      email: @$el.find('#l_email').val()
+      password: @$el.find('#l_password').val()
+  
+  onLogin: ->
+    utils.redirectTo 'app#history'
+  
+  onLoginFailure: (message) ->
+    @$el.find('.error-message').html('<div>'+message+'</div>')

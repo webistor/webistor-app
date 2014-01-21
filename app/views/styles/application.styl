@@ -81,11 +81,11 @@ html[xmlns] .clearfix {
 
 html,
 body
-  font-family: 'Lato', sans-serif
+  font-family: 'ProximaNova', 'ProximaNova Regular', 'Lato', sans-serif
   padding: 0
   margin: 0
   font-size: 1em
-  background: #f7f7f7
+  background: #fff
   color: #373942
   padding-bottom:35px
 
@@ -103,6 +103,7 @@ li
 
 a
   text-decoration: none;
+  color:#a5b1b8
 
 #contentbox
   width: 100%
@@ -112,26 +113,47 @@ a
     float:left
 
     #left
-      margin:30px 360px 30px 30px
-      background: #FFFFFF
-      border: 1px solid #d4d7df
+      margin:80px 280px 30px 30px
+      padding-top:30px
       display:block;
 
   #right
-    float:left
-    width:300px
-    margin:30px 0 30px -330px
-    background: #FFFFFF
-    border: 1px solid #d4d7df
+    position:fixed
+    top:80px
+    right:0
+    bottom:0
+    overflow:hidden
+    width:250px
+    background:#f4f7f8
+    border-left: 1px solid #dfe4e6
     display:block
-    padding:20px
+
+    &:hover
+      overflow:auto
+
+      a
+        color:#67737a
+
+    a
+      color:#a5b1b8
+
+    .app-updates
+      display:none
+      border-bottom:solid #d4d7df 1px
+      margin-bottom:16px
+
+      h1
+        font-weight:bold
+
+      ul
+        margin:16px 0
 
 /* ==== Forms ==== */
 
-::-webkit-input-placeholder {  }
-::-moz-placeholder {  } /* firefox 19+ */
-:-ms-input-placeholder {  } /* ie */
-input:-moz-placeholder {  }
+::-webkit-input-placeholder { color:#98a3ab }
+::-moz-placeholder { color:#98a3ab } /* firefox 19+ */
+:-ms-input-placeholder { color:#98a3ab } /* ie */
+input:-moz-placeholder { color:#98a3ab }
 
 .ctrlHolder
 
@@ -159,7 +181,7 @@ input[type="submit"]
 
 /* ==== Tags ==== */
 
-.tag, .button, input[type="submit"]
+.button, input[type="submit"]
   vertical-align:middle
   padding: 0 10px;
   font-size: 0.85em;
@@ -171,25 +193,6 @@ input[type="submit"]
   color: #FFFFFF;
   font-weight:500
   display: inline-block;
-
-.tag
-  background:#858585;
-  margin-right:4px
-  margin-bottom:8px
-  padding-left:33px
-  position:relative;
-
-.tag::before
-  position:absolute
-  left:10px
-  /*top:7px*/
-  color:#fff
-  font-weight: 500;
-  font-family:FontAwesome
-  display:inline-block
-  font-size:0.9rem
-  content:"\f02b"
-  display:inline-block
 
 .green {
   background: #90d990;
