@@ -9,4 +9,4 @@ module.exports = class RequireLogin extends Controller
     @publishEvent '!session:determineLogin'
     
   logout: ->
-    @redirectTo 'start#invite'
+    @redirectTo 'start#invite', null, replace: true

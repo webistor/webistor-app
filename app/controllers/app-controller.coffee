@@ -29,7 +29,7 @@ module.exports = class AppController extends PageController
     
     @view?.dispose()
     entry = new Entry Chaplin.utils.queryParams.parse route.query
-    @view = new EntryView {model: entry, editing:true, region: 'main'}
+    @view = new EntryView {model: entry, editing:true, focus: 'tags', region: 'main'}
     
     @view.once 'editOff', =>
       entry.dispose()
