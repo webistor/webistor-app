@@ -13,7 +13,7 @@
 
 <div class="tags">
   {{#each tags}}
-    <a href='search/{{this.title}}' class="tag">{{this.title}}</a>
+    <a href='search/{{this.title}}' class="tag"{{#if color}} style="color: {{this.color}};"{{/if}}>{{this.title}}</a>
   {{/each}}
 </div>
 

@@ -10,7 +10,7 @@ module.exports = class EntryListView extends CollectionView
   itemView: EntryView
   
   initialize: (o) ->
-    @collection = new Collection null, model:Entry
+    @collection = o.collection
     if o?.search then @search o.search else @collection.fetch()
     super
   

@@ -29,11 +29,16 @@ module.exports = class TagView extends View
     @toggleColorPicker()
   
   setColor: (color) ->
-    @model.set 'color', color
+    @color = color
     @$el.find('.picker-trigger').css 'color', color
+  
+  revertColor: ->
+    @color = @model.get 'color'
+    @$el.find('.picker-trigger').css 'color', (@model.get 'color') or ''
   
   save: ->
     @hideColorPicker()
+    @model.set 'color', @color
     @model.save().then =>
       @render()
       @model.collection.sort()
@@ -43,6 +48,7 @@ module.exports = class TagView extends View
       @showColorPicker()
     else
       @hideColorPicker()
+      @revertColor()
   
   showColorPicker: ->
     picker = @subview 'color-picker', new ColorPickerView

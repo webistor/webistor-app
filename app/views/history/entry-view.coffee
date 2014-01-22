@@ -34,6 +34,8 @@ module.exports = class EntryView extends View
     return require './templates/entry'
   
   render: ->
+    if document.body.contains @el 
+      console.trace()
     super
     return unless @editing
     @stickit()
