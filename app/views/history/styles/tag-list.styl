@@ -7,7 +7,7 @@
     position:relative
 
     .tag
-      padding:12px 40px 12px 30px
+      padding:17px 30px 17px 60px
       display:block
       font-size:16px
       color:#67737a
@@ -24,19 +24,26 @@
       position:absolute
       display:none
       top:0
-      right:0
+      left:15
       font-size:5px
-      width:40px
-      height:40px
-      text-align:center
+      width:50px
+      height:50px
+      padding-left:30px
+      text-align:left
       z-index:1
       
       &.pinned
         display:block
       
       &:hover
-        background-color:#dfe4e6
-      
+        background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%, rgba(255,255,255,0) 50%);
+        background: -webkit-gradient(radial, center center, 0px, center center, 50%, color-stop(0%,rgba(255,255,254,1)), color-stop(50%,rgba(255,255,255,0)));
+        background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
+        background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
+        background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
+        background: radial-gradient(ellipse at center,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
+
+
       i
         top:50%
         position:absolute
