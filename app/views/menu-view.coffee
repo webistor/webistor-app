@@ -31,7 +31,7 @@ module.exports = class MenuView extends View
   
   focusSearch: (e) ->
     e?.preventDefault()
-    @$el.find('input[name=search]').focus()
+    @$('input[name=search]').focus()
   
   submitSearch: (e) ->
     e.preventDefault()
@@ -42,11 +42,11 @@ module.exports = class MenuView extends View
   
   updateSearch: (query) ->
     @search = query
-    @$el.find('input[name=search]').val query
+    @$('input[name=search]').val query
   
   # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
   handleKeyboardShortcuts: ->
-    $bar = @$el.find('input[name=search]')
+    $bar = @$('input[name=search]')
     $(document).keydown (e) =>
       @focusSearch(e) if e.which is 191 and $(document).has(':focus').length is 0
       $bar.blur() if ($bar.is ':focus') and e.which is 27

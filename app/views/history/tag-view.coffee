@@ -30,11 +30,11 @@ module.exports = class TagView extends View
   
   setColor: (color) ->
     @color = color
-    @$el.find('.picker-trigger').css 'color', color
+    @$('.picker-trigger').css 'color', color
   
   revertColor: ->
     @color = @model.get 'color'
-    @$el.find('.picker-trigger').css 'color', (@model.get 'color') or ''
+    @$('.picker-trigger').css 'color', (@model.get 'color') or ''
   
   save: ->
     @hideColorPicker()

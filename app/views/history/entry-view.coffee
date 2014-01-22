@@ -34,12 +34,10 @@ module.exports = class EntryView extends View
     return require './templates/entry'
   
   render: ->
-    if document.body.contains @el 
-      console.trace()
     super
     return unless @editing
     @stickit()
-    setTimeout (=> @$el.find("#l_#{@focus}").focus()), 10
+    setTimeout (=> @$("#l_#{@focus}").focus()), 10
     
   toggleEdit: (e) ->
     @[if @editing then 'disableEdit' else 'enableEdit'] e

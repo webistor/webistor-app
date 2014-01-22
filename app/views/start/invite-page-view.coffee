@@ -19,16 +19,16 @@ module.exports = class InvitePageView extends PageView
   render: ->
     super
     @stickit()
-    # setTimeout (=> @$el.find('.email')[0].focus()), 0
+    # setTimeout (=> @$('.email')[0].focus()), 0
   
   invite: (e) ->
     e.preventDefault()
     @model.save().then ((result) => @inviteSucces(result)), ((xhr, state, message)=> @inviteError(xhr, state, message))
   
   inviteSucces: (result) ->
-    @$el.find('.error-message').html('<div>Your request is being processed!</div>')
-    @$el.find('.email, .request').hide()
+    @$('.error-message').html('<div>Your request is being processed!</div>')
+    @$('.email, .request').hide()
     # Chaplin.utils.redirectTo 'introduction#thankyou')
   
   inviteError: (xhr, state, message) ->
-    @$el.find('.error-message').html('<div>'+message+'</div>')
+    @$('.error-message').html('<div>'+message+'</div>')

@@ -60,7 +60,6 @@ module.exports = class HistoryPageView extends PageView
     
     # No need to keep a hold of this property.
     @search = undefined
-    
   
   createNewEntry: (e, newEntryData = null) ->
     e?.preventDefault()
