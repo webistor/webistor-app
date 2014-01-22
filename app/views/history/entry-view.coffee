@@ -8,6 +8,7 @@ module.exports = class EntryView extends View
   className: 'entry'
   autoRender: true
   editing: false
+  focus: 'title'
   
   bindings:
     '#l_title': 'title'
@@ -26,6 +27,7 @@ module.exports = class EntryView extends View
   initialize: (o) ->
     super
     @editing = o.editing or @editing
+    @focus = o.focus or @focus
   
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
@@ -33,8 +35,9 @@ module.exports = class EntryView extends View
   
   render: ->
     super
-    @stickit() if @editing
-    $('#l_title').focus() if @editing
+    return unless @editing
+    @stickit()
+    setTimeout (=> @$el.find("#l_#{@focus}").focus()), 10
     
   toggleEdit: (e) ->
     @[if @editing then 'disableEdit' else 'enableEdit'] e
