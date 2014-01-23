@@ -42,8 +42,9 @@ module.exports = class HistoryPageView extends PageView
     
     # Get the tags view to listen to changes in the tags on the entry models.
     # When anything concerning the tags changes, refresh the whole collection.
-    tagsView.listenTo entries, 'change:tags', ->
-      @resetCollection()
+    entries.once 'sync', ->
+      tagsView.listenTo entries, 'change:tags add remove', ->
+        @resetCollection()
     
     # Get the entry view to listen to the color property on tag models.
     entriesView.listenTo tags, 'change:color', (tag) ->

@@ -3,7 +3,6 @@ utils = require 'lib/utils'
 View = require 'views/base/view'
 Entry = require 'models/entry'
 
-#TODO: Rewrite this to use create and dispose rather than all sorts of buggy magic.
 module.exports = class EntryView extends View
   className: 'entry'
   autoRender: true
@@ -13,7 +12,7 @@ module.exports = class EntryView extends View
   bindings:
     '#l_title': 'title'
     '#l_url': 'url'
-    '#l_tags': 'rawTags' #TODO: custom getters or some custom binding
+    '#l_tags': 'rawTags'
     '#l_notes': 'notes'
 
   events:
