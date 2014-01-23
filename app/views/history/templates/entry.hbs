@@ -13,9 +13,13 @@
 
 <div class="tags">
   {{#each tags}}
-    <a href='search/{{this.title}}' class="tag">{{this.title}}</a>
+    <a href='search/{{this.title}}' class="tag"{{#if color}} style="color: {{this.color}};"{{/if}}>{{this.title}}</a>
   {{/each}}
 </div>
+
+<a href="#" class="js-delete delete" title="Delete this entry">
+  <i class="fa fa-trash-o"></i>
+</a>
 
 <footer>
   <ul>
@@ -27,11 +31,6 @@
       <a href="#" class="js-edit">
         <i class="fa fa-pencil"></i>
       </a>
-      {{!--
-      <a href="#" class="js-delete delete">
-        Delete
-      </a>
-      --}}
     </li>
     <li class="dt-created">
       <i class="fa fa-clock-o js-delete"></i>

@@ -1,18 +1,39 @@
 <div class="box">
 
   <div class="slide-control">
-    <button class="left" disabled>&laquo;</button>
-    <button class="right">&raquo;</button>
+    <a class="left fa-icon fa-angle-left disabled"></a>
+    <a class="right fa-icon fa-angle-right"></a>
   </div>
 
   <div class="slides">
-    <div class="color-spectrum"></div>
-    <div class="color-palette" hidden></div>
+
+    <ul class="color-palette">
+      <li data-color="#a0d468" style="background:#a0d468"></li>
+      <li data-color="#ec7963" style="background:#ec7963"></li>
+      <li data-color="#f6bb42" style="background:#f6bb42"></li>
+      <li data-color="#37bc9b" style="background:#37bc9b"></li>
+      <li data-color="#68b5c5" style="background:#68b5c5"></li>
+      <li data-color="#967adc" style="background:#967adc"></li>
+      <li data-color="#d770ad" style="background:#d770ad"></li>
+      <li data-color="#cee4f1" style="background:#cee4f1"></li>
+      <li data-color="#4a89dc" style="background:#4a89dc"></li>
+      <li data-color="#ee2e49" style="background:#ee2e49"></li>
+      <li data-color="#ecbda8" style="background:#ecbda8"></li>
+      <li data-color="#afa5c5" style="background:#afa5c5"></li>
+      <li data-color="#78b7a0" style="background:#78b7a0"></li>
+      <li data-color="#82b266" style="background:#82b266"></li>
+      <li data-color="#309078" style="background:#309078"></li>
+      <li data-color="#b4c248" style="background:#b4c248"></li>
+    </ul>
+
+    <div class="color-spectrum" hidden></div>
+
   </div>
 
   <form action="#" class="actions">
     
-    <input type="hidden" name="color" value="{{this.color}}">
+    <input class="color-code" disabled type="text" name="color" value="{{this.color}}">
+    <i class="color-preview" style="color:{{this.color}}">&#xf111;</i>
     
     <input type="submit" name="apply" class="apply button green{{#if this.color}} hidden{{/if}}" value="Apply new Colour">
     <input type="submit" name="remove" class="remove button red{{#unless this.color}} hidden{{/unless}}" value="Remove / Unpin">

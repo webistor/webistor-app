@@ -1,7 +1,7 @@
 control-height = 30px
 
 .module.color-picker
-  width: 200px
+  min-width:272px
   
   &.over
     position: absolute
@@ -10,23 +10,82 @@ control-height = 30px
     position: static
   
   .slide-control
-    display: none
     height: control-height
     position: relative
+    margin-bottom: control-height
     
-    > button
+    > a
       height: control-height
       line-height: control-height
       position: absolute
-    
+      background: transparent
+      border: none
+      font-family: FontAwesome
+      color: #fff
+      text-align: center
+      font-size: 2em
+      padding: 0 10px
+      cursor: pointer
+      display: block
+      font-weight: 800px
+      top: -3px
+
+      &:focus
+        border: none
+        box-shadow: none
+
+      &.disabled
+        color: #5c676d
+        cursor: auto
+
     .left
-      left: 0
+      left: -10px
     
     .right
-      right: 0
+      right: -10px
   
+  .color-palette
+    width: 212px
+    
+    li
+      display: inline-block
+      margin-right: 8px
+      margin-bottom: 8px
+      width: 44px
+      height: 44px
+      background-color: #fff
+      cursor: pointer
+      
+      &.active
+        border: solid lightgrey 3px
+      
+      &:nth-child(4n)
+        margin-right: 0
+
   .actions
     position: relative
     bottom: 0
 
+    .color-preview
+      width: 16px
+      height: 16px
+      position: absolute
+      right: 0
+      top: 23px
+      font-size: 0.6rem
+      display: block
+      color: #fff
+      font-family: FontAwesome
 
+    .color-code
+      width: 100%
+      background-color: transparent
+      padding: 16px 0
+      border: none
+      color: #fff
+      font-weight: 800
+      font-size: 1rem
+      border-bottom: solid #5c676d 1px
+    
+  input[type="submit"]
+    margin-top: 29px

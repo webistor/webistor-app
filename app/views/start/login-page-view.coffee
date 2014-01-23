@@ -22,16 +22,16 @@ module.exports = class LoginPageView extends PageView
     e?.preventDefault()
     
     # This is a workaround for some password managers. Trigger a just-in-time change manually.
-    @$el.find('#l_password, #l_email').trigger 'change'
+    @$('#l_password, #l_email').trigger 'change'
 
     # Do a persistent login.
     @publishEvent '!session:login',
       persistent: 1
-      email: @$el.find('#l_email').val()
-      password: @$el.find('#l_password').val()
+      email: @$('#l_email').val()
+      password: @$('#l_password').val()
   
   onLogin: ->
     utils.redirectTo 'app#history'
   
   onLoginFailure: (message) ->
-    @$el.find('.error-message').html('<div>'+message+'</div>')
+    @$('.error-message').html('<div>'+message+'</div>')

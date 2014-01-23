@@ -20,8 +20,7 @@ module.exports = class TagView extends View
     score1 = scale / (3 + 0.03 * scale)
     score2 = data.num / (3 + 0.03 * data.num)
     score = (score1 + score2) / ((100 / 3) * 2)
-    data.ball_size = (4*score).toPrecision 2
-    data.ball_margin = (score/2).toPrecision 2
+    data.ball_size = (3*score+0.75).toPrecision 2
     data
   
   clickPicker: (e) ->
@@ -29,10 +28,15 @@ module.exports = class TagView extends View
     @toggleColorPicker()
   
   setColor: (color) ->
-    @model.set 'color', color
-    @$el.find('.picker-trigger').css 'color', color
+    @color = color
+    @$('.picker-trigger').css 'color', color
+  
+  revertColor: ->
+    @color = @model.get 'color'
+    @$('.picker-trigger').css 'color', @color or ''
   
   save: ->
+    @model.set 'color', @color
     @hideColorPicker()
     @model.save().then =>
       @render()
@@ -55,6 +59,7 @@ module.exports = class TagView extends View
     picker.on 'changeColor', (color) => @setColor color
     picker.on 'applyColor', (color) => @setColor color; @save()
     picker.on 'removeColor', => @setColor null; @save()
+    picker.on 'dispose', => @revertColor()
     
   hideColorPicker: ->
     @subview('color-picker')?.dispose()

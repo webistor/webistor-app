@@ -1,6 +1,6 @@
-background-color = lightgrey
+background-color = #67737a
 arrow-size = 15px
-arrow-pos = 20px
+arrow-pos = 30px
 
 arrow-base =
   border: solid transparent
@@ -16,6 +16,8 @@ arrow-base =
   background-color: background-color
   height: 100%
   width: 100%
+  padding:30px
+  border-radius:3px
   
   &.arrow-top:after
     {arrow-base}
@@ -48,3 +50,7 @@ arrow-base =
     border-right-color: background-color
     border-width: arrow-size
     margin-top: - arrow-size
+
+  input[type="submit"]
+    display:block
+    width:100%

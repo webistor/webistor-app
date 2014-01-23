@@ -12,3 +12,7 @@ module.exports = class ModuleView extends View
   render: ->
     @publishEvent 'module:render', this
     super
+  
+  dispose: ->
+    @trigger 'dispose'
+    super

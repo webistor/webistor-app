@@ -3,16 +3,16 @@ utils = require 'lib/utils'
 View = require 'views/base/view'
 Entry = require 'models/entry'
 
-#TODO: Rewrite this to use create and dispose rather than all sorts of buggy magic.
 module.exports = class EntryView extends View
   className: 'entry'
   autoRender: true
   editing: false
+  focus: 'title'
   
   bindings:
     '#l_title': 'title'
     '#l_url': 'url'
-    '#l_tags': 'rawTags' #TODO: custom getters or some custom binding
+    '#l_tags': 'rawTags'
     '#l_notes': 'notes'
 
   events:
@@ -26,6 +26,7 @@ module.exports = class EntryView extends View
   initialize: (o) ->
     super
     @editing = o.editing or @editing
+    @focus = o.focus or @focus
   
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
@@ -33,8 +34,9 @@ module.exports = class EntryView extends View
   
   render: ->
     super
-    @stickit() if @editing
-    $('#l_title').focus() if @editing
+    return unless @editing
+    @stickit()
+    setTimeout (=> @$("#l_#{@focus}").focus()), 10
     
   toggleEdit: (e) ->
     @[if @editing then 'disableEdit' else 'enableEdit'] e
