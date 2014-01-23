@@ -22,18 +22,21 @@
     .picker-trigger
       font-family:none
       position:absolute
-      display:none
+      opacity:0.1
       top:0
-      left:15
+      left:9px
       font-size:5px
       width:50px
       height:50px
-      padding-left:30px
-      text-align:left
+      line-height:50px
+      display:block
+      text-align:center
       z-index:1
+      color:#abb6bd
       
       &.pinned
         display:block
+        opacity:1
       
       &:hover
         background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%, rgba(255,255,255,0) 50%);
@@ -43,12 +46,13 @@
         background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
         background: radial-gradient(ellipse at center,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
 
-
       i
-        top:50%
-        position:absolute
+        display:block
+        height:100%
+        line-height:50px
+        text-align:center
       
     &:hover
 
       .picker-trigger
-        display:block
+        opacity:1

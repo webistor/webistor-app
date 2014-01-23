@@ -15,6 +15,7 @@ module.exports = class HistoryPageView extends PageView
   events:
     'click .js-add-entry:not(.toggled)': 'createNewEntry'
     'click .js-add-entry.toggled': 'cancelNewEntry'
+    'click .pro-tip .dismiss': 'hideProTip'
   
   initialize: (o) ->
     @search = o?.search or @search
@@ -57,6 +58,8 @@ module.exports = class HistoryPageView extends PageView
         one.color = tag.get 'color' for one in tags when one.id is tag.get 'tag_id'
         entry.set 'tags', tags, silent:true
         entriesView.renderItem entry
+
+    @showProTip()
     
     # No need to keep a hold of this property.
     @search = undefined
@@ -93,3 +96,21 @@ module.exports = class HistoryPageView extends PageView
     $ico[(if state is on then 'add' else 'remove') + 'Class'] 'fa-toggle-up'
     $ico[(if state is on then 'remove' else 'add') + 'Class'] 'fa-link'
     this
+
+  supportsLocalStorage: ->
+    # try{
+    #   return 'localStorage' in window && window['localStorage'] !== null;
+    # }catch(e){
+    #   return false;
+    # }
+    return true;
+
+  # SHOW PRO TIP IF NEVER HIDDEN
+  showProTip: (force) ->
+    return false if !@supportsLocalStorage()
+    if( ! localStorage['app.preferences.hide_pro_tip.bookmarklet'] )
+      @$el.find('.pro-tip').show()
+
+  hideProTip: ->
+    localStorage['app.preferences.hide_pro_tip.bookmarklet'] = new Date().getTime();
+    @$el.find('.pro-tip').hide()

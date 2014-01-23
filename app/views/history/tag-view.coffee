@@ -20,8 +20,8 @@ module.exports = class TagView extends View
     score1 = scale / (3 + 0.03 * scale)
     score2 = data.num / (3 + 0.03 * data.num)
     score = (score1 + score2) / ((100 / 3) * 2)
-    data.ball_size = (4*score).toPrecision 2
-    data.ball_margin = (score/2).toPrecision 2
+    data.ball_size = (3*score+0.75).toPrecision 2
+    # data.ball_margin = ((score+0.75)/2).toPrecision 2
     data
   
   clickPicker: (e) ->
