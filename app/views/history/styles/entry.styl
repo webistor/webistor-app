@@ -28,10 +28,14 @@
     a
       color: #373942
 
-  .description
+  .notes
     margin-bottom:30px
     font-family:'ProximaNova Light', sans-serif
     font-size:14px
+
+    .first-line-toggler
+      height:28px;
+      overflow-y:hidden
 
   .tags
     font-size:16px
@@ -50,7 +54,6 @@
     top:30px
     right:30px
     transition:color 0.25s 0
-    transition:opacity 0.25s 0
 
     &:hover
       color:#555
@@ -127,7 +130,6 @@
     .delete
       display:block
       opacity:0.5
-      transition:opacity 2s 1s
 
   &:hover .entry-actions
     display:block

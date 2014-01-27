@@ -6,8 +6,10 @@
 </h3>
 
 {{#if notes}}
-  <div class="description">
-    {{this.notes}}
+  <div class="notes">
+    <div class="first-line-toggler">
+      {{this.notes}}
+    </div>
   </div>
 {{/if}}
 
@@ -23,10 +25,12 @@
 
 <footer>
   <ul>
+    {{#if this.url}}
     <li class="uri">
       <i class="fa fa-globe"></i>
       <a href="{{this.url}}" target="_blank" class="link">{{this.url}}</a>
     </li>
+    {{/if}}
     <li class="entry-actions">
       <a href="#" class="js-edit">
         <i class="fa fa-pencil"></i>
