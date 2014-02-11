@@ -23,7 +23,7 @@ module.exports = class InvitePageView extends PageView
   
   invite: (e) ->
     e.preventDefault()
-    @model.save().then ((result) => @inviteSucces(result)), ((xhr, state, message)=> @inviteError(xhr, state, message))
+    @model.save().then ((result) => @inviteSucces result), (=> @inviteError arguments...)
   
   inviteSucces: (result) ->
     @$('.error-message').html('<div>Your request is being processed!</div>')

@@ -11,7 +11,7 @@ module.exports = class MenuView extends View
   
   listen:
     'session:loginStatus mediator': 'render'
-    'search mediator': 'updateSearch'
+    'search:search mediator': 'updateSearch'
   
   events:
     'submit #search-form': 'submitSearch'
@@ -22,8 +22,7 @@ module.exports = class MenuView extends View
     @handleKeyboardShortcuts()
   
   getTemplateData: ->
-    data = Chaplin.mediator.user?.serialize() or {}
-    data.search = @search
+    data = mediator.user?.serialize() or {}
     data
   
   doLogout: (e) ->
@@ -36,13 +35,10 @@ module.exports = class MenuView extends View
   submitSearch: (e) ->
     e.preventDefault()
     query = $.trim $(e.target).find('input[name=search]').val()
-    return utils.redirectTo url: "" if query is '' or not query
-    query = encodeURIComponent query
-    utils.redirectTo url: "search/#{query}"
+    @publishEvent '!search:search', query
   
-  updateSearch: (query) ->
-    @search = query
-    @$('input[name=search]').val query
+  updateSearch: (data) ->
+    @$('input[name=search]').val data.processed
   
   # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
   handleKeyboardShortcuts: ->

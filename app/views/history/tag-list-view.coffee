@@ -6,10 +6,7 @@ module.exports = class TagListView extends CollectionView
   className: 'tag-list'
   autoRender: true
   itemView: TagView
-  
-  initialize: ->
-    super
-    @collection.fetch()
+  region: 'side'
   
   resetCollection: ->
     @collection.fetch reset:true

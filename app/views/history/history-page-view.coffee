@@ -4,7 +4,6 @@ EntryView = require './entry-view'
 EntryListView = require './entry-list-view'
 TagListView = require './tag-list-view'
 TagCollection = require 'models/tag-collection'
-EntryCollection = require 'models/entry-collection'
 
 module.exports = class HistoryPageView extends PageView
   autoRender: true
@@ -17,9 +16,6 @@ module.exports = class HistoryPageView extends PageView
     'click .js-add-entry.toggled': 'cancelNewEntry'
     'click .pro-tip .dismiss': 'hideProTip'
   
-  initialize: (o) ->
-    @search = o?.search or @search
-  
   render: ->
     
     # Do standard rendering.
@@ -27,12 +23,10 @@ module.exports = class HistoryPageView extends PageView
     
     # Create sub-collections.
     tags = new TagCollection
-    entries = new EntryCollection
     
     # Create the sub-view for the list of entries, passing it the collection.
     entriesView = @subview 'entry-list', new EntryListView
       container: this.el
-      search: @search
       collection: entries
     
     # Create the sub-view for the list of tags, passing it the collection.
@@ -61,9 +55,6 @@ module.exports = class HistoryPageView extends PageView
         entriesView.renderItem entry
 
     @showProTip()
-    
-    # No need to keep a hold of this property.
-    @search = undefined
   
   createNewEntry: (e, newEntryData = null) ->
     e?.preventDefault()
