@@ -16,6 +16,7 @@ module.exports = class EntryView extends View
     '#l_notes': 'notes'
 
   events:
+    'click': 'clickEntry'
     'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
     'click .js-edit': 'enableEdit'
@@ -54,6 +55,11 @@ module.exports = class EntryView extends View
     @editing = false
     @render()
     this.trigger 'editOff'
+  
+  clickEntry: (e) ->
+    e?.preventDefault()
+    $('.entry').removeClass('active')
+    $(e.target).addClass('active')#TODO: Store wich entry is active,in a global var or model pointer.
   
   clickTag: (e, data) ->
     e?.preventDefault()
