@@ -63,7 +63,8 @@ module.exports = class EntryView extends View
     e?.preventDefault?()
     @disableEdit()
   
-  delete: ->
+  delete: (e) ->
+    e?.preventDefault?()
     if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
