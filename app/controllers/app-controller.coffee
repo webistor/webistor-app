@@ -19,8 +19,9 @@ module.exports = class AppController extends PageController
   
   search: (params, route) ->
     query = decodeURIComponent params.query
+    document.title = '/q/'+query#TODO: Reset document title after search field is cleared again.
     @view = new HistoryPageView search: query
-    @publishEvent 'search', query
+    @publishEvent 'q', query
   
   add: (params, route) ->
     Entry = require 'models/entry'
