@@ -16,6 +16,7 @@ module.exports = class EntryView extends View
     '#l_notes': 'notes'
 
   events:
+    'click': 'clickEntry'
     'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
     'click .js-edit': 'enableEdit'
@@ -55,6 +56,11 @@ module.exports = class EntryView extends View
     @render()
     this.trigger 'editOff'
   
+  clickEntry: (e) ->
+    e?.preventDefault()
+    $('.entry').removeClass('active')
+    $(e.target).addClass('active')#TODO: Store wich entry is active,in a global var or model pointer.
+  
   clickTag: (e, data) ->
     e?.preventDefault()
     $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit')
@@ -63,7 +69,8 @@ module.exports = class EntryView extends View
     e?.preventDefault?()
     @disableEdit()
   
-  delete: ->
+  delete: (e) ->
+    e?.preventDefault?()
     if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
