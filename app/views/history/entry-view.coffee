@@ -59,7 +59,7 @@ module.exports = class EntryView extends View
   clickEntry: (e) ->
     e?.preventDefault()
     $('.entry').removeClass('active')
-    $(e.target).addClass('active')#TODO: Store wich entry is active,in a global var or model pointer.
+    $(e.target).addClass('active')#TODO: Store wich entry is active, in a global var or model pointer.
   
   clickTag: (e, data) ->
     e?.preventDefault()

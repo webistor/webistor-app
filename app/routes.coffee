@@ -6,3 +6,4 @@ module.exports = (match) ->
   match 'login', 'start#login'
   match 'invite', 'start#invite'
   match 'register/:user_id/:claim_key', 'start#register'
+  match '404', 'not-found#show'
