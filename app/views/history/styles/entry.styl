@@ -2,7 +2,6 @@
 
 .entry
   padding:30px 30px 30px 30px;
-  /*border: 1px solid #dfe4e6 / ecf1f3*/
   border: 1px solid #dfe4e6
   margin-bottom:28px;
   display:block;
@@ -10,17 +9,7 @@
   min-width:320px
   overflow:hidden
 
-.entry
-  /*
-  background-color:#fff;
-  border-left-color:#fff
-  border-top-color:#fff
-  border-right-color:#fff
-  border-bottom-color:#fff
-  box-shadow: 0px 0px 2px #dfe4e6;
-  */
-
-  h3.title
+  .title
     font-size: 1.04rem;
     font-family:'ProximaNova SemiBold', sans-serif
     margin-bottom:30px
@@ -140,6 +129,11 @@
 
     .buttonHolder
       position:relative
+      // position:-webkit-sticky
+      // position:-moz-sticky
+      // position:sticky
+      // bottom:0
+      z-index:1
 
     .ctrlHolder
       position:relative
@@ -178,7 +172,7 @@
         */
 
       textarea
-        min-height:150px
+        min-height:300px
         padding-top:5px
         padding-bottom:5px
 
