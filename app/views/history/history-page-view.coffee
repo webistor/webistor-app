@@ -3,13 +3,14 @@ Entry = require 'models/entry'
 EntryView = require './entry-view'
 EntryListView = require './entry-list-view'
 TagListView = require './tag-list-view'
+HistoryExplorerView = require './history-explorer-view'
 TagCollection = require 'models/tag-collection'
 EntryCollection = require 'models/entry-collection'
 
 module.exports = class HistoryPageView extends PageView
   autoRender: true
   className: 'history-page'
-  template: require './templates/history'
+  template: require './templates/history-page'
   newEntry: null
   
   events:
@@ -37,7 +38,7 @@ module.exports = class HistoryPageView extends PageView
     
     # Create the sub-view for the list of tags, passing it the collection.
     tagsView = @subview 'tag-list', new TagListView
-      container: '#right'
+      container: '#tag-explorer'
       collection: tags
     
     # Get the tags view to listen to changes in the tags on the entry models.

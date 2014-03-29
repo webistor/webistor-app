@@ -7,7 +7,7 @@ module.exports = class AppView extends View
   regions:
     nav: '#nav'
     main: '#left'
-    side: '#right'
+    side: '#tag-explorer'
   template: require './templates/app'
   
   initialize: ->
