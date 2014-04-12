@@ -3,6 +3,7 @@ Tag = require './tag'
 
 module.exports = class TagCollection extends Collection
   
+  path: 'tags'
   model: Tag
     
   comparator: (a, b) ->

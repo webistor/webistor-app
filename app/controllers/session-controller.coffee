@@ -1,33 +1,35 @@
 Controller = require 'controllers/base/controller'
 mediator = require 'mediator'
 Me = require 'models/me'
-UserSession = require 'models/user-session'
+utils = require 'lib/utils'
 
 module.exports = class SessionController extends Controller
   
   loginStatus: null
+  @me: null
   
   initialize: ->
     super
-    mediator.user = new Me
-    
+    @me = mediator.user = new Me
     @subscribeEvent '!session:login', @login
     @subscribeEvent '!session:determineLogin', @determineLoginStatus
     @subscribeEvent '!session:logout', @logout
   
-  show: ->
-    #show login view
-  
   login: (data) ->
     @publishEvent 'session:loginAttempt'
-    @userSession = new UserSession data
-    @userSession.save().then (=> @determineLoginStatus()), ((a,b,message) => @handleLoginFailure(message))
+    @me.set data
+    @me.save()
+    .then(=> @handleLogin())
+    .fail((xhr,b,message) => @handleLoginFailure xhr.responseJSON?.error or message)
   
   determineLoginStatus: ->
-    mediator.user.fetch().then (=> @handleLogin()), (=> @handleLogout()) unless @isLoginStatusDetermined()
+    unless @isLoginStatusDetermined()
+      utils.req('GET', 'session/loginCheck')
+      .then((data) => if data.value is true then @handleLogin() else @handleLogout())
+      .fail(=> @handleLogout())
   
   logout: ->
-    (@userSession or new UserSession).destroy().always => @handleLogout()
+    @me.destroy().always => @handleLogout()
   
   handleLogin: ->
     @publishEvent 'session:login'
@@ -35,7 +37,7 @@ module.exports = class SessionController extends Controller
     @loginStatus = true
   
   handleLogout: ->
-    mediator.user = new Me
+    @me = mediator.user = new Me
     @publishEvent 'session:logout'
     @publishEvent 'session:loginStatus', false
     @loginStatus = false
@@ -46,4 +48,4 @@ module.exports = class SessionController extends Controller
     @loginStatus = false
   
   isLoginStatusDetermined: ->
-    @loginStatus is not null
+    @loginStatus isnt null

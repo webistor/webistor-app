@@ -1,5 +1,4 @@
 PageView = require 'views/base/page-view'
-UserSession = require 'models/user-session'
 mediator = require 'mediator'
 utils = require 'lib/utils'
 

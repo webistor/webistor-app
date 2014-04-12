@@ -1,47 +1,17 @@
 config = require 'config'
-utils = require 'lib/utils'
 
-###*
- * Base Model
- *
- * @type {class}
-###
 module.exports = class Model extends Chaplin.Model
-  
-  sync: (method, model, options) ->
-    options = $.extend true, xhrFields:withCredentials:true, options
-    super
-  
-  urlParams: {}
+
+  # Use the mongoDB ID attribute naming convention.
+  idAttribute: '_id'
   
   ###*
-   * Returns the root URL for this model.
-   * 
-   * Extending models may create their own implementation of this method, or replace it
-   * with a string containing a static urlRoot.
-   * 
-   * @throws {Error} If no urlPath is defined in the model nor its collection.
-   *
-   * @return {String} The urlRoot.
-  ###
-  urlRoot: ->
-    urlPath = _.result @, 'urlPath'
-    return config.api.urlRoot + urlPath if urlPath
-    return @collection.urlRoot() if @collection?
-    return config.api.urlRoot
-  
-  ###*
-   * Custom URL implementation to cater to the needs of non-standard APIs.
-   *
-   * @return {String} The URL at which this models data resides in the API.
+   * Custom URL generating
   ###
   url: ->
-    base = @urlRoot()
-    key = if @id? then encodeURIComponent(@id) else ''
-    base + "/#{key}" +
-    if _.isEmpty @urlParams then '' else (
-      (if base.indexOf('?') >= 0 then '&' else '?') + utils.queryParams.stringify @urlParams
-    )
+    return "#{@collection.url()}/#{@id}" if @collection
+    throw new Error "Individual models must define their own paths." unless @path
+    return "http://#{config.api.domain}:#{config.api.port}/#{@path}"
   
   ###*
    * Create a sub-set.
@@ -66,3 +36,38 @@ module.exports = class Model extends Chaplin.Model
       @stopListening collection
       @off "change:#{attributeName}", onChange
     return collection
+  
+  ###*
+   * Add default withCredentials option to all synchronisations.
+  ###
+  sync: (method, model, options) ->
+    options = $.extend true, xhrFields:withCredentials:true, options
+    super
+  
+  ###*
+   * Create a sub-model.
+   * 
+   * Return a new Model which uses, and synchronises with the attribute of the given name
+   * in this model.
+   *
+   * @param {String} attributeName The name of the attribute from this model to use.
+   * @param {Object} options Options to pass to the Model constructor.
+   * @param {Collection} modelType An optional constructor function to use instead of Model.
+   *
+   * @return {Collection}
+  ###
+  sub: (attributeName, options={}, modelType) ->
+    Class = modelType or Model
+    model = new Class @get attributeName, options
+    @listenTo model, 'change', => @set attributeName, model.getAttributes()
+    model.listenTo this, "change:#{attributeName}", => model.set @get attributeName
+  
+  ###*
+   * Fix dispose.
+  ###
+  disposing: false
+  dispose: ->
+    return if @disposing
+    @disposing = true
+    super
+    @disposing = false
