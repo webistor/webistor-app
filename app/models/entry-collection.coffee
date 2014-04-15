@@ -4,7 +4,6 @@ Entry = require './entry'
 module.exports = class EntryCollection extends Collection
   path: 'entries'
   model: Entry
-  
+
   search: (data) ->
-    @urlParams = if data.empty then {} else {query: data.query}
-    @fetch()
+    @fetch if data?.query then {data:query:data.query} else {}
