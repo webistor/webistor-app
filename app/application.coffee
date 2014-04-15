@@ -1,6 +1,9 @@
+mediator = require 'mediator'
+
 # The application object.
 module.exports = class Application extends Chaplin.Application
   
   initMediator: ->
-    Chaplin.mediator.user = null
+    mediator.user = null
+    mediator.regulators = {}
     super

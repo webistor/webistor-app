@@ -8,12 +8,4 @@ module.exports = class EntryListView extends CollectionView
   template: require './templates/entry-list'
   autoRender: true
   itemView: EntryView
-  
-  initialize: (o) ->
-    @collection = o.collection
-    if o?.search then @search o.search else @collection.fetch()
-    super
-  
-  search: (query) ->
-    @collection.urlParams = search:query
-    @collection.fetch()
+  region: 'main'
