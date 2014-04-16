@@ -20,7 +20,7 @@ module.exports = class EntryView extends View
     'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
     'click .js-edit': 'enableEdit'
-    'click .js-cancel': 'cancel'
+    'click .js-cancel': 'disableEdit'
     'click .js-delete': 'delete'
     'submit .edit-entry-form': 'save'
 
@@ -43,18 +43,16 @@ module.exports = class EntryView extends View
     @[if @editing then 'disableEdit' else 'enableEdit'] e
 
   enableEdit: (e) ->
-    return if @editing
     e?.preventDefault()
+    return if @editing
     @editing = true
     @render()
-    this.trigger 'editOn'
 
   disableEdit: (e) ->
-    return unless @editing
     e?.preventDefault()
+    return unless @editing
     @editing = false
     @render()
-    this.trigger 'editOff'
 
   clickEntry: (e) ->
     e?.preventDefault()
@@ -63,14 +61,10 @@ module.exports = class EntryView extends View
 
   clickTag: (e, data) ->
     e?.preventDefault()
-    $('#search-form').find('input').val( $(e.target).text() ).end().trigger('submit')
-
-  cancel: (e) ->
-    e?.preventDefault?()
-    @disableEdit()
+    @publishEvent '!search:extend', "##{$(e.target).text()}"
 
   delete: (e) ->
-    e?.preventDefault?()
+    e?.preventDefault()
     if confirm 'Destroy this historical piece of data?' then @model.destroy()
 
   save: (e) ->

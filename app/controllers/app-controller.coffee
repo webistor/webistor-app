@@ -1,5 +1,4 @@
 PageController = require 'controllers/base/page-controller'
-HistoryPageView = require 'views/history/history-page-view'
 AppView = require 'views/app-view'
 MenuView = require 'views/menu-view'
 SearchRegulator = require 'regulators/search'
@@ -7,6 +6,7 @@ EntryCollection = require 'models/entry-collection'
 TagCollection = require 'models/tag-collection'
 EntryListView = require 'views/history/entry-list-view'
 TagListView = require 'views/history/tag-list-view'
+ProtipView = require 'views/history/protip-view'
 utils = require 'lib/utils'
 
 module.exports = class AppController extends PageController
@@ -29,8 +29,8 @@ module.exports = class AppController extends PageController
       @item.subscribeEvent 'search:search', @item.search.bind @item
 
     @reuse 'tags-view', TagListView, collection: (@reuse 'tags')
-
-    @view = new EntryListView collection: (@reuse 'entries')
+    @protip = new ProtipView region: 'main'
+    @view = new EntryListView collection: (@reuse 'entries'), region: 'main'
 
     #TODO: Change document title accordingly.
     @publishEvent '!search:search', (if params.query then decodeURIComponent params.query else ''), true
