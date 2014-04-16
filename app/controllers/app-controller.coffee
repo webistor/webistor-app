@@ -1,37 +1,48 @@
-utils = require 'lib/utils'
-
 PageController = require 'controllers/base/page-controller'
-HistoryPageView = require 'views/history/history-page-view'
-RequireLogin = require 'lib/require-login'
 AppView = require 'views/app-view'
 MenuView = require 'views/menu-view'
+SearchRegulator = require 'regulators/search'
+EntryCollection = require 'models/entry-collection'
+TagCollection = require 'models/tag-collection'
+EntryListView = require 'views/history/entry-list-view'
+TagListView = require 'views/history/tag-list-view'
+ProtipView = require 'views/history/protip-view'
+utils = require 'lib/utils'
 
 module.exports = class AppController extends PageController
-  
+
   beforeAction: ->
     super
-    @reuse 'login', RequireLogin
+    @subscribeEvent 'session:logout', => @redirectTo 'start#invite', null, replace: true
+    @publishEvent '!session:determineLogin'
+    @reuse 'search-regulator', SearchRegulator
     @reuse 'app', AppView
     @reuse 'menu', MenuView
-  
-  history: (params, route) ->
-    @view = new HistoryPageView
-  
-  search: (params, route) ->
-    query = decodeURIComponent params.query
-    document.title = '/q/'+query#TODO: Reset document title after search field is cleared again.
-    @view = new HistoryPageView search: query
-    @publishEvent 'q', query
-  
+    @reuse 'tags', ->
+      @item = new TagCollection
+      @item.fetch()
+
+  list: (params) ->
+
+    @reuse 'entries', ->
+      @item = new EntryCollection
+      @item.subscribeEvent 'search:search', @item.search.bind @item
+
+    @reuse 'tags-view', TagListView, collection: (@reuse 'tags')
+    @protip = new ProtipView region: 'main'
+    @view = new EntryListView collection: (@reuse 'entries'), region: 'main'
+
+    #TODO: Change document title accordingly.
+    @publishEvent '!search:search', (if params.query then decodeURIComponent params.query else ''), true
+
   add: (params, route) ->
     Entry = require 'models/entry'
     MessageView = require 'views/message-view'
     EntryView = require 'views/history/entry-view'
-    
-    @view?.dispose()
-    entry = new Entry Chaplin.utils.queryParams.parse route.query
-    @view = new EntryView {model: entry, editing:true, focus: 'tags', region: 'main'}
-    
+
+    @entry = new Entry utils.queryParams.parse route.query
+    @view = new EntryView {model: @entry, editing:true, focus: 'tags', region: 'main'}
+
     @view.once 'editOff', =>
-      entry.dispose()
+      @entry.dispose()
       @view = new MessageView {region: 'main', message: 'Added a new entry. :)'}

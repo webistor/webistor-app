@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "from": "regulator.coffee.hbs",
+      "to": "app/regulators/{{name}}.coffee"
+    }
+  ],
+  "dependencies": []
+}
