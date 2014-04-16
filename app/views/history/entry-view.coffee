@@ -22,6 +22,7 @@ module.exports = class EntryView extends View
     'click .js-edit': 'enableEdit'
     'click .js-cancel': 'cancel'
     'click .js-delete': 'delete'
+    'click input[type="submit"]': 'save'
     'submit .edit-entry-form': 'save'
   
   initialize: (o) ->
@@ -57,6 +58,11 @@ module.exports = class EntryView extends View
     this.trigger 'editOff'
   
   clickEntry: (e) ->
+
+    # Don't do a thing if the user clicked a link.
+    if $(e.target).is('a') then return;
+
+    # Otherwise: make entry active.
     e?.preventDefault()
     $('.entry').removeClass('active')
     $(e.target).addClass('active')#TODO: Store wich entry is active, in a global var or model pointer.
