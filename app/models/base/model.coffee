@@ -4,7 +4,10 @@ module.exports = class Model extends Chaplin.Model
 
   # Use the mongoDB ID attribute naming convention.
   idAttribute: '_id'
-  
+
+  # Prevent the disposal loop of infinite deathness.
+  disposing: false
+
   ###*
    * Custom URL generating
   ###
@@ -12,10 +15,10 @@ module.exports = class Model extends Chaplin.Model
     return "#{@collection.url()}/#{@id}" if @collection
     throw new Error "Individual models must define their own paths." unless @path
     return "http://#{config.api.domain}:#{config.api.port}/#{@path}"
-  
+
   ###*
    * Create a sub-set.
-   * 
+   *
    * Return a new Collection which uses, and synchronises with the attribute of the given
    * name in this model.
    *
@@ -36,17 +39,17 @@ module.exports = class Model extends Chaplin.Model
       @stopListening collection
       @off "change:#{attributeName}", onChange
     return collection
-  
+
   ###*
    * Add default withCredentials option to all synchronisations.
   ###
   sync: (method, model, options) ->
     options = $.extend true, xhrFields:withCredentials:true, options
     super
-  
+
   ###*
    * Create a sub-model.
-   * 
+   *
    * Return a new Model which uses, and synchronises with the attribute of the given name
    * in this model.
    *
@@ -61,11 +64,12 @@ module.exports = class Model extends Chaplin.Model
     model = new Class @get attributeName, options
     @listenTo model, 'change', => @set attributeName, model.getAttributes()
     model.listenTo this, "change:#{attributeName}", => model.set @get attributeName
-  
+
   ###*
-   * Fix dispose.
+   * Clean up.
+   *
+   * This extends the default Chaplin implementation by preventing the infinite disposal loop.
   ###
-  disposing: false
   dispose: ->
     return if @disposing
     @disposing = true
