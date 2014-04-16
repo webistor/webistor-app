@@ -5,15 +5,21 @@ module.exports = class Model extends Chaplin.Model
   # Use the mongoDB ID attribute naming convention.
   idAttribute: '_id'
 
+  # No path by default.
+  path: null
+
   # Prevent the disposal loop of infinite deathness.
   disposing: false
+
+  # Allow initialize to define the path.
+  initialize: (@path) ->
 
   ###*
    * Custom URL generating
   ###
   url: ->
     return "#{@collection.url()}/#{@id}" if @collection
-    throw new Error "Individual models must define their own paths." unless @path
+    throw new Error "Individual models must define their own paths." unless @path?
     return "http://#{config.api.domain}:#{config.api.port}/#{@path}"
 
   ###*

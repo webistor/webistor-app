@@ -22,7 +22,7 @@ module.exports = class EntryView extends View
     'click .js-edit': 'enableEdit'
     'click .js-cancel': 'disableEdit'
     'click .js-delete': 'delete'
-    'submit .edit-entry-form': 'save'
+    'submit form': 'save'
 
   initialize: (o) ->
     super
@@ -55,7 +55,6 @@ module.exports = class EntryView extends View
     @render()
 
   clickEntry: (e) ->
-    e?.preventDefault()
     $('.entry').removeClass('active')
     $(e.target).addClass('active')
 

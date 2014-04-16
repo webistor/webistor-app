@@ -36,7 +36,7 @@ module.exports = class EntryListView extends CollectionView
   createNewEntry: (e) ->
     e?.preventDefault()
     @disableAllEdits()
-    @newEntry = new Entry
+    @newEntry = new Entry 'entries'
     @toggleAddButton on
     @subview 'new-entry', new EntryView
       container: @$ '.new-entry-container'
@@ -44,6 +44,7 @@ module.exports = class EntryListView extends CollectionView
       editing: true
     @newEntry.once 'sync', =>
       @toggleAddButton off
+      @removeSubview 'new-entry'
       @collection.unshift @newEntry
       @newEntry = null
 
