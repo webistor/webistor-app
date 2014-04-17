@@ -1,6 +1,6 @@
 Regulator = require 'regulators/base/regulator'
 
-module.exports = class Search extends Regulator
+module.exports = class SearchRegulator extends Regulator
   name: 'search'
 
   listen:
