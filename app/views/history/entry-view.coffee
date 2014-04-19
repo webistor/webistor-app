@@ -45,12 +45,14 @@ module.exports = class EntryView extends View
   enableEdit: (e) ->
     e?.preventDefault()
     return if @editing
+    @trigger 'edit:on'
     @editing = true
     @render()
 
   disableEdit: (e) ->
     e?.preventDefault()
     return unless @editing
+    @trigger 'edit:off'
     @editing = false
     @render()
 

@@ -48,6 +48,11 @@ module.exports = class EntryListView extends CollectionView
       @collection.unshift @newEntry
       @newEntry = null
 
+  initItemView: ->
+    view = super
+    @listenTo view, 'edit:on', @disableAllEdits
+    return view
+
   cancelNewEntry: ->
     @newEntry?.dispose()
     @newEntry = null
