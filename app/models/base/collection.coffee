@@ -26,6 +26,15 @@ module.exports = class Collection extends Chaplin.Collection
     super
 
   ###*
+   * Patch the collection on the server with the new models in the local collection.
+   *
+   * @return {promise/A} A jQuery 1.8 promise of the server response.
+  ###
+  patch: ->
+    options = data: JSON.stringify @filter (model) -> model.isNew()
+    @sync 'patch', this, options
+
+  ###*
    * Clean up.
    *
    * This extends Chaplins default implementation by also disposing all models in this
