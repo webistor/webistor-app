@@ -31,7 +31,7 @@ module.exports = class Collection extends Chaplin.Collection
    * @return {promise/A} A jQuery 1.8 promise of the server response.
   ###
   patch: ->
-    options = data: JSON.stringify @filter (model) -> model.isNew()
+    options = data: JSON.stringify @filter (model) -> model.isNew() or model.hasChanged()
     @sync 'patch', this, options
 
   ###*
