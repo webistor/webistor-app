@@ -9,6 +9,9 @@ module.exports = class TagView extends View
   autoRender: true
   template: require './templates/tag'
 
+  listen:
+    'change model': 'render'
+
   events:
     'click .picker-trigger': 'clickPicker'
 

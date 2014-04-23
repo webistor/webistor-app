@@ -12,7 +12,7 @@ module.exports = class EntryView extends View
   bindings:
     '#l_title': 'title'
     '#l_url': 'url'
-    '#l_tags': 'rawTags'
+    '#l_tags': observe: 'tags', onGet: 'getTemplateTags', updateModel: false
     '#l_notes': 'notes'
 
   events:
@@ -30,10 +30,22 @@ module.exports = class EntryView extends View
     super
     @editing = o.editing or @editing
     @focus = o.focus or @focus
+    tags = @collect 'tag-collection'
+    @listenTo tags, 'change', (tag) => @render() if tag.id in @model.get 'tags'
 
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
     return require './templates/entry'
+
+  getTemplateData: ->
+    data = super
+    tags = @collect 'tag-collection'
+    data.tags = _.map data.tags, (tag) -> tags.get(tag).serialize()
+    return data
+
+  getTemplateTags: (val) ->
+    tags = @collect 'tag-collection'
+    _.map(val, (id) -> tags.get(id).get 'title').join ', '
 
   render: ->
     super
@@ -89,16 +101,16 @@ module.exports = class EntryView extends View
    *
    * @param {Boolean} add Set to false to prevent adding new tags to the collection.
    *
-   * @return {Array} An array of the Tag models created (or used) by this entry.
+   * @return {Array} An array of the Tag models created by this entry.
   ###
   updateTags: (add = true) ->
     tagNames = @parseTags()
     tags = @collect 'tag-collection'
     tags.remove tags.filter (tag) -> tag.isNew() and (tag.get 'title') in tagNames
-    ownTags = []
-    ownTags.push (tags.findWhere {title}) or (tags.add {title}) for title in tagNames if add
+    added = []
+    added.push tags.add {title} for title in tagNames when not tags.findWhere {title} if add
     tags.sort()
-    return ownTags
+    return added
 
   ###*
    * Patch the global tag collection, set references to the tags in our model and save the model.
@@ -107,19 +119,16 @@ module.exports = class EntryView extends View
   ###
   save: (e) ->
     e?.preventDefault()
-
     tags = @collect('tag-collection')
-    ownTags = @updateTags()
-
-    (if ownTags.length > 0 then tags.patch().then(=>
-      tagIds = _.map ownTags, (t) -> t.id
-      @model.set 'tags', tagIds
+    @updateTags()
+    tags.patch().then(=>
+      ownTags = _.map @parseTags(), (title) -> return tags.findWhere {title}
+      @model.set 'tags', _.map ownTags, (tag) -> tag.id
       @model.save()
     )
-
-    else @model.save())
-
-    .then => @disableEdit()
+    .then =>
+      @disableEdit()
+      tags.fetch().then -> tags.sort()
 
   ###*
    * Disable edit mode before disposing to ensure tags are cleaned up.
