@@ -26,7 +26,7 @@ module.exports = class LoginPageView extends PageView
     # Do a persistent login.
     @publishEvent '!session:login',
       persistent: 1
-      email: @$('#l_email').val()
+      login: @$('#l_email').val()
       password: @$('#l_password').val()
 
   onLogin: ->
