@@ -13,7 +13,7 @@ module.exports = class EntryView extends View
     '#l_title': 'title'
     '#l_url': 'url'
     '#l_tags': observe: 'tags', onGet: 'getTemplateTags', updateModel: false
-    '#l_notes': 'notes'
+    '#l_notes': 'description'
 
   events:
     'click': 'clickEntry'
