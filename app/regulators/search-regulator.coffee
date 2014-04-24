@@ -1,6 +1,6 @@
 Regulator = require 'regulators/base/regulator'
 
-module.exports = class Search extends Regulator
+module.exports = class SearchRegulator extends Regulator
   name: 'search'
 
   listen:
@@ -38,10 +38,10 @@ module.exports = class Search extends Regulator
     for value in ($.trim query).split ' '
       value = $.trim value
       if value.length > 1 then switch value.charAt 0
-        when '#' then tags.push value.slice 1
-        when '@' then users.push value.slice 1
-        when '$' then groups.push value.slice 1
-        when ':' then indexes.push value.slice 1
+        when '#' then v = value.slice 1; tags.push v unless v in tags
+        when '@' then v = value.slice 1; users.push v unless v in users
+        when '$' then v = value.slice 1; groups.push v unless v in groups
+        when ':' then v = value.slice 1; indexes.push v unless v in indexes
         else search = $.trim search + " #{value}"
       else search = $.trim search + " #{value}"
 

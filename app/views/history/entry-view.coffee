@@ -12,7 +12,7 @@ module.exports = class EntryView extends View
   bindings:
     '#l_title': 'title'
     '#l_url': 'url'
-    '#l_tags': 'rawTags'
+    '#l_tags': observe: 'tags', onGet: 'getTemplateTags', updateModel: false
     '#l_notes': 'notes'
 
   events:
@@ -23,15 +23,29 @@ module.exports = class EntryView extends View
     'click .js-cancel': 'disableEdit'
     'click .js-delete': 'delete'
     'submit form': 'save'
+    'change #l_tags': -> @updateTags()
+    'keydown #l_tags': (e) -> @updateTags() if e.which is 188
 
   initialize: (o) ->
     super
     @editing = o.editing or @editing
     @focus = o.focus or @focus
+    tags = @collect 'tag-collection'
+    @listenTo tags, 'change', (tag) => @render() if tag.id in @model.get 'tags'
 
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
     return require './templates/entry'
+
+  getTemplateData: ->
+    data = super
+    tags = @collect 'tag-collection'
+    data.tags = _.map data.tags, (tag) -> tags.get(tag).serialize()
+    return data
+
+  getTemplateTags: (val) ->
+    tags = @collect 'tag-collection'
+    _.map(val, (id) -> tags.get(id).get 'title').join ', '
 
   render: ->
     super
@@ -45,12 +59,16 @@ module.exports = class EntryView extends View
   enableEdit: (e) ->
     e?.preventDefault()
     return if @editing
+    @trigger 'edit:on'
     @editing = true
     @render()
+    @updateTags()
 
   disableEdit: (e) ->
     e?.preventDefault()
     return unless @editing
+    @trigger 'edit:off'
+    @updateTags false
     @editing = false
     @render()
 
@@ -64,8 +82,57 @@ module.exports = class EntryView extends View
 
   delete: (e) ->
     e?.preventDefault()
-    if confirm 'Destroy this historical piece of data?' then @model.destroy()
+    if confirm 'Destroy this historical piece of data?'
+      @model.destroy().then => @collect('tag-collection').fetch()
 
+  ###*
+   * Parse the raw tags from the input field into an array of tag names.
+   *
+   * @return {Array}
+  ###
+  parseTags: ->
+    tagNames = @$('#l_tags').val().split(',')
+    tagNames = _.filter tagNames, trim = (name) -> $.trim name
+    tagNames = _.map tagNames, trim
+    return tagNames
+
+  ###*
+   * Parse raw tags and create Tag models in the global tag-collection.
+   *
+   * @param {Boolean} add Set to false to prevent adding new tags to the collection.
+   *
+   * @return {Array} An array of the Tag models created by this entry.
+  ###
+  updateTags: (add = true) ->
+    tagNames = @parseTags()
+    tags = @collect 'tag-collection'
+    tags.remove tags.filter (tag) -> tag.isNew() and (tag.get 'title') in tagNames
+    added = []
+    added.push tags.add {title} for title in tagNames when not tags.findWhere {title} if add
+    tags.sort()
+    return added
+
+  ###*
+   * Patch the global tag collection, set references to the tags in our model and save the model.
+   *
+   * @return {promise/A} A jQuery 1.8 promise.
+  ###
   save: (e) ->
     e?.preventDefault()
-    @model.save().then => @disableEdit()
+    tags = @collect('tag-collection')
+    @updateTags()
+    tags.patch().then(=>
+      ownTags = _.map @parseTags(), (title) -> return tags.findWhere {title}
+      @model.set 'tags', _.map ownTags, (tag) -> tag.id
+      @model.save()
+    )
+    .then =>
+      @disableEdit()
+      tags.fetch().then -> tags.sort()
+
+  ###*
+   * Disable edit mode before disposing to ensure tags are cleaned up.
+  ###
+  dispose: ->
+    @disableEdit()
+    super

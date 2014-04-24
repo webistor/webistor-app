@@ -1,9 +1,8 @@
 PageController = require 'controllers/base/page-controller'
 AppView = require 'views/app-view'
 MenuView = require 'views/menu-view'
-SearchRegulator = require 'regulators/search'
+SearchRegulator = require 'regulators/search-regulator'
 EntryCollection = require 'models/entry-collection'
-TagCollection = require 'models/tag-collection'
 EntryListView = require 'views/history/entry-list-view'
 TagListView = require 'views/history/tag-list-view'
 ProtipView = require 'views/history/protip-view'
@@ -18,9 +17,7 @@ module.exports = class AppController extends PageController
     @reuse 'search-regulator', SearchRegulator
     @reuse 'app', AppView
     @reuse 'menu', MenuView
-    @reuse 'tags', ->
-      @item = new TagCollection
-      @item.fetch()
+    @collect 'tag-collection'
 
   list: (params) ->
 
@@ -28,7 +25,7 @@ module.exports = class AppController extends PageController
       @item = new EntryCollection
       @item.subscribeEvent 'search:search', @item.search.bind @item
 
-    @reuse 'tags-view', TagListView, collection: (@reuse 'tags')
+    @reuse 'tags-view', TagListView, collection: (@reuse 'tag-collection')
     @protip = new ProtipView region: 'main'
     @view = new EntryListView collection: (@reuse 'entries'), region: 'main'
 
