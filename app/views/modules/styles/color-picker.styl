@@ -2,18 +2,18 @@ control-height = 30px
 
 .module.color-picker
   min-width:272px
-  
+
   &.over
-    position: absolute
-  
+    position: fixed
+
   &.in
     position: static
-  
+
   .slide-control
     height: control-height
     position: relative
     margin-bottom: control-height
-    
+
     > a
       height: control-height
       line-height: control-height
@@ -40,14 +40,14 @@ control-height = 30px
 
     .left
       left: -10px
-    
+
     .right
       right: -10px
-  
+
   .color-palette
     width: 216px
     margin:0 auto
-    
+
     li
       display: inline-block
       margin-right: 8px
@@ -56,10 +56,10 @@ control-height = 30px
       height: 44px
       background-color: #fff
       cursor: pointer
-      
+
       &.active
         border: solid lightgrey 3px
-      
+
       &:nth-child(4n)
         margin-right: 0
 
@@ -87,6 +87,6 @@ control-height = 30px
       font-family:"ProximaNova SemiBold";
       font-size: 1rem
       border-bottom: solid #5c676d 1px
-    
+
   input[type="submit"]
     margin-top: 29px

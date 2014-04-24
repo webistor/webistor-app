@@ -54,7 +54,7 @@ module.exports = class TagView extends View
       color: @model.get 'color'
       arrow: 'right'
       css:
-        top: @$el.offset().top
+        top: @$el.position().top + 75
         right: 270
 
     picker.on 'changeColor', (color) => @setColor color
