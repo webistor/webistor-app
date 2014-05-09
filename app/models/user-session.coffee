@@ -1,17 +1,11 @@
 Model = require './base/model'
 
-###*
- * UserSession model
- *
- * @type {Model}
-###
-
 module.exports = class UserSession extends Model
-  urlPath: 'account/user_session'
-  keys: ['id', 'success', 'target_url', 'email', 'password', 'persistent']
-  isNewVal: false
+  
+  urlPath: 'session/getUser'
   
   # We don't need any primary keys or what have you.
+  isNewVal: false
   isNew: -> @isNewVal
   
   save: ->

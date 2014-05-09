@@ -5,10 +5,10 @@
   </a>
 </h3>
 
-{{#if notes}}
+{{#if this.description}}
   <div class="notes">
     <div class="first-line-toggler">
-      {{this.notes}}
+      {{this.description}}
     </div>
   </div>
 {{/if}}
@@ -37,8 +37,8 @@
       </a>
     </li>
     <li class="dt-created">
-      <i class="fa fa-clock-o js-delete"></i>
-      {{this.dt_created}}
+      <i class="fa fa-clock-o"></i>
+      {{this.created}}
     </li>
   </ul>
 </footer>

@@ -1,0 +1,4 @@
+Regulator = require 'regulators/base/regulator'
+
+module.exports = class {{#camelize}}{{name}}{{/camelize}} extends Regulator
+  name: '{{name}}'

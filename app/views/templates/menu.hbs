@@ -5,9 +5,7 @@
 
 <form id="search-form">
   <div class="ctrlHolder has-icon search">
-    <input type="search" name="search" placeholder="Search" list="search-suggestions"
-      {{#if this.search}} value="{{this.search}}"{{/if}}
-    />
+    <input id="search" type="search" name="search" placeholder="Search" list="search-suggestions" value="{{query}}" />
     <datalist id="search-suggestions"></datalist>
   </div>
 </form>
@@ -15,7 +13,7 @@
 <ul id="profile-nav">
   {{!-- <li><span>Avatar</span></li> --}}
   <li>
-    {{#if level}}
+    {{#if username}}
       <a href="#" class="profile-btn"><span>{{username}}</span> <i class="fa fa-caret-down"></i></a>
       <ul class="sub-menu">
         <li>
@@ -25,8 +23,6 @@
           <a href="invite" class="js-logout">Log out</a>
         </li>
       </ul>
-    {{else}}
-      <a href="{{url "start#login"}}" class="login-btn"><span>Log in</span></a>
     {{/if}}
   </li>
 </ul>
