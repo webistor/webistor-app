@@ -4,5 +4,5 @@ module.exports = (match) ->
   match 'search/:query', 'app#list' #TODO Reroute to #q/:query
   match 'login', 'start#login'
   match 'invite', 'start#invite'
-  match 'register/:user_id/:claim_key', 'start#register'
+  match 'register/:token', 'start#register'
   match '404', 'not-found#show'
