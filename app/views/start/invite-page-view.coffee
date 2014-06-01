@@ -1,5 +1,5 @@
 PageView = require 'views/base/page-view'
-UserInvite = require 'models/user-invite'
+Invitation = require 'models/invitation'
 
 module.exports = class InvitePageView extends PageView
   autoRender: true
@@ -13,19 +13,20 @@ module.exports = class InvitePageView extends PageView
     'submit .invite': 'invite'
   
   initialize: ->
-    @model = new UserInvite
+    @model = new Invitation
     super
   
   render: ->
     super
     @stickit()
-    # setTimeout (=> @$('.email')[0].focus()), 0
   
   invite: (e) ->
     e.preventDefault()
+    @model.path = 'invitations/register'
     @model.save().then ((result) => @inviteSucces result), (=> @inviteError arguments...)
   
   inviteSucces: (result) ->
+    console.log('inviteSuccess');
     @$('.error-message').html('<div>Your request is being processed!</div>')
     @$('.email, .request').hide()
     # Chaplin.utils.redirectTo 'introduction#thankyou')

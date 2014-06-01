@@ -15,15 +15,6 @@ module.exports = class RegisterPageView extends PageView
   events:
     'submit .register-form': 'register'
 
-  initialize: (model) ->
-    @model = model
-    @model.fetch()
-      .fail (xhr, state, message) =>
-        @$('form').hide()
-        @$('.welcome').text('Something went wrong.')
-        @$('.message').text(message+' ').append($('<a>', {href:'invite', text:'You can request a new invite.'}))
-    super
-
   render: ->
     super
     @stickit()
@@ -36,6 +27,12 @@ module.exports = class RegisterPageView extends PageView
     @$('#l_username, #l_password1, #l_password2').trigger 'change'
 
     @model.save().then ((result) => @registerSucces(result)), ((xhr, state, message)=> @registerError(xhr, state, message))
+
+  showErrorMessage: ->
+    super
+    @$('form').hide()
+    @$('.welcome').text('Something went wrong.')
+    @$('.message').text(message+' ').append($('<a>', {href:'invite', text:'You can request a new invite.'}))
 
   registerSucces: (result) ->
     Chaplin.utils.redirectTo 'app#history'
