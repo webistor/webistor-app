@@ -3,11 +3,16 @@
 <form class="register-form" method="post" action="#">
   <div class="inner">
     <div class="ctrlHolder email">
-      E-mail: <span id="l_email"></span>
+      <label for="l_email">Email</label>
+      {{#if this.emailEditable}}
+      <input id="l_email" type="text" name="email" placeholder="Email" autofocus />
+      {{else}}
+      <span id="l_email"></span>
+      {{/if}}
     </div>
     <div class="ctrlHolder">
       <label for="l_username">Username</label>
-      <input id="l_username" type="text" name="username" placeholder="Username" />
+      <input id="l_username" type="text" name="username" placeholder="Username" {{#unless this.emailEditable}}autofocus{{/unless}} />
     </div>
     <div class="ctrlHolder">
       <label for="l_password1">New password</label>

@@ -23,9 +23,8 @@ module.exports = class LoginPageView extends PageView
     # This is a workaround for some password managers. Trigger a just-in-time change manually.
     @$('#l_password, #l_email').trigger 'change'
 
-    # Do a persistent login.
+    # Do a login.
     @publishEvent '!session:login',
-      persistent: 1
       login: @$('#l_email').val()
       password: @$('#l_password').val()
 
