@@ -10,6 +10,7 @@ module.exports = class ErrorRegulator extends Regulator
 
   attachErrorView: ->
     @view = @reuse 'error-view', ErrorView
+    @view.attach()
 
   handleError: (error) ->
     console.error error.message

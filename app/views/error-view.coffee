@@ -2,7 +2,9 @@ View = require 'views/base/view'
 
 module.exports = class ErrorView extends View
   errorTemplate: require './templates/error'
-  autorender: true
+  autoRender: true
+  autoAttach: false
+  containerMethod: 'html'
   region: 'error'
   id: 'error'
 
