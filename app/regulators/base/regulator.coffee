@@ -18,6 +18,8 @@ module.exports = class Regulator
 
   initialize: -> this
 
+  reuse: Chaplin.Controller::reuse
+
   redirectTo: (args..., options) ->
 
     if options.silent

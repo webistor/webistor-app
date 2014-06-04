@@ -5,7 +5,6 @@ module.exports = class CollectionRegulator extends Regulator
   name: 'collection'
 
   collections: null
-  reuse: Chaplin.Controller::reuse
 
   initialize: ->
     @collections = {}

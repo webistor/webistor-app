@@ -21,9 +21,7 @@ module.exports = class Collection extends Chaplin.Collection
   ###*
    * Add default withCredentials option to all synchronisations.
   ###
-  sync: (method, model, options) ->
-    options = $.extend true, xhrFields:withCredentials:true, options
-    super
+  sync: Model::sync
 
   ###*
    * Patch the collection on the server with the new models in the local collection.

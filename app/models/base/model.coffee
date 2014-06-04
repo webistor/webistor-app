@@ -1,4 +1,5 @@
 config = require 'config'
+utils = require 'lib/utils'
 
 module.exports = class Model extends Chaplin.Model
 
@@ -47,11 +48,25 @@ module.exports = class Model extends Chaplin.Model
     return collection
 
   ###*
-   * Add default withCredentials option to all synchronisations.
+   * Synchronise with the server.
+   *
+   * This enhances backbone.sync a bit:
+   * - Adds default withCredentials option.
+   * - Hooks into error handler for server errors.
+   *
+   * @inheritDoc
   ###
   sync: (method, model, options) ->
     options = $.extend true, xhrFields:withCredentials:true, options
     super
+    .fail (xhr) =>
+      error = if xhr.responseJSON?.error?.message? then xhr.responseJSON.error else {
+        name: "SyncError"
+        message: xhr.responseJSON?.error or "#{utils.serverErrorToMessage(xhr.status)} (#{xhr.responseText})"
+      }
+      error.message = "#{xhr.statusText} (#{xhr.status}): #{error.message}"
+      @trigger 'apiError', error
+      @publishEvent '!error:error', error
 
   ###*
    * Create a sub-model.
