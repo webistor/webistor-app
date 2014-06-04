@@ -1,6 +1,6 @@
 {
   "name": "Webistor",
-  "version": "0.0.1-alpha",
+  "version": "0.1.0-beta",
   "main": "public/javascripts/app.js",
   "dependencies": {
     "chaplin": ">=0.10.0",
