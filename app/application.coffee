@@ -1,5 +1,4 @@
 CollectionRegulator = require 'regulators/collection-regulator'
-ErrorRegulator = require 'regulators/error-regulator'
 mediator = require 'mediator'
 
 # The application object.
@@ -22,4 +21,3 @@ module.exports = class Application extends Chaplin.Application
 
   initRegulators: ->
     @collectionRegulator = new CollectionRegulator
-    @errorRegulator = new ErrorRegulator

@@ -62,7 +62,8 @@ module.exports = class Model extends Chaplin.Model
     .fail (xhr) =>
       error = if xhr.responseJSON?.error?.message? then xhr.responseJSON.error else {
         name: "SyncError"
-        message: xhr.responseJSON?.error or "#{utils.serverErrorToMessage(xhr.status)} (#{xhr.responseText})"
+        message: xhr.responseJSON?.error or "#{utils.serverErrorToMessage(xhr.status)}" +
+          (if 0 < xhr.responseText?.length < 30 then " (#{xhr.responseText.replace '\n', ''})" else '')
       }
       error.message = "#{xhr.statusText} (#{xhr.status}): #{error.message}"
       @trigger 'apiError', error
