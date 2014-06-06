@@ -38,7 +38,6 @@ module.exports = class AppController extends PageController
     @protip = new ProtipView region: 'main'
     @view = new EntryListView collection: (@reuse 'entries'), region: 'main'
 
-    #TODO: Change document title accordingly.
     @publishEvent '!search:search', (if params.query then decodeURIComponent params.query else ''), true
 
   add: (params, route) ->
