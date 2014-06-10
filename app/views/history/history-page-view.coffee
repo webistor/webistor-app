@@ -3,6 +3,8 @@ Entry = require 'models/entry'
 EntryView = require './entry-view'
 EntryListView = require './entry-list-view'
 TagListView = require './tag-list-view'
+TagCollection = require 'models/tag-collection'
+EntryCollection = require 'models/entry-collection'
 
 module.exports = class HistoryPageView extends PageView
   autoRender: true
@@ -11,15 +13,57 @@ module.exports = class HistoryPageView extends PageView
   newEntry: null
   
   events:
-    'submit #search-form': 'submitSearch'
     'click .js-add-entry:not(.toggled)': 'createNewEntry'
     'click .js-add-entry.toggled': 'cancelNewEntry'
+    'click .pro-tip .dismiss': 'hideProTip'
+  
+  initialize: (o) ->
+    @search = o?.search or @search
   
   render: ->
+    
+    # Do standard rendering.
     super
-    @subview 'entry-list', new EntryListView {container: this.el}
-    @subview 'tag-list', new TagListView {container: '#right'}
-    @handleKeyboardShortcuts()
+    
+    # Create sub-collections.
+    tags = new TagCollection
+    entries = new EntryCollection
+    
+    # Create the sub-view for the list of entries, passing it the collection.
+    entriesView = @subview 'entry-list', new EntryListView
+      container: this.el
+      search: @search
+      collection: entries
+    
+    # Create the sub-view for the list of tags, passing it the collection.
+    tagsView = @subview 'tag-list', new TagListView
+      container: '#right'
+      collection: tags
+    
+    # Get the tags view to listen to changes in the tags on the entry models.
+    # When anything concerning the tags changes, refresh the whole collection.
+    entries.once 'sync', ->
+      tagsView.listenTo entries, 'change:tags add remove', ->
+        @resetCollection()
+    
+    # Get the entry view to listen to the color property on tag models.
+    entriesView.listenTo tags, 'change:color', (tag) ->
+      
+      # Find all entries that contain the changed tag.
+      affectedEntries = entries.filter (entry) ->
+        _(entry.get 'tags').any (one) -> one.id is tag.get 'tag_id'
+      
+      # Update the entry's tag-data and re-render.
+      _(affectedEntries).each (entry) ->
+        tags = _.clone entry.get 'tags'
+        one.color = tag.get 'color' for one in tags when one.id is tag.get 'tag_id'
+        entry.set 'tags', tags, silent:true
+        entriesView.renderItem entry
+
+    @showProTip()
+    
+    # No need to keep a hold of this property.
+    @search = undefined
   
   createNewEntry: (e, newEntryData = null) ->
     e?.preventDefault()
@@ -33,6 +77,7 @@ module.exports = class HistoryPageView extends PageView
       editing: true
     }
     @newEntry.once 'sync', =>
+      @toggleAddButton off
       @subview('entry-list').collection.unshift @newEntry
       newEntryView.dispose()
       @newEntry = null
@@ -41,7 +86,7 @@ module.exports = class HistoryPageView extends PageView
     @newEntry?.dispose()
     @newEntry = null
     @toggleAddButton off
-    @
+    this
   
   toggleAddButton: (state) ->
     $btn = @$el.find '.js-add-entry'
@@ -51,27 +96,22 @@ module.exports = class HistoryPageView extends PageView
     $txt.text $txt.data (if state is on then 'toggle' else 'default') + '-text'
     $ico[(if state is on then 'add' else 'remove') + 'Class'] 'fa-toggle-up'
     $ico[(if state is on then 'remove' else 'add') + 'Class'] 'fa-link'
-    @
-  
-  focusSearch: (e) ->
-    e?.preventDefault()
-    @$el.find('input[name=search]').focus()
+    this
 
-  submitSearch: (e) ->
-    e.preventDefault()
-    query = $(e.target).find('input[name=search]').val()
-    @subview('entry-list').search query
+  supportsLocalStorage: ->
+    # try{
+    #   return 'localStorage' in window && window['localStorage'] !== null;
+    # }catch(e){
+    #   return false;
+    # }
+    return true;
 
-  # Keyboard shortcuts handler.
-  # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
-  handleKeyboardShortcuts: ->
-    
-    $bar = @$el.find('input[name=search]')
+  # SHOW PRO TIP IF NEVER HIDDEN
+  showProTip: (force) ->
+    return false if !@supportsLocalStorage()
+    if( ! localStorage['app.preferences.hide_pro_tip.bookmarklet'] )
+      @$el.find('.pro-tip').show()
 
-    $(document).keydown (e) =>
-      
-      # Focus the search bar when slash is pressed outside of a focussed element.
-      @focusSearch(e) if e.which is 191 and $(document).has(':focus').length is 0
-      
-      # Blur the search bar when the escape key is pressed in it.
-      $bar.blur() if ($bar.is ':focus') and e.which is 27  
+  hideProTip: ->
+    localStorage['app.preferences.hide_pro_tip.bookmarklet'] = new Date().getTime();
+    @$el.find('.pro-tip').hide()

@@ -1,0 +1,41 @@
+<a href="">
+  <h1>Webistor</h1>
+  <span class="beta-label">beta</span>
+</a>
+
+<form id="search-form">
+  <div class="ctrlHolder has-icon search">
+    <input type="search" name="search" placeholder="Search" list="search-suggestions"
+      {{#if this.search}} value="{{this.search}}"{{/if}}
+    />
+    <datalist id="search-suggestions"></datalist>
+  </div>
+</form>
+
+<ul id="main-nav">
+  {{!-- 
+    <!--<li><a href="{{url "app#history"}}" class="history-btn active">My history</a></li>-->
+    <!--<li><a href="friends" class="friends-btn">My friends</a></li>-->
+    <li><a href="https://webistor.uservoice.com/forums/230349-general" class="feedback-btn" target="_blank">Send feedback</a></li>
+    <li><a title="Drag this button to your bookmarks bar" href="javascript:window.open('http://webistor.net/add?title='+encodeURI(document.title)+'&url='+encodeURI(location.href), '_blank');" class="bookmarklet-btn">Bookmarklet</a></li>
+    <li><a title="@webistor" target="_blank" href="https://twitter.com/webistor"><img src="http://www.intersport.nl/media/wysiwyg/footer/twitter-icon.png"></a></li>
+  --}}
+</ul>
+<ul id="profile-nav">
+  {{!-- <li><span>Avatar</span></li> --}}
+  <li>
+    {{#if level}}
+      <a href="#" class="profile-btn"><span>{{username}}</span> <i class="fa fa-caret-down"></i></a>
+      <ul class="sub-menu">
+        <li>
+          <a href="https://webistor.uservoice.com/forums/230349-general" class="feedback-btn" target="_blank">Send feedback</a>
+        </li>
+        <li>
+          <a href="invite" class="js-logout">Log out</a>
+        </li>
+      </ul>
+    {{else}}
+      <a href="{{url "start#login"}}" class="login-btn"><span>Log in</span></a>
+    {{/if}}
+  </li>
+</ul>

@@ -3,21 +3,23 @@ utils = require 'lib/utils'
 View = require 'views/base/view'
 Entry = require 'models/entry'
 
-#TODO: Rewrite this to use create and dispose rather than all sorts of buggy magic.
 module.exports = class EntryView extends View
   className: 'entry'
   autoRender: true
   editing: false
+  focus: 'title'
   
   bindings:
     '#l_title': 'title'
     '#l_url': 'url'
-    '#l_tags': 'rawTags' #TODO: custom getters or some custom binding
+    '#l_tags': 'rawTags'
     '#l_notes': 'notes'
 
   events:
+    'click': 'clickEntry'
+    'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
-    'click .js-edit': 'toggleEdit'
+    'click .js-edit': 'enableEdit'
     'click .js-cancel': 'cancel'
     'click .js-delete': 'delete'
     'submit .edit-entry-form': 'save'
@@ -25,6 +27,7 @@ module.exports = class EntryView extends View
   initialize: (o) ->
     super
     @editing = o.editing or @editing
+    @focus = o.focus or @focus
   
   getTemplateFunction: ->
     return require './templates/edit-entry' if @editing
@@ -32,14 +35,31 @@ module.exports = class EntryView extends View
   
   render: ->
     super
-    @stickit() if @editing
-    $('#l_title').focus() if @editing
+    return unless @editing
+    @stickit()
+    setTimeout (=> @$("#l_#{@focus}").focus()), 10
     
   toggleEdit: (e) ->
-    e?.preventDefault?()
-    @editing = !@editing
+    @[if @editing then 'disableEdit' else 'enableEdit'] e
+  
+  enableEdit: (e) ->
+    return if @editing
+    e?.preventDefault()
+    @editing = true
     @render()
-    this.trigger 'edit' + (if @editing then 'On' else 'Off')
+    this.trigger 'editOn'
+  
+  disableEdit: (e) ->
+    return unless @editing
+    e?.preventDefault()
+    @editing = false
+    @render()
+    this.trigger 'editOff'
+  
+  clickEntry: (e) ->
+    e?.preventDefault()
+    $('.entry').removeClass('active')
+    $(e.target).addClass('active')#TODO: Store wich entry is active, in a global var or model pointer.
   
   clickTag: (e, data) ->
     e?.preventDefault()
@@ -47,11 +67,12 @@ module.exports = class EntryView extends View
   
   cancel: (e) ->
     e?.preventDefault?()
-    @toggleEdit()
+    @disableEdit()
   
-  delete: ->
+  delete: (e) ->
+    e?.preventDefault?()
     if confirm 'Destroy this historical piece of data?' then @model.destroy()
   
   save: (e) ->
     e?.preventDefault()
-    @model.save().then => @toggleEdit()
+    @model.save().then => @disableEdit()

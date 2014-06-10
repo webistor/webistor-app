@@ -1,0 +1,56 @@
+background-color = #67737a
+arrow-size = 15px
+arrow-pos = 30px
+
+arrow-base =
+  border: solid transparent
+  content: " "
+  height: 0
+  width: 0
+  position: absolute
+  pointer-events: none
+  border-color: rgba(0, 0, 0, 0)
+
+.box
+  position: relative
+  background-color: background-color
+  height: 100%
+  width: 100%
+  padding:30px
+  border-radius:3px
+  
+  &.arrow-top:after
+    {arrow-base}
+    bottom: 100%
+    left: arrow-pos
+    border-bottom-color: background-color
+    border-width: arrow-size
+    margin-left: - arrow-size
+  
+  &.arrow-right:after
+    {arrow-base}
+    left: 100%
+    top: arrow-pos
+    border-left-color: background-color
+    border-width: arrow-size
+    margin-top: - arrow-size
+  
+  &.arrow-bottom:after
+    {arrow-base}
+    top: 100%
+    left: arrow-pos
+    border-top-color: background-color
+    border-width: arrow-size
+    margin-left: - arrow-size
+  
+  &.arrow-left:after
+    {arrow-base}
+    right: 100%
+    top: arrow-pos
+    border-right-color: background-color
+    border-width: arrow-size
+    margin-top: - arrow-size
+
+  input[type="submit"]
+    display:block
+    width:100%

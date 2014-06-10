@@ -22,17 +22,20 @@
 
   h3.title
     font-size: 1.04rem;
-    font-weight:800
     font-family:'ProximaNova SemiBold', sans-serif
     margin-bottom:30px
     
     a
       color: #373942
 
-  .description
+  .notes
     margin-bottom:30px
     font-family:'ProximaNova Light', sans-serif
     font-size:14px
+
+    .first-line-toggler
+      height:28px;
+      overflow-y:hidden
 
   .tags
     font-size:16px
@@ -43,6 +46,21 @@
       color:#67737a;
       margin-top:5px
       margin-right:15px
+
+  .delete
+    position:absolute
+    color:#a7afb6
+    opacity:0
+    top:30px
+    right:30px
+    transition:color 0.25s 0
+
+    &:hover
+      color:#555
+      transition:color 0 0
+      opacity:0
+      transition:opacity 0 0
+
 
   footer
     height:40px
@@ -80,7 +98,7 @@
       
     .entry-actions
       margin-left:30px
-      width:40px
+      width:75px
       text-align:center
       font-size:16px
       font-family:'FontAwesome', sans-serif
@@ -90,26 +108,6 @@
         display:block
         width:100%
         height:100%
-
-    .delete
-      margin-right:5px
-      color:#858585
-      font-size:0.85rem
-      line-height:30px
-      position:relative
-      display:none
-      top:2px
-      text-transform:lowercase
-      transition:color 0.25s 0
-
-      &:hover
-        color:#555
-        transition:color 0 0
-
-  &:hover
-    .entry-actions
-      .delete
-        display:inline-block
 
   .actions
     text-align:right
@@ -122,6 +120,17 @@
       margin-right:5px
       text-transform:lowercase
   
+  //.entry:hover
+  &:hover, &.active
+    border-color:#c5ced4;
+
+    // h3.title a
+    //   color:#ec7963
+
+    .delete
+      display:block
+      opacity:0.5
+
   &:hover .entry-actions
     display:block
 

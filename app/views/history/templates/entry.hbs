@@ -1,40 +1,43 @@
 
 <h3 class="title">
   <a href="{{this.url}}" target="_blank">
-    {{title}}
+    {{this.title}}
   </a>
 </h3>
 
-{{#if this.description}}
-  <div class="description">
-    {{this.description}}
+{{#if notes}}
+  <div class="notes">
+    <div class="first-line-toggler">
+      {{this.notes}}
+    </div>
   </div>
 {{/if}}
 
 <div class="tags">
   {{#each tags}}
-    <a href='#' class="tag">{{title}}</a>
+    <a href='search/{{this.title}}' class="tag"{{#if color}} style="color: {{this.color}};"{{/if}}>{{this.title}}</a>
   {{/each}}
 </div>
 
+<a href="#" class="js-delete delete" title="Delete this entry">
+  <i class="fa fa-trash-o"></i>
+</a>
+
 <footer>
   <ul>
+    {{#if this.url}}
     <li class="uri">
       <i class="fa fa-globe"></i>
       <a href="{{this.url}}" target="_blank" class="link">{{this.url}}</a>
     </li>
+    {{/if}}
     <li class="entry-actions">
       <a href="#" class="js-edit">
         <i class="fa fa-pencil"></i>
       </a>
-      {{!--
-      <a href="#" class="js-delete delete">
-        Delete
-      </a>
-      --}}
     </li>
     <li class="dt-created">
-      <i class="fa fa-clock-o"></i>
+      <i class="fa fa-clock-o js-delete"></i>
       {{this.dt_created}}
     </li>
   </ul>

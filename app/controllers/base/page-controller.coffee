@@ -5,4 +5,4 @@ module.exports = class PageController extends Controller
     
   beforeAction: ->
     super
-    @compose 'session', SessionController
+    @reuse 'session', SessionController

@@ -1,6 +1,6 @@
 CollectionView = require 'views/base/collection-view'
 EntryView = require './entry-view'
-SyncCollection = require 'models/base/sync-collection'
+Collection = require 'models/base/collection'
 Entry = require 'models/entry'
 
 module.exports = class EntryListView extends CollectionView
@@ -9,11 +9,11 @@ module.exports = class EntryListView extends CollectionView
   autoRender: true
   itemView: EntryView
   
-  initialize: ->
-    @collection = new SyncCollection null, model:Entry
-    @collection.fetch()
+  initialize: (o) ->
+    @collection = o.collection
+    if o?.search then @search o.search else @collection.fetch()
     super
   
   search: (query) ->
-    @collection.urlParams.search = query
+    @collection.urlParams = search:query
     @collection.fetch()
