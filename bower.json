@@ -10,7 +10,8 @@
     "normalize-css": ">=2.1.2",
     "h5bp-helpers": ">=0.1.0",
     "font-awesome": ">=3.2.1",
-    "backbone.stickit": "*"
+    "backbone.stickit": "*",
+    "cookies-js": "~0.4.0"
   },
   "overrides": {
     "backbone": {
