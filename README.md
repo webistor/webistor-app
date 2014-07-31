@@ -56,3 +56,4 @@ be able to test the output at `localhost:3333`.
 * [Chaplin](http://docs.chaplinjs.org/): Framework used.
 * [Backbone](http://backbonejs.org/): Framework used by Chaplin.
 * [HandleBars](http://handlebarsjs.com/): Template rendering engine used.
+* [Cookies](https://github.com/ScottHamper/Cookies): Cookies.

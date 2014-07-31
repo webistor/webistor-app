@@ -10,6 +10,11 @@ module.exports = class LoginPageView extends PageView
   events:
     'submit .login-form': 'doLogin'
 
+  getTemplateData: ->
+    data = super
+    data.nocookies = not Cookies.enabled
+    return data
+
   doLogin: (e) ->
     e?.preventDefault()
 
