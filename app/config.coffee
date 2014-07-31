@@ -1,4 +1,4 @@
 module.exports =
   api:
-    domain: 'localhost'
-    port: 3001
+    domain: 'api.webistor.net'
+    port: 80

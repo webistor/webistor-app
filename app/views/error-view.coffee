@@ -19,7 +19,9 @@ module.exports = class ErrorView extends View
 
   showError: (error) ->
     @$el.show()
-    @$el.append @errorTemplate error
+    if error.message not in @errors
+      @$el.append @errorTemplate error
+      @errors.push error.message
     @hideAfter 10000
 
   hideAfter: (ms) ->
@@ -32,3 +34,4 @@ module.exports = class ErrorView extends View
     @hideTimeout = null
     @$el.hide()
     @$el.empty()
+    @errors = []

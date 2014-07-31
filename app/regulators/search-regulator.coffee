@@ -1,4 +1,5 @@
 Regulator = require 'regulators/base/regulator'
+mediator = require 'mediator'
 
 module.exports = class SearchRegulator extends Regulator
   name: 'search'
@@ -14,6 +15,7 @@ module.exports = class SearchRegulator extends Regulator
     url = (if @parsed.empty then '/' else "/search/#{encodeURIComponent @parsed.processed}")
     Backbone.history.navigate url, {replace}
     @publishEvent '#search', @parsed
+    mediator.execute 'adjustTitle', @parsed.processed
 
   addSearch: (query, replace=false) ->
     return @doSearch query, replace unless @parsed?

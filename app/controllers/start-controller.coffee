@@ -5,11 +5,13 @@ StartView = require 'views/start-view'
 LoginPageView = require 'views/start/login-page-view'
 InvitePageView = require 'views/start/invite-page-view'
 RegisterPageView = require 'views/start/register-page-view'
+ErrorRegulator = require 'regulators/error-regulator'
 
 module.exports = class StartController extends PageController
 
   beforeAction: ->
     super
+    @reuse 'error-regulator', ErrorRegulator
     @reuse 'start-view', StartView
 
   invite: ->
@@ -17,6 +19,8 @@ module.exports = class StartController extends PageController
     @view = new InvitePageView  {@model}
 
   login: ->
+    @subscribeEvent 'session:login', => @redirectTo 'app#list', null, replace: true
+    @publishEvent '!session:determineLogin'
     @view = new LoginPageView
 
   register: (params) ->

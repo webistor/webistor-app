@@ -7,17 +7,26 @@ EntryListView = require 'views/history/entry-list-view'
 TagListView = require 'views/history/tag-list-view'
 ProtipView = require 'views/history/protip-view'
 utils = require 'lib/utils'
+ErrorRegulator = require 'regulators/error-regulator'
 
 module.exports = class AppController extends PageController
 
   beforeAction: ->
     super
-    @subscribeEvent 'session:logout', => @redirectTo 'start#invite', null, replace: true
+    D = $.Deferred()
+    P = D.promise()
+    @reuse 'error-regulator', ErrorRegulator
+    @subscribeEvent 'session:logout', =>
+      D.reject "Not logged in"
+      @redirectTo 'start#invite', null, replace: true
+    @subscribeEvent 'session:login', => D.resolve()
     @publishEvent '!session:determineLogin'
-    @reuse 'search-regulator', SearchRegulator
-    @reuse 'app', AppView
-    @reuse 'menu', MenuView
-    @collect 'tag-collection'
+    D.resolve() if @reuse('session').loginStatus is true
+    return P.then =>
+      @reuse 'search-regulator', SearchRegulator
+      @reuse 'app', AppView
+      @reuse 'menu', MenuView
+      @collect 'tag-collection'
 
   list: (params) ->
 
@@ -29,7 +38,6 @@ module.exports = class AppController extends PageController
     @protip = new ProtipView region: 'main'
     @view = new EntryListView collection: (@reuse 'entries'), region: 'main'
 
-    #TODO: Change document title accordingly.
     @publishEvent '!search:search', (if params.query then decodeURIComponent params.query else ''), true
 
   add: (params, route) ->

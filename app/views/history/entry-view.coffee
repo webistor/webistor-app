@@ -4,27 +4,38 @@ View = require 'views/base/view'
 Entry = require 'models/entry'
 
 module.exports = class EntryView extends View
+
+  # Properties.
   className: 'entry'
   autoRender: true
   editing: false
   focus: 'title'
+  dirty: null
 
+  # 2-Way data bindings.
   bindings:
     '#l_title': 'title'
     '#l_url': 'url'
     '#l_tags': observe: 'tags', onGet: 'getTemplateTags', updateModel: false
     '#l_notes': 'description'
 
+  # UI events.
   events:
     'click': 'clickEntry'
     'dblclick': 'enableEdit'
     'click .tag': 'clickTag'
     'click .js-edit': 'enableEdit'
-    'click .js-cancel': 'disableEdit'
+    'click .js-close': 'disableEdit'
+    'click .js-discard': 'revertEdit'
     'click .js-delete': 'delete'
     'submit form': 'save'
     'change #l_tags': -> @updateTags()
     'keydown #l_tags': (e) -> @updateTags() if e.which is 188
+
+  # Internal events.
+  listen:
+    'change model': 'setDirty'
+    'sync model': 'setClean'
 
   initialize: (o) ->
     super
@@ -41,6 +52,7 @@ module.exports = class EntryView extends View
     data = super
     tags = @collect 'tag-collection'
     data.tags = _.map data.tags, (tag) -> tags.get(tag).serialize()
+    data.dirty = @isDirty()
     return data
 
   getTemplateTags: (val) ->
@@ -51,6 +63,7 @@ module.exports = class EntryView extends View
     super
     return unless @editing
     @stickit()
+    if @isDirty() then @setDirty() else @setClean()
     setTimeout (=> @$("#l_#{@focus}").focus()), 10
 
   toggleEdit: (e) ->
@@ -71,6 +84,12 @@ module.exports = class EntryView extends View
     @updateTags false
     @editing = false
     @render()
+
+  revertEdit: (e) ->
+    e?.preventDefault()
+    if window.confirm 'Are you sure you want to discard changes?'
+      @disableEdit()
+      @model.fetch().then @render.bind this
 
   clickEntry: (e) ->
     $('.entry').removeClass('active')
@@ -129,6 +148,18 @@ module.exports = class EntryView extends View
     .then =>
       @disableEdit()
       tags.fetch().then -> tags.sort()
+
+  setDirty: ->
+    @$el.addClass 'dirty'
+    @dirty = true
+
+  setClean: ->
+    @$el.removeClass 'dirty'
+    @dirty = false
+
+  isDirty: ->
+    @dirty is true
+
 
   ###*
    * Disable edit mode before disposing to ensure tags are cleaned up.

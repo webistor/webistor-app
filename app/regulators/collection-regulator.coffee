@@ -20,9 +20,16 @@ module.exports = class CollectionRegulator extends Regulator
     return (@collect name for name in names)
 
   fetch: (name) ->
+
     return @fetchAll name if name instanceof Array
-    Collection = require "models/#{name}"
-    @listenTo (@collections[name] = item = new Collection), 'dispose', => @remove name
+
+    if name of @collections
+      item = @collections[name]
+
+    else
+      Collection = require "models/#{name}"
+      @listenTo (@collections[name] = item = new Collection), 'dispose', => @remove name
+
     return @reuse name, ->
       @item = item
       @item.fetch()

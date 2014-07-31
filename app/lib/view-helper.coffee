@@ -26,3 +26,7 @@ Handlebars.registerHelper 'url', (routeName, params..., options) ->
 # Pass a string to turn it into a class name (lowercase + dashify)
 Handlebars.registerHelper 'classify', (string) ->
   string.toLowerCase()
+
+Handlebars.registerHelper 'date', (input) ->
+  date = if input instanceof Date then input else new Date input
+  return "#{date.toLocaleDateString()} - #{date.getHours()}:#{date.getMinutes()}"

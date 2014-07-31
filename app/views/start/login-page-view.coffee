@@ -10,12 +10,10 @@ module.exports = class LoginPageView extends PageView
   events:
     'submit .login-form': 'doLogin'
 
-  listen:
-    'session:login mediator': 'onLogin'
-    'session:loginFailure mediator': 'onLoginFailure'
-
-  initialize: ->
-    @publishEvent '!session:determineLogin'
+  getTemplateData: ->
+    data = super
+    data.nocookies = not Cookies.enabled
+    return data
 
   doLogin: (e) ->
     e?.preventDefault()
@@ -27,9 +25,3 @@ module.exports = class LoginPageView extends PageView
     @publishEvent '!session:login',
       login: @$('#l_email').val()
       password: @$('#l_password').val()
-
-  onLogin: ->
-    utils.redirectTo 'app#list'
-
-  onLoginFailure: (message) ->
-    @$('.error-message').html('<div>'+message+'</div>')

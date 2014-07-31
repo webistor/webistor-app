@@ -4,7 +4,21 @@
     <a class="invite" href="{{url 'start#invite'}}">Request an invite</a>
   </div>
 </div>
+
 <h2>Do log in, we have cookies!</h2>
+
+{{#if this.nocookies}}
+<p>
+  But it looks like you don't. Please ensure that cookies are enabled past this point.
+  Cookies are required to keep you logged in during this session.
+</p>
+
+<p>
+  We don't use any of the evil kind.
+  You are welcome to read more about it in our <a href="/policy">privacy policy</a>.
+</p>
+{{/if}}
+
 <form class="login-form" method="post" action="#">
   <div class="inner">
     <div class="ctrlHolder">
@@ -16,7 +30,6 @@
       <input id="l_password" type="password" name="password" placeholder="Password" />
     </div>
     <div class="buttonHolder">
-      <div class="error-message"></div>
       <input type="submit" class="button red" value="Log in">
     </div>
   </div>

@@ -1,4 +1,4 @@
-# Webistor App - Version 0.0.1 Alpha
+# Webistor App - Version 0.1.0 Beta
 
 This is an HTML5 application, built with [Brunch](http://brunch.io) and [Chaplin](http://chaplinjs.org).
 
@@ -56,3 +56,4 @@ be able to test the output at `localhost:3333`.
 * [Chaplin](http://docs.chaplinjs.org/): Framework used.
 * [Backbone](http://backbonejs.org/): Framework used by Chaplin.
 * [HandleBars](http://handlebarsjs.com/): Template rendering engine used.
+* [Cookies](https://github.com/ScottHamper/Cookies): Cookies.

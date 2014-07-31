@@ -33,12 +33,12 @@
     {{/if}}
     <li class="entry-actions">
       <a href="#" class="js-edit">
-        <i class="fa fa-pencil"></i>
+        <i class="fa fa-pencil" {{#if dirty}}title="The changes made in this entry are not yet saved."{{/if}}></i>
       </a>
     </li>
     <li class="dt-created">
       <i class="fa fa-clock-o"></i>
-      {{this.created}}
+      {{date this.created}}
     </li>
   </ul>
 </footer>

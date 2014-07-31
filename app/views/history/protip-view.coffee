@@ -1,4 +1,5 @@
 View = require 'views/base/view'
+support = require 'support'
 
 module.exports = class ProtipView extends View
 
@@ -13,13 +14,6 @@ module.exports = class ProtipView extends View
     super
     @render() if @isEnabled()
 
-  # TODO: Move to Chaplin.supports in a nice way.
-  supportsLocalStorage: ->
-    try
-      return 'localStorage' of window and window.localStorage?
-    catch err
-      return false;
-
   showProTip: (force) ->
     @$el.show() if force or @isEnabled()
 
@@ -28,4 +22,4 @@ module.exports = class ProtipView extends View
     @$el.hide()
 
   isEnabled: ->
-    @supportsLocalStorage() and not localStorage['app.preferences.hide_pro_tip.bookmarklet']?
+    support.localStorage and not localStorage['app.preferences.hide_pro_tip.bookmarklet']?
