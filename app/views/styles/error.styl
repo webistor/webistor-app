@@ -1,22 +1,27 @@
 #error-container
-  position: fixed
+  position:fixed
   top:0
   left:0
   width:100%
   z-index:6
 
   #error
-
-    display: none
-    line-height: 30px
-    font-size: 1.2em
-    text-align: center
-    background-color: yellow
-    color: black
+    display:none
+    font-size:1.2em
+    text-align:center
+    color:#000
 
     .error
       margin: 10px
+      padding: 8px
+      border-radius:4px
+      border:1px solid #f5eb7b
+      background-color:#fdf7b3
+      opacity:0.8
+      display:inline-block
+      &:hover
+        opacity:1
 
     .name
-      font-weight: bolder
-      color: red
+      font-weight:bolder
+      color:#f00
