@@ -23,15 +23,16 @@
   <div class="inner">
     <div class="ctrlHolder">
       <label for="l_email">E-mail</label>
-      <input id="l_email" autofocus type="text" name="email" placeholder="Username / Email address" />
+      <input id="l_email" autofocus type="text" name="email" placeholder="Username / Email address" tabindex="1" />
     </div>
     <div class="ctrlHolder">
       <label for="l_password">Password</label>
-      <input id="l_password" type="password" name="password" placeholder="Password" />
+      <input id="l_password" type="password" name="password" placeholder="Password" tabindex="2" />
     </div>
+    <div class="error-message"></div>
     <div class="buttonHolder">
-      <a class="password-reset" href="{{url 'start#passwordReset'}}">Forgot your password?</a>
-      <input type="submit" class="button red" value="Log in">
+      <a class="password-reset" href="{{url 'start#passwordReset'}}" tabindex="4">Forgot your password?</a>
+      <input type="submit" class="button red" value="Log in" tabindex="3">
     </div>
   </div>
 </form>

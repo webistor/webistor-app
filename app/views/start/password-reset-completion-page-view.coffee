@@ -5,6 +5,9 @@ module.exports = class PasswordResetCompletionPageView extends PageView
   className: 'password-reset-page'
   template: require './templates/password-reset-completion'
   
+  regions:
+    error: '.error-message'
+  
   events:
     'submit .password-reset-completion-form': 'onSubmit'
   

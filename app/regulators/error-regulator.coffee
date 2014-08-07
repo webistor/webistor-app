@@ -9,7 +9,7 @@ module.exports = class ErrorRegulator extends Regulator
     'dispatcher:dispatch mediator': 'attachErrorView'
 
   attachErrorView: ->
-    @view = @reuse 'error-view', ErrorView
+    @view = new ErrorView
     @view.attach()
 
   handleError: (error) ->

@@ -7,6 +7,9 @@ module.exports = class PasswordResetPageView extends PageView
   className: 'password-reset-page'
   template: require './templates/password-reset'
   
+  regions:
+    error: '.error-message'
+  
   events:
     'submit .password-reset-form': 'onRequest'
   

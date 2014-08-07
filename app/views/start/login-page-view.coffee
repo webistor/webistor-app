@@ -6,7 +6,10 @@ module.exports = class LoginPageView extends PageView
   autoRender: true
   className: 'login-page'
   template: require './templates/login'
-
+  
+  regions:
+    error: '.error-message'
+  
   events:
     'submit .login-form': 'doLogin'
 
