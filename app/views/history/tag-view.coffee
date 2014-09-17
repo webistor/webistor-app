@@ -46,7 +46,7 @@ module.exports = class TagView extends View
     @$('.picker-trigger').css 'color', @color or ''
 
   save: ->
-    @model.set 'color', @color.slice 1
+    @model.set 'color', if @color? then @color.slice 1 else null
     @hideColorPicker()
     @model.save().then =>
       @render()
