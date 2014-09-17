@@ -22,7 +22,6 @@ module.exports = class ColorPickerView extends ModuleView
     @color = @activeColor = o.color or @color
     @arrowPosition = o.arrow or @arrowPosition
     @css = o.css or @css
-    window.test = this
     super
 
   getTemplateData: ->
