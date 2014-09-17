@@ -51,7 +51,12 @@ module.exports = class EntryView extends View
   getTemplateData: ->
     data = super
     tags = @collect 'tag-collection'
-    data.tags = _.map data.tags, (tag) -> tags.get(tag).serialize()
+    data.tags = _.map data.tags, (tag) ->
+      tag = tags.get(tag)
+      r = tag.serialize()
+      r.color = tag.getColor()
+      return r
+
     data.dirty = @isDirty()
     return data
 
