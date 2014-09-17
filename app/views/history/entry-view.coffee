@@ -102,6 +102,7 @@ module.exports = class EntryView extends View
 
   clickTag: (e, data) ->
     e?.preventDefault()
+    e?.stopImmediatePropagation()
     @publishEvent '!search:extend', "##{$(e.target).text()}"
 
   delete: (e) ->

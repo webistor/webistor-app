@@ -14,6 +14,7 @@ module.exports = class TagView extends View
 
   events:
     'click .picker-trigger': 'clickPicker'
+    'click .tag': 'clickTag'
 
   getTemplateData: ->
     data = super
@@ -30,6 +31,11 @@ module.exports = class TagView extends View
   clickPicker: (e) ->
     e?.preventDefault()
     @toggleColorPicker()
+
+  clickTag: (e, data) ->
+    e?.preventDefault()
+    e?.stopImmediatePropagation()
+    @publishEvent '!search:extend', "##{@model.get('title')}"
 
   setColor: (color) ->
     @color = color
