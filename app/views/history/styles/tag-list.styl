@@ -1,6 +1,13 @@
 @import 'nib'
 
 .tag-list
+
+  .extra
+    color: #ec7963 !important
+    display: block
+    margin: 0 0 20px 0
+    padding: 17px 30px 17px 60px
+
   display:block
 
   .tag-row
@@ -33,11 +40,11 @@
       text-align:center
       z-index:1
       color:#abb6bd
-      
+
       &.pinned
         display:block
         opacity:1
-      
+
       &:hover
         background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%, rgba(255,255,255,0) 50%);
         background: -webkit-gradient(radial, center center, 0px, center center, 50%, color-stop(0%,rgba(255,255,254,1)), color-stop(50%,rgba(255,255,255,0)));
@@ -51,7 +58,7 @@
         height:100%
         line-height:50px
         text-align:center
-      
+
     &:hover
 
       .picker-trigger
