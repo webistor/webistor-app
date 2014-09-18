@@ -6,4 +6,7 @@ module.exports = class EntryCollection extends Collection
   model: Entry
 
   search: (data) ->
-    @fetch if data?.query then {data:query:data.query} else {}
+    query = {}
+    query.options = limit:100
+    query.query = data.query if data?.query
+    @fetch data:query
