@@ -13,7 +13,9 @@ module.exports = class Model extends Chaplin.Model
   disposing: false
 
   # Allow initialize to define the path.
-  initialize: (@path=@path) ->
+  initialize: (properties, options = {}) ->
+    @path = options.path or @path
+    super
 
   ###*
    * Custom URL generating
