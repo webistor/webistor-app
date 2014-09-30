@@ -1,11 +1,14 @@
 Model = require './base/model'
 
-###*
- * Tag model
- *
- * @type {Model}
-###
-
 module.exports = class Tag extends Model
-  urlPath: 'webhistory/tags'
-  idAttribute: 'tag_id'
+
+  ###*
+   * Get the colour of the tag with leading `#`.
+   *
+   * @method getColor
+   *
+   * @return {String|null} Null when colour was not set.
+  ###
+  getColor: ->
+    color = @get 'color'
+    return if color then "##{color}" else null

@@ -1,5 +1,4 @@
 PageView = require 'views/base/page-view'
-UserSession = require 'models/user-session'
 mediator = require 'mediator'
 utils = require 'lib/utils'
 
@@ -8,30 +7,24 @@ module.exports = class LoginPageView extends PageView
   className: 'login-page'
   template: require './templates/login'
   
+  regions:
+    error: '.error-message'
+  
   events:
     'submit .login-form': 'doLogin'
-  
-  listen:
-    'session:login mediator': 'onLogin'
-    'session:loginFailure mediator': 'onLoginFailure'
-  
-  initialize: ->
-    @publishEvent '!session:determineLogin'
-  
+
+  getTemplateData: ->
+    data = super
+    data.nocookies = not Cookies.enabled
+    return data
+
   doLogin: (e) ->
     e?.preventDefault()
-    
+
     # This is a workaround for some password managers. Trigger a just-in-time change manually.
     @$('#l_password, #l_email').trigger 'change'
 
-    # Do a persistent login.
+    # Do a login.
     @publishEvent '!session:login',
-      persistent: 1
-      email: @$('#l_email').val()
+      login: @$('#l_email').val()
       password: @$('#l_password').val()
-  
-  onLogin: ->
-    utils.redirectTo 'app#history'
-  
-  onLoginFailure: (message) ->
-    @$('.error-message').html('<div>'+message+'</div>')

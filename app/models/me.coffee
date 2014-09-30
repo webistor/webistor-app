@@ -1,10 +1,4 @@
 Model = require './base/model'
 
-###*
- * Me model
- *
- * @type {Model}
-###
-
 module.exports = class Me extends Model
-  urlPath: 'account/me'
+  path: 'users/me'

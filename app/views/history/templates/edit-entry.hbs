@@ -2,8 +2,11 @@
 
   <div class="ctrlHolder has-icon title">
     <input placeholder="Title" id="l_title" type="text" name="title" value="" />
+    {{#if this.oldTitle}}
+    <p class="note">Note: You had previously stored this entry as "<code>{{this.oldTitle}}</code>".</p>
+    {{/if}}
   </div>
-   
+
   <div class="ctrlHolder has-icon url">
     <input placeholder="URI" id="l_url" type="text" name="url" value="" />
   </div>
@@ -17,8 +20,9 @@
   </div>
 
   <div class="buttonHolder actions">
-    {{#if id}}
-      <a href="#" class="js-cancel cancel">Cancel</a>
+    {{#if _id}}
+    <a href="#" class="js-discard cancel">Discard</a>
+    <a href="#" class="js-close cancel">Close</a>
     {{/if}}
     <input type="submit" value="Save" class="save button green" />
   </div>

@@ -8,10 +8,14 @@ module.exports = class TagView extends View
   className: 'tag-row'
   autoRender: true
   template: require './templates/tag'
-  
+
+  listen:
+    'change model': 'render'
+
   events:
     'click .picker-trigger': 'clickPicker'
-  
+    'click .tag': 'clickTag'
+
   getTemplateData: ->
     data = super
     collection = @model.collection
@@ -21,45 +25,50 @@ module.exports = class TagView extends View
     score2 = data.num / (3 + 0.03 * data.num)
     score = (score1 + score2) / ((100 / 3) * 2)
     data.ball_size = (3*score+0.75).toPrecision 2
+    data.color = @model.getColor()
     data
-  
+
   clickPicker: (e) ->
     e?.preventDefault()
     @toggleColorPicker()
-  
+
+  clickTag: (e, data) ->
+    e?.preventDefault()
+    e?.stopImmediatePropagation()
+    title = @model.get('title')
+    @publishEvent '!search:extend', (if title.indexOf(' ') is -1 then "#" else "") + title
+
   setColor: (color) ->
     @color = color
     @$('.picker-trigger').css 'color', color
-  
+
   revertColor: ->
-    @color = @model.get 'color'
+    @color = @model.getColor()
     @$('.picker-trigger').css 'color', @color or ''
-  
+
   save: ->
-    @model.set 'color', @color
+    @model.set 'color', if @color? then @color.slice 1 else null
     @hideColorPicker()
     @model.save().then =>
       @render()
       @model.collection.sort()
-  
+
   toggleColorPicker: ->
-    if not @subview('color-picker') or @subview('color-picker').disposed
-      @showColorPicker()
-    else
-      @hideColorPicker()
-  
+    if @subview('color-picker') then @hideColorPicker() else @showColorPicker()
+
   showColorPicker: ->
+    return false if @model.isNew()
     picker = @subview 'color-picker', new ColorPickerView
-      color: @model.get 'color'
+      color: @model.getColor()
       arrow: 'right'
       css:
-        top: @$el.offset().top
+        top: @$el.position().top + 75
         right: 270
-    
+
     picker.on 'changeColor', (color) => @setColor color
     picker.on 'applyColor', (color) => @setColor color; @save()
     picker.on 'removeColor', => @setColor null; @save()
     picker.on 'dispose', => @revertColor()
-    
+
   hideColorPicker: ->
-    @subview('color-picker')?.dispose()
+    @removeSubview 'color-picker'

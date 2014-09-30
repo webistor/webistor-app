@@ -5,17 +5,17 @@
   </a>
 </h3>
 
-{{#if notes}}
+{{#if this.description}}
   <div class="notes">
     <div class="first-line-toggler">
-      {{this.notes}}
+      {{this.description}}
     </div>
   </div>
 {{/if}}
 
 <div class="tags">
   {{#each tags}}
-    <a href='search/{{this.title}}' class="tag"{{#if color}} style="color: {{this.color}};"{{/if}}>{{this.title}}</a>
+    <a href='search/#{{this.title}}' class="tag"{{#if color}} style="color: {{this.color}};"{{/if}}>{{this.title}}</a>
   {{/each}}
 </div>
 
@@ -33,12 +33,12 @@
     {{/if}}
     <li class="entry-actions">
       <a href="#" class="js-edit">
-        <i class="fa fa-pencil"></i>
+        <i class="fa fa-pencil" {{#if dirty}}title="The changes made in this entry are not yet saved."{{/if}}></i>
       </a>
     </li>
     <li class="dt-created">
-      <i class="fa fa-clock-o js-delete"></i>
-      {{this.dt_created}}
+      <i class="fa fa-clock-o"></i>
+      {{date this.created}}
     </li>
   </ul>
 </footer>
