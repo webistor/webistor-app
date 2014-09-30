@@ -35,7 +35,8 @@ module.exports = class TagView extends View
   clickTag: (e, data) ->
     e?.preventDefault()
     e?.stopImmediatePropagation()
-    @publishEvent '!search:extend', "##{@model.get('title')}"
+    title = @model.get('title')
+    @publishEvent '!search:extend', (if title.indexOf(' ') is -1 then "#" else "") + title
 
   setColor: (color) ->
     @color = color

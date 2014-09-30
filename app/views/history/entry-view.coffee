@@ -106,7 +106,8 @@ module.exports = class EntryView extends View
   clickTag: (e, data) ->
     e?.preventDefault()
     e?.stopImmediatePropagation()
-    @publishEvent '!search:extend', "##{$(e.target).text()}"
+    title = $(e.target).text()
+    @publishEvent '!search:extend', (if title.indexOf(' ') is -1 then "#" else "") + title
 
   delete: (e) ->
     e?.preventDefault()
