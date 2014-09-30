@@ -16,6 +16,9 @@ module.exports = class TagListView extends CollectionView
 
   initialize: (o) ->
     @originalCollection = o.collection
+    @listenTo @originalCollection, 'change sort', =>
+      @collection = @createCollection @limit
+      @renderAllItems()
     @collection = @createCollection @limit
     super
 
