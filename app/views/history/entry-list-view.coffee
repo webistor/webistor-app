@@ -36,7 +36,7 @@ module.exports = class EntryListView extends CollectionView
   createNewEntry: (e) ->
     e?.preventDefault()
     @disableAllEdits()
-    @newEntry = new Entry 'entries'
+    @newEntry = new Entry null, path:'entries'
     @toggleAddButton on
     @subview 'new-entry', new EntryView
       container: @$ '.new-entry-container'
