@@ -1,4 +1,4 @@
-# Webistor App - Version 0.1.0 Beta
+# Webistor App - Version 0.2.0 Beta
 
 This is an HTML5 application, built with [Brunch](http://brunch.io) and [Chaplin](http://chaplinjs.org).
 
