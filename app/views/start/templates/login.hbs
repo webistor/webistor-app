@@ -29,10 +29,14 @@
       <label for="l_password">Password</label>
       <input id="l_password" type="password" name="password" placeholder="Password" tabindex="2" />
     </div>
+    <div class="ctrlHolder">
+      <input id="l_persistent" type="checkbox" name="persistent" tabindex="3" />
+      <label for="l_persistent" class="visible">Keep me logged-in</label>
+    </div>
     <div class="error-message"></div>
     <div class="buttonHolder">
-      <a class="password-reset" href="{{url 'start#passwordReset'}}" tabindex="4">Forgot your password?</a>
-      <input type="submit" class="button red" value="Log in" tabindex="3">
+      <a class="password-reset" href="{{url 'start#passwordReset'}}" tabindex="5">Forgot your password?</a>
+      <input type="submit" class="button red" value="Log in" tabindex="4">
     </div>
   </div>
 </form>
