@@ -30,4 +30,4 @@ module.exports = class RegisterPageView extends PageView
       name: 'ValidationError'
       message: "Passwords don't match."
     }
-    @model.save().then -> Chaplin.utils.redirectTo 'start#login'
+    @model.save().then -> Chaplin.utils.redirectTo 'landing#login'

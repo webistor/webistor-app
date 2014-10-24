@@ -1,0 +1,24 @@
+@import 'nib'
+
+button-shadow(size, color)
+  box-shadow: 0px size 0px 0px color
+
+.btn
+  cursor: pointer
+  text-decoration: none
+  color: #577388
+  font-family: 'proxima_novasemibold'
+  background: #FFF
+  padding: 10px 20px
+  border-radius: 2px
+  button-shadow: 2px rgba(227,227,227,1)
+
+.buttons
+  margin: 0 -10px
+  .btn
+    margin: 10px
+
+.green.btn
+  color: #FFF
+  background: #a0d468
+  button-shadow: 2px rgba(140,184,93,1)
