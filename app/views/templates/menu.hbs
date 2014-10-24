@@ -1,21 +1,19 @@
-<a href="">
-  <h1>Webistor</h1>
-  <span class="beta-label">beta</span>
-</a>
+<a class="logo" href="">Webistor</a>
 
-<form id="search-form">
+{{!-- <form id="search-form">
   <div class="ctrlHolder has-icon search">
     <input id="search" type="search" name="search" placeholder="Search" list="search-suggestions" value="{{query}}" />
     <datalist id="search-suggestions"></datalist>
   </div>
-</form>
+</form> --}}
 
-<ul id="profile-nav">
-  {{!-- <li><span>Avatar</span></li> --}}
-  <li>
-    {{#if username}}
-      <a href="#" class="profile-btn"><span>{{username}}</span> <i class="fa fa-caret-down"></i></a>
-      <ul class="sub-menu">
+<ul id="profile-nav" class="navigation">
+  {{#if username}}
+    <li>
+      <a href="#">
+        <span>{{username}}</span> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown cf">
         <li>
           <a href="https://webistor.uservoice.com/forums/230349-general" class="feedback-btn" target="_blank">Send feedback</a>
         </li>
@@ -23,6 +21,6 @@
           <a href="invite" class="js-logout">Log out</a>
         </li>
       </ul>
-    {{/if}}
-  </li>
+    </li>
+  {{/if}}
 </ul>

@@ -1,65 +1,62 @@
 @import 'nib'
 
 .tag-list
-
-  .extra
-    color: #ec7963 !important
-    display: block
-    margin: 0 0 20px 0
-    padding: 17px 30px 17px 60px
-
-  display:block
-
-  .tag-row
-    position:relative
-
+  
+  .list-title
+    background: #FFF
+    line-height: 50px
+    padding-left: 20px
+    border-bottom: 1px solid #e3e3e3
+    color: #47525d
+    a
+      color: #47525d
+      &:hover
+        color: #000
+  
+  .list
+    padding: 0
+    margin: 0
+    box-shadow: 0px 1px 0px 0px rgb(227,227,227)
+    background: #FFF
+  
+    li
+      line-height: 50px
+      color: #677277
+      position: relative
+      text-transform:uppercase
+      font-size:13px
+      font-family:'proxima_nova_rgbold'
+      a
+        display: block
+        color: #677277
+    
+    a.colorpicker
+      width: 16px
+      height: 16px
+      border: 2px solid #a0d468
+      display: block
+      border-radius: 50%
+      -webkit-border-radius: 50%
+      -moz-border-radius: 50%
+      position: absolute
+      top: 16px
+      right: 20px
+      span.active
+        width: 8px
+        height: 8px
+        background: #a0d468
+        display: block
+        border-radius: 50%
+        -webkit-border-radius: 50%
+        -moz-border-radius: 50%
+        position: absolute
+        top: 2px
+        right: 2px
+    
+      
     .tag
-      padding:17px 30px 17px 60px
-      display:block
-      font-size:16px
-      color:#67737a
-      font-family:'ProximaNova Regular', sans-serif
-
-      &.pinned
-        font-family:'ProximaNova Semibold', sans-serif
-
-      &:hover
-        background-color:#dfe4e6
-
-    .picker-trigger
-      font-family:none
-      position:absolute
-      opacity:0.1
-      top:0
-      left:9px
-      font-size:5px
-      width:50px
-      height:50px
-      line-height:50px
-      display:block
-      text-align:center
-      z-index:1
-      color:#abb6bd
-
-      &.pinned
-        display:block
-        opacity:1
-
-      &:hover
-        background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%, rgba(255,255,255,0) 50%);
-        background: -webkit-gradient(radial, center center, 0px, center center, 50%, color-stop(0%,rgba(255,255,254,1)), color-stop(50%,rgba(255,255,255,0)));
-        background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
-        background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
-        background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
-        background: radial-gradient(ellipse at center,  rgba(255,255,254,1) 0%,rgba(255,255,255,0) 50%);
-
-      i
-        display:block
-        height:100%
-        line-height:50px
-        text-align:center
-
-    &:hover
-
-      .picker-trigger
-        opacity:1
+      padding-left: 20px
+      border-bottom: 1px solid #f1f1f1
+      color: #677277
+      a:hover
+        color: #000

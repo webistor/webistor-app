@@ -1,44 +1,40 @@
-
-<h3 class="title">
-  <a href="{{this.url}}" target="_blank">
+<div class="heading-wrapper cf">
+  <a class="item-title" href="{{this.url}}" target="_blank" title="{{this.title}}">
     {{this.title}}
   </a>
-</h3>
-
-{{#if this.description}}
-  <div class="notes">
-    <div class="first-line-toggler">
-      {{this.description}}
-    </div>
-  </div>
-{{/if}}
-
-<div class="tags">
-  {{#each tags}}
-    <a href='search/#{{this.title}}' class="tag"{{#if color}} style="color: {{this.color}};"{{/if}}>{{this.title}}</a>
-  {{/each}}
+  
+  <a class="item-location" href="{{this.url}}" target="_blank" title="{{this.url}}">
+    {{this.shortUrl}}
+  </a>
+  
+  <a class="item-date">
+    {{date this.created}}
+  </a>
 </div>
 
-<a href="#" class="js-delete delete" title="Delete this entry">
-  <i class="fa fa-trash-o"></i>
-</a>
+{{#if this.description}}
+  <p class="notes">
+    {{this.description}}
+  </p>
+{{/if}}
 
-<footer>
-  <ul>
-    {{#if this.url}}
-    <li class="uri">
-      <i class="fa fa-globe"></i>
-      <a href="{{this.url}}" target="_blank" class="link">{{this.url}}</a>
+<ul class="item-tags">
+  {{#each tags}}
+    <li>
+      <a href='search/#{{this.title}}' class="btn tag"{{#if color}} style="background: {{this.color}};"{{/if}}>{{this.title}}</a>
     </li>
-    {{/if}}
-    <li class="entry-actions">
-      <a href="#" class="js-edit">
-        <i class="fa fa-pencil" {{#if dirty}}title="The changes made in this entry are not yet saved."{{/if}}></i>
-      </a>
-    </li>
-    <li class="dt-created">
-      <i class="fa fa-clock-o"></i>
-      {{date this.created}}
-    </li>
-  </ul>
-</footer>
+  {{/each}}
+</ul>
+
+<ul class="item-actions">
+  <li>
+    <a href="#" class="js-edit edit-item">
+      <i class="fa fa-cog" {{#if dirty}}title="The changes made in this entry are not yet saved."{{/if}}></i>
+    </a>
+  </li>
+  <li>
+    <a href="#" class="js-delete delete-item" title="Delete this entry">
+      <i class="fa fa-trash-o"></i>
+    </a>
+  </li>
+</ul>

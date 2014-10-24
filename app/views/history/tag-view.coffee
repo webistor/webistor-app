@@ -5,7 +5,8 @@ ColorPickerView = require 'views/modules/color-picker-view'
 
 
 module.exports = class TagView extends View
-  className: 'tag-row'
+  tagName: 'li'
+  className: 'cat tag'
   autoRender: true
   template: require './templates/tag'
 
@@ -62,8 +63,8 @@ module.exports = class TagView extends View
       color: @model.getColor()
       arrow: 'right'
       css:
-        top: @$el.position().top + 75
-        right: 270
+        top: @$el.position().top
+        right: 280
 
     picker.on 'changeColor', (color) => @setColor color
     picker.on 'applyColor', (color) => @setColor color; @save()

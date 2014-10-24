@@ -6,7 +6,7 @@ Entry = require 'models/entry'
 module.exports = class EntryView extends View
 
   # Properties.
-  className: 'entry'
+  className: 'item history-entry cf'
   autoRender: true
   editing: false
   focus: 'title'
@@ -59,7 +59,7 @@ module.exports = class EntryView extends View
       r = tag.serialize()
       r.color = tag.getColor()
       return r
-
+    data.shortUrl = @model.getShortUrl()
     data.dirty = @isDirty()
     return data
 

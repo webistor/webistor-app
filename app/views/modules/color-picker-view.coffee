@@ -4,8 +4,8 @@ module.exports = class ColorPickerView extends ModuleView
 
   template: require './templates/color-picker'
 
-  className: 'module color-picker over'
-  container: 'body'
+  className: 'module color-picker at'
+  container: '#contentbox'
 
   color: null
   arrowPosition: null

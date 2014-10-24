@@ -7,8 +7,8 @@ module.exports = class AppView extends View
   id: 'app-container'
   regions:
     nav: '#nav'
-    main: '#left'
-    side: '#tag-explorer'
+    main: '#left-wrapper'
+    side: '#right-wrapper'
     error: '#error-container'
 
   initialize: ->
