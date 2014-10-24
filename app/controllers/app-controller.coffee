@@ -44,10 +44,15 @@ module.exports = class AppController extends PageController
     Entry = require 'models/entry'
     MessageView = require 'views/message-view'
     EntryView = require 'views/history/entry-view'
+    data = utils.queryParams.parse route.query
 
-    @entry = new Entry utils.queryParams.parse route.query
-    @view = new EntryView {model: @entry, editing:true, focus: 'tags', region: 'main'}
-
-    @view.once 'editOff', =>
-      @entry.dispose()
-      @view = new MessageView {region: 'main', message: 'Added a new entry. :)'}
+    @collection = new EntryCollection
+    @collection.fetch(data:{query:"@me", options:uri:data.url}).then =>
+      if @entry = @collection.at 0
+        oldTitle = @entry.get 'title'
+        @entry.set 'title', data.title
+      else @entry = new Entry data, path: 'entries'
+      @view = new EntryView {model: @entry, editing: true, focus: 'tags', region: 'main', oldTitle}
+      @view.once 'editOff', =>
+        @entry.dispose()
+        @view = new MessageView {region: 'main', message: 'Added a new entry. :)'}

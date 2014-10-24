@@ -12,6 +12,9 @@ module.exports = class InvitePageView extends PageView
   events:
     'submit .invite': 'invite'
 
+  regions:
+    error: '.error-message'
+
   render: ->
     super
     @stickit()
@@ -19,11 +22,8 @@ module.exports = class InvitePageView extends PageView
   invite: (e) ->
     e.preventDefault()
     @model.path = 'invitations/request'
-    @model.save().then ((result) => @inviteSucces result), (=> @inviteError arguments...)
+    @model.save().then ((result) => @inviteSucces result)
 
   inviteSucces: (result) ->
     @$('.error-message').html('<div>Your request is being processed!</div>')
     @$('.email, .request').hide()
-
-  inviteError: (xhr, state, message) ->
-    @$('.error-message').html('<div>'+message+'</div>')

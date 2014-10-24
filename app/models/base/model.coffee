@@ -13,7 +13,9 @@ module.exports = class Model extends Chaplin.Model
   disposing: false
 
   # Allow initialize to define the path.
-  initialize: (@path=@path) ->
+  initialize: (properties, options = {}) ->
+    @path = options.path or @path
+    super
 
   ###*
    * Custom URL generating
@@ -60,11 +62,17 @@ module.exports = class Model extends Chaplin.Model
     options = $.extend true, xhrFields:withCredentials:true, options
     super
     .fail (xhr) =>
-      error = if xhr.responseJSON?.error?.message? then xhr.responseJSON.error else {
-        name: "SyncError"
-        message: xhr.responseJSON?.error or "#{utils.serverErrorToMessage(xhr.status)}" +
-          (if 0 < xhr.responseText?.length < 30 then " (#{xhr.responseText.replace '\n', ''})" else '')
-      }
+      if xhr.responseJSON?.name? and xhr.responseJSON?.message?
+        error = xhr.responseJSON
+        error.originalName = error.name
+        error.name = "SyncError"
+      else
+        error = {
+          name: "UnknownSyncError"
+          message: utils.serverErrorToMessage(xhr.status)
+          responseText: xhr.responseText
+        }
+
       error.message = "#{xhr.statusText} (#{xhr.status}): #{error.message}"
       @trigger 'apiError', error
       @publishEvent '!error:error', error

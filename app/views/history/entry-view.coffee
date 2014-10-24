@@ -11,6 +11,7 @@ module.exports = class EntryView extends View
   editing: false
   focus: 'title'
   dirty: null
+  oldTitle: null
 
   # 2-Way data bindings.
   bindings:
@@ -41,6 +42,7 @@ module.exports = class EntryView extends View
     super
     @editing = o.editing or @editing
     @focus = o.focus or @focus
+    @oldTitle = o.oldTitle or @oldTitle
     tags = @collect 'tag-collection'
     @listenTo tags, 'change', (tag) => @render() if tag.id in @model.get 'tags'
 
@@ -51,7 +53,13 @@ module.exports = class EntryView extends View
   getTemplateData: ->
     data = super
     tags = @collect 'tag-collection'
-    data.tags = _.map data.tags, (tag) -> tags.get(tag).serialize()
+    data.oldTitle = @oldTitle unless @oldTitle is data.title
+    data.tags = _.map data.tags, (tag) ->
+      tag = tags.get(tag)
+      r = tag.serialize()
+      r.color = tag.getColor()
+      return r
+
     data.dirty = @isDirty()
     return data
 
@@ -97,7 +105,9 @@ module.exports = class EntryView extends View
 
   clickTag: (e, data) ->
     e?.preventDefault()
-    @publishEvent '!search:extend', "##{$(e.target).text()}"
+    e?.stopImmediatePropagation()
+    title = $(e.target).text()
+    @publishEvent '!search:extend', (if title.indexOf(' ') is -1 then "#" else "") + title
 
   delete: (e) ->
     e?.preventDefault()
@@ -159,7 +169,6 @@ module.exports = class EntryView extends View
 
   isDirty: ->
     @dirty is true
-
 
   ###*
    * Disable edit mode before disposing to ensure tags are cleaned up.

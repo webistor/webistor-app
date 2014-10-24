@@ -2,6 +2,9 @@
 
   <div class="ctrlHolder has-icon title">
     <input placeholder="Title" id="l_title" type="text" name="title" value="" />
+    {{#if this.oldTitle}}
+    <p class="note">Note: You had previously stored this entry as "<code>{{this.oldTitle}}</code>".</p>
+    {{/if}}
   </div>
 
   <div class="ctrlHolder has-icon url">

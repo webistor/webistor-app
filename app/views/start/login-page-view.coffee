@@ -6,10 +6,10 @@ module.exports = class LoginPageView extends PageView
   autoRender: true
   className: 'login-page'
   template: require './templates/login'
-  
+
   regions:
     error: '.error-message'
-  
+
   events:
     'submit .login-form': 'doLogin'
 
@@ -28,3 +28,4 @@ module.exports = class LoginPageView extends PageView
     @publishEvent '!session:login',
       login: @$('#l_email').val()
       password: @$('#l_password').val()
+      persistent: @$('#l_persistent').is(':checked')
