@@ -1,4 +1,6 @@
 PageView = require 'views/base/page-view'
+LoginView = require './login-view'
+InviteView = require './invite-view'
 
 module.exports = class LandingPageView extends PageView
 
@@ -11,13 +13,18 @@ module.exports = class LandingPageView extends PageView
     popup: "#popup"
 
   events:
-    'click .login': 'openPopup'
     'click #overlay': 'closePopup'
-
-  openPopup: (e) ->
-    e?.preventDefault()
+  
+  openPopup: (view) ->
+    @subview 'popup', view
+    @subview('popup').render()
     @$('#overlay').addClass 'open'
 
   closePopup: (e) ->
+    return unless e?.target == @$('#overlay')[0]
     e?.preventDefault()
-    @$('#overlay').removeClass 'open'
+    Chaplin.utils.redirectTo 'landing#index'
+    @$('#overlay')
+    .removeClass('open')
+    .delay 1000, =>
+      @removeSubview 'popup'

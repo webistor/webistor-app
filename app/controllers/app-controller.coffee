@@ -18,7 +18,7 @@ module.exports = class AppController extends PageController
     @reuse 'error-regulator', ErrorRegulator
     @subscribeEvent 'session:logout', =>
       D.reject "Not logged in"
-      @redirectTo 'landing#invite', null, replace: true
+      @redirectTo 'landing#index', null, replace: true
     @subscribeEvent 'session:login', => D.resolve()
     @publishEvent '!session:determineLogin'
     D.resolve() if @reuse('session').loginStatus is true
