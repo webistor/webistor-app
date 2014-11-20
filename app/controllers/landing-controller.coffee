@@ -15,6 +15,8 @@ module.exports = class LandingController extends Controller
   index: ->
     @view = @reuse 'landing-page-view', LandingPageView
 
+  invite: ->
+    @index()
 
   redirectLoggedIn: ->
     @subscribeEvent 'session:login', => @redirectTo 'app#list', null, replace: true
