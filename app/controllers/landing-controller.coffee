@@ -1,10 +1,10 @@
-Controller = require 'controllers/base/controller'
+PageController = require 'controllers/base/page-controller'
 ErrorRegulator = require 'regulators/error-regulator'
 MinimalView = require 'views/minimal-view'
 LandingPageView = require 'views/landing/landing-page-view'
 mediator = require 'mediator'
 
-module.exports = class LandingController extends Controller
+module.exports = class LandingController extends PageController
 
   beforeAction: ->
     super
@@ -13,8 +13,16 @@ module.exports = class LandingController extends Controller
     mediator.execute 'adjustTitle', 'Webistor, Easy Bookmarking'
 
   index: ->
-    @view = @reuse 'landing-page-view', LandingPageView
-
+    @redirectLoggedIn()
+    @view = new LandingPageView unless @view instanceof LandingPageView
+  
+  invite: ->
+    @index()
+    @view.openInvite()
+  
+  login: ->
+    @index()
+    @view.openLogin()
 
   redirectLoggedIn: ->
     @subscribeEvent 'session:login', => @redirectTo 'app#list', null, replace: true

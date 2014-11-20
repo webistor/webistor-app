@@ -1,4 +1,4 @@
-<!-- <div class="login-wrapper">
+<div class="login-wrapper">
   <form class="login-form">
     <div>
       <label for="username">Email Address</label>
@@ -6,27 +6,20 @@
     </div>
     <div>
       <label for="password">Password</label>
-      <em class="error-message">Password Incorrect</em>
+      {{!-- <em class="error-message">Password Incorrect</em> --}}
       <input type="password" name="password" id="password" value="">
     </div>
     <p class="remember_me">
-        <input type="checkbox" name="remember-me" id="remember-me">
-        <label for="remember-me">Remember me</label>
-    </p><!-- /p.remember_me >
-    <a href="#" class="submit">Submit</a>
-    <a href="#" class="switch">Don't have an account yet? Request invite.</a>
-  </form><!-- /form.login-form >
-</div><!-- /div.login-wrapper > ---->
-
-<div class="request-wrapper">
-
-  <form class="request-form">
-    <div>
-      <label for="email">Email Address</label>
-      <input type="text" name="email" id="email" value="">
+      <input type="checkbox" name="remember-me" id="remember-me">
+      <label for="remember-me">Remember me</label>
+    </p><!-- /p.remember_me -->
+    <p class="submit">
+      <input type="submit" value="Log in" class="btn green submit clearfix" />
+    </p>
+    <p class="invite">
+      <label>Don't have an account yet?</label>
+      <a href="{{url "landing#invite"}}" class="switch">Request an invite.</a>
+    </p>
     </div>
-    <a href="#" class="submit">Request Invite</a>
-    <a href="#" class="switch">Already have an account? Login here</a>
-  </form>
-
-</div>
+  </form><!-- /form.login-form -->
+</div><!-- /div.login-wrapper -->
