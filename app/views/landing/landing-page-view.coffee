@@ -15,18 +15,9 @@ module.exports = class LandingPageView extends PageView
   events:
     'click #overlay': 'closePopup'
   
-  openLogin: (e) ->
-    @subview 'popup', new LoginView
+  openPopup: (view) ->
+    @subview 'popup', view
     @subview('popup').render()
-    @openPopup e
-  
-  openInvite: (e) ->
-    @subview 'popup', new InviteView
-    @subview('popup').render()
-    @openPopup e
-  
-  openPopup: (e) ->
-    e?.preventDefault()
     @$('#overlay').addClass 'open'
 
   closePopup: (e) ->

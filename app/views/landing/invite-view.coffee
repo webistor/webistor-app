@@ -5,3 +5,21 @@ module.exports = class InviteView extends View
 
   id: 'invite'
   region: 'popup'
+
+  events:
+    'submit .invite-form': 'invite'
+
+  bindings:
+    '.email': 'email'
+
+  render: ->
+    super
+    @stickit()
+  
+  invite: (e) ->
+    e.preventDefault()
+    @model.path = 'invitations/request'
+    @model.save().then ((result) => @inviteSucces result)
+
+  inviteSucces: (result) ->
+    @$('.invite-wrapper').html('<div>Your request is being processed!</div>')
