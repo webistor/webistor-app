@@ -8,8 +8,13 @@
   box-sizing: border-box
   font-smoothing: antialiased
 
+a
+  text-decoration:none
+  outline:none
+
 /* ==== CLEAFIX ==== */
 
+.cf,
 .clearfix
   display: inline-block
 
@@ -21,9 +26,11 @@
     line-height: 0
     height: 0
 
+html[xmlns] .cf,
 html[xmlns] .clearfix
   display: block
 
+* html .cf,
 * html .clearfix
   height: 1%
 
