@@ -1,11 +1,17 @@
-<div class="header">
-  <h2 class="title active">My History</h2>
-  <a class="js-add-entry button reddish" href="#">
-    <i class="fa fa-toggle-down"></i>
-    <span data-toggle-text="Cancel" data-default-text="Add New">Add New</span>
+<form action="/search/#" class="search" id="search-form">
+  <input id="search" type="search" name="search" placeholder="Search" list="search-suggestions" value="{{query}}" />
+  <a class="search-submit">
+    <i class="fa fa-search" title="Search"></i>
+  </a>
+  <datalist id="search-suggestions"></datalist>
+</form>
+
+<div class="entry-actions">
+  <a class="btn green add-new js-add-entry">
+    <span data-toggle-text="Cancel" data-default-text="Add new entry">Add new entry</span>
   </a>
 </div>
 
 <div class="new-entry-container"></div>
 
-<div class="item-container"></div>
+<div class="item-container cf"></div>

@@ -1,170 +1,108 @@
+@import 'nib'
+
 #nav
-  width:100%;
-  background-color:#f4f7f8
-  margin:0
-  padding:0
-  height:80px;
-  position:fixed
-  top:0
-  left:0
-  z-index:5
-  color: #67737a
-  border-bottom:solid #dfe4e6 1px
 
-  .menu
-    clearfix()
-
-  h1
-    margin:0;
-    padding: 0;
-    float: left;
-    display:inline-block;
-    width:117px
-    height:78px
-    border-right: 1px solid  #e5e5e5
-    text-indent:-9999px
-    background:#f4f7f8 url(../images/history/logo.png) center center no-repeat
-
-    a
-      width: 100%;
-      height: 100%;
-
-  .beta-label
-    position:absolute
-    font-size:20px
-    width:117px
-    text-align:center
-    top:55px
-    left:25px
-    // left:0
-    // top:35px
-    color:#999
-    font-size:0.6rem;
-
-  a
-    color: #67737a
-    display:inline-block;
-    position:relative;
-
-  #search-form
-    display:inline-block
-    font-family:'ProximaNova Regular', sans-serif
-    top: 0;
-    left:118px;
-    right:250px;
-    position: absolute;
-
-    .ctrlHolder
-      position:relative
-
-      &.search::before
-        content:"\f002"
-        font-size:18px
-        padding-top:24px
-        padding-left:20px
-
-    input[type="search"]
-      font-family:'ProximaNova SemiBold', sans-serif
-      font-weight:400
-      height:80px
-      width:100%
-      padding:30px
-      padding-left:70px
-      border:none
-      font-size:18px
-      border-bottom:solid #dfe4e6 1px
-      background:transparent
-      box-sizing: border-box
-      -moz-box-sizing: border-box
-
-    input[type="search"]:focus
-      background:#f9fbfc;
-
-  .bookmarklet-btn
-    cursor:move
-
-  ul
-    margin:0
-    padding:0
-    position:relative
-  
-    > li
-      float:left
-
-    li
-      margin:0
-      padding:0
-      line-height:80px
-
-      a
-        padding:0 15px
+  .inner-center
+    width: 100%
+    max-width: 1040px
+    height: 100%
+    margin: 0 auto
+    padding: 0
+    position: relative
 
   #profile-nav
-    position:absolute
-    top:0
-    right:0
-    width:250px
-    border-left:solid #dfe4e6 1px
-    text-align:right
-    
     li
-      width:100%
+      text-align:right
+    .dropdown
+      display: none
+      width:auto
+      li
+        display: block
+    li:hover .dropdown
+      display: block
+  
+  &.top
+    height: 70px;
+    line-height: 70px;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #e3e3e3;
+    background: #FFF;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    z-index: 40;
     
     a
-      display:inline-block
-      padding-right:30px
-
-    i
-      margin-left:13px
+      color: #7a8499;
+  
+  .logo
+    float: left;
+    width: 48px;
+    height: 32px;
+    background: #FFF url('../images/history/webistorlogo.png') center no-repeat;
+    text-indent: -9999px;
+    margin-top: 15px;
+  
+  ul.navigation
+    float: right;
+    margin: 0;
+    padding: 0;
     
-    .sub-menu
-      display:none
-      position:absolute
-      top:54px
-      right:16px
-      background:#fff
-      border:1px solid #e1e6e7
-      border-radius:3px
-      line-height:normal
-      padding:1px 1px
-        
-      li
-        padding:0
-        margin:0
-        line-height:normal
-        width:auto
-        float:none
+    li
+      display: inline-block;
       
-      a
-        color:#a7afb6
-        display:block
-        text-align:left
-        font-size:0.8em
-        line-height:1.2em
-        padding:6px 10px
+      &:last-child
+        margin-left: 0;
     
-        &:hover
-          background-color:#edf1f2
-          z-index:1000
-
-      &::after
-        content:""
-        display:block
-        position:absolute
-        top:-6px
-        right:12.5px
-        // width:12px
-        // height:7px
-
-        border: solid;
-        border-color: #fff transparent;
-        border-width: 0 .4em .4em .4em;
-        content: "";
-        display: block;
-        position: absolute;
-        z-index: 99;
-
+    .notifications
+      margin-right: 80px;
+    
+    .profile
+      height: 40px;
+      width: 40px;
+      background: #FFF;
+      display: block;
+      margin: 0;
+      padding: 0;
+      text-indent: -9999px;
+      border-radius: 50%;
+      position: absolute;
+      right: 20px;
+      top: 12px;
+      border: 1px solid #e3e3e3;
+  
+  .dropdown
+    background: #FFF;
+    width: 200px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-box-shadow: 0px 2px 0px 0px rgba(227,227,227,1);
+    -moz-box-shadow: 0px 2px 0px 0px rgba(227,227,227,1);
+    box-shadow: 0px 2px 0px 0px rgba(227,227,227,1);
+    position: absolute;
+    right: 0;
+    top: 50px;
+    z-index: 44;
+    
+    a
+      color: #7a8499;
+    
+    li
+      line-height: 40px;
+      border-bottom: 1px solid #f1f1f1;
+      padding: 0 10px;
       
-    &:hover .sub-menu
-      display:block
+      &:last-child
+        border: none;
     
+    &:after
+      content: "\f0d8"
+      font-family: 'FontAwesome'
+      color: #FFF
+      position: absolute
+      top: -15px
+      right: 10px
+      
+  

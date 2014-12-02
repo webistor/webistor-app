@@ -1,30 +1,34 @@
 .entry-list
+  
+  .search
+    position: relative
 
-  .header
-    clearfix()
-    padding-bottom: 30px
-    border-bottom:solid #dee5e7 1px
-
-    h2
-      margin: 0 10px 0 0
-      font-size: 20px
-      line-height: 30px
+  input[type=search]
+    box-sizing:border-box
+    display:block
+    width:100%
+    height: 50px
+    padding: 0 50px 0 20px
+    margin-bottom: 30px
+    border: none
+    box-shadow: 0px 1px 0px 0px rgb(227,227,227)
+    font-size: 16px
+    color: #7a8499
+  
+  .search-submit
+    position: absolute
+    right: 20px
+    top: 12px
+    border: none
+    background:transparent
+    font-size: 20px
+    color: #aaa
+    font-family: 'FontAwesome'
+    content: "\f002"
+  
+  .entry-actions
+    text-align:right
+    margin-bottom: 30px
+    
+    .add-new
       display:inline-block
-      font-size:22px
-      font-family:'ProximaNova Regular', sans-serif
-
-      &.active
-        color:#ec7963
-
-    .js-add-entry
-      float:right
-      min-width:93px
-      position:relative
-      margin:-5px 0 0 0
-
-      .fa
-        margin-right:3px;
-
-      &.toggled
-        span
-          display:inline-block

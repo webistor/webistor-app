@@ -10,16 +10,26 @@ module.exports = class EntryListView extends CollectionView
   itemView: EntryView
   listSelector: '.item-container'
 
+  query: ''
   newEntry: null
-
+  
+  listen:
+    'search:search mediator': 'updateSearch'
+  
   events:
+    'submit #search-form': 'submitSearch'
     'click .js-add-entry:not(.toggled)': 'createNewEntry'
     'click .js-add-entry.toggled': 'cancelNewEntry'
 
   initialize: ->
     super
-    $(document).keydown (e) => @disableAllEdits() if e.which is 27
-
+    @handleKeyboardShortcuts()
+  
+  getTemplateData: ->
+    data = super
+    data.query = @query
+    return data
+    
   disableAllEdits: ->
     item.disableEdit() for own k, item of @getItemViews()
     @cancelNewEntry()
@@ -57,3 +67,26 @@ module.exports = class EntryListView extends CollectionView
     @newEntry?.dispose()
     @newEntry = null
     @toggleAddButton off
+
+  focusSearch: (e) ->
+    e?.preventDefault()
+    @$('#search').focus()
+
+  submitSearch: (e) ->
+    e.preventDefault()
+    query = $.trim $(e.target).find('#search').val()
+    @publishEvent '!search:search', query
+
+  updateSearch: (data) ->
+    @query = data.processed
+    @$('#search').val @query
+
+  # Shortcut code overview: http://www.catswhocode.com/blog/using-keyboard-shortcuts-in-javascript
+  handleKeyboardShortcuts: ->
+    $bar = @$('#search')
+    # 27 = ESC
+    # 191 = /
+    $(document).keydown (e) =>
+      @disableAllEdits() if e.which is 27
+      @focusSearch(e) if e.which is 191 and $(document).has(':focus').length is 0
+      $bar.blur() if ($bar.is ':focus') and e.which is 27
