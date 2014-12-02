@@ -86,16 +86,20 @@
     top: 50px;
     z-index: 44;
     
-    a
-      color: #7a8499;
-    
     li
-      line-height: 40px;
-      border-bottom: 1px solid #f1f1f1;
-      padding: 0 10px;
+      padding:0
       
-      &:last-child
-        border: none;
+      a
+        display:block
+        color: #7a8499;
+        line-height: 40px;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 0 10px;
+      
+      line-height:0
+    
+    li:last-child a
+      border: none;
     
     &:after
       content: "\f0d8"

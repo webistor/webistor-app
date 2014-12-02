@@ -9,7 +9,7 @@ module.exports = class TagListView extends CollectionView
   region: 'side'
   listSelector: '.list'
   template: require './templates/tag-list'
-  limit: 50
+  limit: 20
 
   events:
     'click .extra': 'showMore'

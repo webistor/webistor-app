@@ -3,7 +3,8 @@
 #landing-page
   width: 100%
   height: 100%
-  background: #599ef0
+  background: #599ef0 url('/images/landing/bg.svg') no-repeat;
+  background-size: cover;
   color: #FFF
   font-size: 16px
   font-family: 'proxima_nova_rgregular'
@@ -27,14 +28,13 @@
     text-transform: uppercase
     font-size: 15px
     font-family: 'proxima_novasemibold'
-    background: #599ef0
 
     .top-left
       width: 150px
       float: left
 
       .logo
-        background: url('/images/landing/img/logo.png')
+        background: url('/images/landing/logo.png')
         width: 152px
         height: 32px
         display: block
@@ -112,7 +112,7 @@
     border-top-left-radius: 2px
     border-bottom-left-radius: 2px
     box-shadow: 0px 0px 10px 5px rgba(64,145,236,1)
-    background-image: url("/images/landing/img/preview.png")
+    background-image: url("/images/landing/preview.png")
 
   .overlay
     position: fixed
@@ -142,3 +142,7 @@
       color: #577388
       font-family: 'proxima_novasemibold'
       font-size: 18px
+      
+      a
+        text-decoration:underline;
+        color: #577388
