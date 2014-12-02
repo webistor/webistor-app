@@ -1,12 +1,11 @@
-PageView = require 'views/base/page-view'
+View = require 'views/base/view'
 
-module.exports = class PasswordResetCompletionPageView extends PageView
-  autoRender: true
-  className: 'password-reset-page'
+module.exports = class PasswordResetCompletionView extends View
+  autoRender: false
   template: require './templates/password-reset-completion'
-
-  regions:
-    error: '.error-message'
+  
+  region: 'popup'
+  id: 'password-reset'
 
   events:
     'submit .password-reset-completion-form': 'onSubmit'
@@ -16,8 +15,9 @@ module.exports = class PasswordResetCompletionPageView extends PageView
 
     # Check if password is empty.
     if !@$('#l_password1').val()
-      @publishEvent '!error:error', new Error('Password is emtpy.')
-      return
+      return @publishEvent '!error:error',
+        name: 'ValidationError'
+        message: "Password is empty."
 
     # Check the passwords match.
     if @$('#l_password1').val() != @$('#l_password2').val()
