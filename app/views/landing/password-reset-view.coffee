@@ -1,14 +1,13 @@
-PageView = require 'views/base/page-view'
+View = require 'views/base/view'
 mediator = require 'mediator'
 utils = require 'lib/utils'
 
-module.exports = class PasswordResetPageView extends PageView
+module.exports = class PasswordResetView extends View
   autoRender: false
-  className: 'password-reset-page'
   template: require './templates/password-reset'
   
-  regions:
-    error: '.error-message'
+  region: 'popup'
+  id: 'password-reset'
   
   events:
     'submit .password-reset-form': 'onRequest'

@@ -1,0 +1,27 @@
+<div class="login-wrapper">
+  <form class="login-form">
+    <div>
+      <label for="username">Email Address</label>
+      <input type="text" name="login" id="username" value="" placeholder="your@address.com">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" value="" placeholder="">
+    </div>
+    <p class="remember_me">
+      <input type="checkbox" name="remember-me" id="remember-me">
+      <label for="remember-me">Remember me</label>
+    </p>
+    <p class="submit">
+      <input type="submit" value="Log in" class="btn green submit clearfix" />
+    </p>
+    <p class="invite">
+      <label>Don't have an account yet?</label>
+      <a href="{{url "landing#invite"}}" class="switch">Request an invite.</a>
+    </p>
+    <p class="forgot">
+      <a href="{{url "landing#passwordReset"}}" class="switch">Forgot your password?</a>
+    </p>
+    </div>
+  </form>
+</div>

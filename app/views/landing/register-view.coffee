@@ -1,10 +1,12 @@
-PageView = require 'views/base/page-view'
+View = require 'views/base/view'
 
-module.exports = class RegisterPageView extends PageView
-  autoRender: false
-  className: 'register-page'
+module.exports = class RegisterView extends View
+  autorender: false
   template: require './templates/register'
-
+  
+  region: 'popup'
+  id: 'register'
+  
   bindings:
     '#l_email': 'email'
     '#l_username': 'username'
@@ -30,4 +32,4 @@ module.exports = class RegisterPageView extends PageView
       name: 'ValidationError'
       message: "Passwords don't match."
     }
-    @model.save().then -> Chaplin.utils.redirectTo 'start#login'
+    @model.save().then -> Chaplin.utils.redirectTo 'landing#login'
