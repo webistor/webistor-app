@@ -15,6 +15,7 @@ module.exports = class InviteView extends View
   render: ->
     super
     @stickit()
+    setTimeout (=> @$('input.email')[0].focus()), 50
   
   invite: (e) ->
     e.preventDefault()

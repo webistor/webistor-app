@@ -9,6 +9,10 @@ module.exports = class LoginView extends View
   events:
     'submit .login-form': 'doLogin'
   
+  render: ->
+    super
+    setTimeout (=> @$('#username')[0].focus()), 50
+  
   doLogin: (e) ->
     e?.preventDefault()
 

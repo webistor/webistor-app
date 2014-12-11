@@ -15,6 +15,10 @@ module.exports = class PasswordResetView extends View
   getTemplateData: ->
     email: @model.get 'email'
   
+  render: ->
+    super
+    setTimeout (=> @$('#l_email')[0].focus()), 50
+  
   onRequest: (e) ->
     e?.preventDefault()
     
