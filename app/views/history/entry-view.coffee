@@ -95,9 +95,8 @@ module.exports = class EntryView extends View
 
   revertEdit: (e) ->
     e?.preventDefault()
-    if window.confirm 'Are you sure you want to discard changes?'
-      @disableEdit()
-      @model.fetch().then @render.bind this
+    @disableEdit()
+    @model.fetch().then @render.bind this
 
   clickEntry: (e) ->
     $('.entry').removeClass('active')
