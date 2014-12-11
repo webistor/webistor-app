@@ -20,10 +20,21 @@ button-shadow(size, color)
 
 .green.btn
   color: #FFF
-  background: #a0d468
+  background:#a0d468
   button-shadow: 2px rgba(140,184,93,1)
+  
+  &:hover
+    background:#a9e06e
 
 .blue.btn
   color:#fff;
-  background:none repeat scroll 0% 0% #599EF0
-  box-shadow:0px 2px 0px 0px #4A85CA
+  background:#599EF0
+  button-shadow: 2px #4A85CA
+  
+  &:hover
+    background:#5ea6fc
+
+.btn:active
+  box-shadow:none;
+  position:relative
+  top:2px
