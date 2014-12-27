@@ -1,14 +1,10 @@
-<a class="logo" href="">Webistor</a>
-
-{{!-- <form id="search-form">
-  <div class="ctrlHolder has-icon search">
-    <input id="search" type="search" name="search" placeholder="Search" list="search-suggestions" value="{{query}}" />
-    <datalist id="search-suggestions"></datalist>
-  </div>
-</form> --}}
+<a href="" class="home"></a>
 
 <ul id="profile-nav" class="navigation">
   {{#if username}}
+    <li>
+      <a href="#" class="notifications"><i class="fa fa-bell"></i></a>
+    </li>
     <li>
       <a href="#">
         <span>{{username}}</span> <i class="fa fa-caret-down"></i>
@@ -24,3 +20,5 @@
     </li>
   {{/if}}
 </ul>
+
+<a href="" class="logo-img">Webistor</a>
