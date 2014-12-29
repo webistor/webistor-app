@@ -99,8 +99,10 @@ module.exports = class EntryView extends View
     @model.fetch().then @render.bind this
 
   clickEntry: (e) ->
-    $('.entry').removeClass('active')
-    $(e.target).addClass('active')
+    clickedEntry = $(e.target).closest('.item')
+    selfClick = clickedEntry.hasClass('active')
+    $('.item').removeClass('active')
+    clickedEntry.addClass('active') unless selfClick
 
   clickTag: (e, data) ->
     e?.preventDefault()
