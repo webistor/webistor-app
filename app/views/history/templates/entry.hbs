@@ -13,9 +13,11 @@
 </div>
 
 {{#if this.description}}
-  <p class="notes">
-    {{this.description}}
-  </p>
+  <div class="item-notes">
+    <div class="first-line-toggler">
+      {{expandLineBreaks this.description}}
+    </div>
+  </div>
 {{/if}}
 
 <ul class="item-tags">
