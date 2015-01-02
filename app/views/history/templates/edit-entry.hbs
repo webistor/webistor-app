@@ -1,18 +1,18 @@
 <form action="#" method="post" class="edit-entry-form">
 
   <div class="ctrlHolder has-icon title">
-    <input placeholder="Title" id="l_title" type="text" name="title" value="" />
+    <input placeholder="Title" id="l_title" type="text" name="title" value="" autocomplete="off" />
     {{#if this.oldTitle}}
     <p class="note">Note: You had previously stored this entry as "<code>{{this.oldTitle}}</code>".</p>
     {{/if}}
   </div>
 
   <div class="ctrlHolder has-icon url">
-    <input placeholder="URI" id="l_url" type="text" name="url" value="" />
+    <input placeholder="URI" id="l_url" type="text" name="url" value="" autocomplete="off" />
   </div>
 
   <div class="ctrlHolder has-icon tags">
-    <input placeholder="Tags, separated by commas" id="l_tags" type="text" name="tags" value="" />
+    <input placeholder="Tags, separated by commas" id="l_tags" type="text" name="tags" value="" autocomplete="off" />
   </div>
 
   <div class="ctrlHolder has-icon notes">

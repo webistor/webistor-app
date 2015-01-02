@@ -2,10 +2,10 @@
 
 <ul id="profile-nav" class="navigation">
   {{#if username}}
-    <li>
+    <li class="notifications-button">
       <a href="#" class="notifications"><i class="fa fa-bell"></i></a>
     </li>
-    <li>
+    <li class="profile-button">
       <a href="#">
         <span>{{username}}</span> <i class="fa fa-caret-down"></i>
       </a>
@@ -17,6 +17,9 @@
           <a href="landing" class="js-logout">Log out</a>
         </li>
       </ul>
+    </li>
+    <li class="menu-button">
+      <a href="#"><i class="fa fa-bars"></i></a>
     </li>
   {{/if}}
 </ul>

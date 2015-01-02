@@ -1,32 +1,36 @@
-<div class="heading-wrapper cf">
-  <a class="item-title"  href="{{this.url}}" rel="external" target="_blank" title="{{this.title}}">
-    {{this.title}}
-  </a>
-  
-  <a class="item-location" href="{{this.url}}" rel="external" target="_blank" title="{{this.url}}">
-    {{this.shortUrl}}
-  </a>
-  
-  <a class="item-date">
-    {{date this.created}}
-  </a>
-</div>
+<div class="item-meta-wrapper">
 
-{{#if this.description}}
-  <div class="item-notes">
-    <div class="first-line-toggler">
-      {{expandLineBreaks this.description}}
-    </div>
+  <div class="heading-wrapper cf">
+    <a class="item-title"  href="{{this.url}}" rel="external" target="_blank" title="{{this.title}}">
+      {{this.title}}
+    </a>
+    
+    <a class="item-location" href="{{this.url}}" rel="external" target="_blank" title="{{this.url}}">
+      {{this.shortUrl}}
+    </a>
+    
+    <a class="item-date">
+      {{date this.created}}
+    </a>
   </div>
-{{/if}}
 
-<ul class="item-tags">
-  {{#each tags}}
-    <li>
-      <a href='search/#{{this.title}}' class="btn tag"{{#if color}} style="background: {{this.color}};"{{/if}}>{{this.title}}</a>
-    </li>
-  {{/each}}
-</ul>
+  {{#if this.description}}
+    <div class="item-notes">
+      <div class="first-line-toggler">
+        {{expandLineBreaks this.description}}
+      </div>
+    </div>
+  {{/if}}
+
+  <ul class="item-tags">
+    {{#each tags}}
+      <li>
+        <a href='search/#{{this.title}}' class="btn tag"{{#if color}} style="background: {{this.color}};"{{/if}}>{{this.title}}</a>
+      </li>
+    {{/each}}
+  </ul>
+
+</div>
 
 <ul class="item-actions">
   <li>
@@ -38,5 +42,8 @@
     <a href="#" class="js-delete delete-item" title="Delete this entry">
       <i class="fa fa-trash-o"></i>
     </a>
+  </li>
+  <li class="action-menu-button">
+    <i class="fa fa-chevron-down"></i>
   </li>
 </ul>
