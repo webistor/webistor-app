@@ -21,12 +21,6 @@
       },
       "main": "backbone.js"
     },
-    "font-awesome": {
-      "main": [
-        "font",
-        "css/font-awesome.css"
-      ]
-    },
     "backbone.stickit": {
       "main": "backbone.stickit.js"
     }

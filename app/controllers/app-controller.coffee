@@ -3,9 +3,11 @@ AppView = require 'views/app-view'
 MenuView = require 'views/menu-view'
 SearchRegulator = require 'regulators/search-regulator'
 EntryCollection = require 'models/entry-collection'
+Feedback = require 'models/feedback'
 EntryListView = require 'views/history/entry-list-view'
 TagListView = require 'views/history/tag-list-view'
 ProtipView = require 'views/history/protip-view'
+FeedbackView = require 'views/history/feedback-view'
 utils = require 'lib/utils'
 ErrorRegulator = require 'regulators/error-regulator'
 
@@ -56,3 +58,25 @@ module.exports = class AppController extends PageController
       @view.once 'editOff', =>
         @entry.dispose()
         @view = new MessageView {region: 'main', message: 'Added a new entry. :)'}
+  
+  feedback: ->
+
+    @reuse 'entries', ->
+      @item = new EntryCollection
+      @item.subscribeEvent 'search:search', @item.search.bind @item
+
+    @reuse 'tags-view', TagListView, collection: (@reuse 'tag-collection')
+    @protip = new ProtipView region: 'main'
+
+    @entries = @collection
+
+    @view = new EntryListView collection: (@reuse 'entries'), region: 'main'
+
+    popup = new FeedbackView
+    popup.model = new Feedback
+    @reuse('app').openPopup popup
+
+  login: ->
+    @index()
+    popup = new LoginView
+    @reuse('landing-page').openPopup popup

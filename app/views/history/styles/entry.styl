@@ -11,9 +11,16 @@
   box-shadow: 0px 1px 0px 0px rgb(227,227,227)
   border-radius: 2px
   
+  &.active
+    box-shadow: 0px 1px 2px 2px rgb(227,227,227)
+
+  &.selected
+    padding:18px
+    border: solid #599EF0 2px;
+
   .heading-wrapper
     display:block
-  
+
   .item-title
     float: left;
     font-size: 18px;
@@ -44,7 +51,21 @@
     white-space:no-wrap;
     overflow:hidden;
     text-overflow:ellipsis;
-  
+
+  .item-notes
+
+    .first-line-toggler
+      max-height:28px
+      min-height:28px
+      overflow-y:hidden
+      transition: max-height 0.50s ease-out
+
+  &.active
+    .item-notes
+      .first-line-toggler
+        max-height: 10000px
+        transition: max-height 0.80s ease-in;
+
   .item-tags
     padding: 0;
     margin: 0;
@@ -62,10 +83,28 @@
     position: absolute;
     right: 20px;
     bottom: 10px;
+    opacity:0;
+    transition:opacity 0.15s;
+
+
     a
-      color: #aaa;
+      color: #bbb;
+      
+      &:hover
+        color: #999
+
     li
       display: inline-block;
+
+
+      &.action-menu-button
+        display:none
+
+  &:hover
+  &.active
+    .item-actions
+      transition:opacity 0.2s 0.2s, color 1s;
+      opacity:1;
   
   .edit-item
     margin-right: 20px;
