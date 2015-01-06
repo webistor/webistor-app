@@ -16,7 +16,8 @@ module.exports = class Collection extends Chaplin.Collection
   ###
   url: ->
     throw new Error "Must define a path on collections." unless @path
-    "http://#{config.api.domain}:#{config.api.port}/#{@path}"
+    schema = if config.api.https then 'https' else 'http'
+    "#{schema}://#{config.api.domain}:#{config.api.port}/#{@path}"
 
   ###*
    * Add default withCredentials option to all synchronisations.
