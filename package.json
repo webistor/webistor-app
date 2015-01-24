@@ -3,7 +3,7 @@
   "name": "Webistor",
   "description": "Webistor application",
   "version": "0.2.0-beta",
-  "homepage": "http://webistor.net",
+  "homepage": "https://webistor.net",
   "repository": {
     "type": "git",
     "url": "https://github.com/webistor/webistor.git"
