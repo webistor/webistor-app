@@ -23,7 +23,8 @@ module.exports = class Model extends Chaplin.Model
   url: ->
     return "#{@collection.url()}/#{@id}" if @collection
     throw new Error "Individual models must define their own paths." unless @path?
-    return "http://#{config.api.domain}:#{config.api.port}/#{@path}"
+    schema = if config.api.https then 'https' else 'http'
+    return "#{schema}://#{config.api.domain}:#{config.api.port}/#{@path}"
 
   ###*
    * Create a sub-set.

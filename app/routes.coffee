@@ -14,3 +14,4 @@ module.exports = (match) ->
   match '', 'app#list'
   match 'add', 'app#add'
   match 'search/:query', 'app#list' #TODO Reroute to #q/:query
+  match 'feedback', 'app#feedback'

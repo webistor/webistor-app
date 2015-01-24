@@ -1,6 +1,6 @@
 {
   "name": "Webistor",
-  "version": "0.2.0-beta",
+  "version": "0.3.0-beta",
   "main": "public/javascripts/app.js",
   "dependencies": {
     "chaplin": ">=0.10.0",
@@ -20,12 +20,6 @@
         "jquery": "*"
       },
       "main": "backbone.js"
-    },
-    "font-awesome": {
-      "main": [
-        "font",
-        "css/font-awesome.css"
-      ]
     },
     "backbone.stickit": {
       "main": "backbone.stickit.js"

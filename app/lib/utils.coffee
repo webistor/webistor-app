@@ -17,9 +17,10 @@ _(utils).extend
     isEmpty:                -> @length < 1
 
   req: (method, path, data) ->
+    schema = if config.api.https then 'https' else 'http'
     $.ajax
       method: method
-      url: "http://#{config.api.domain}:#{config.api.port}/#{path}"
+      url: "#{schema}://#{config.api.domain}:#{config.api.port}/#{path}"
       data: JSON.stringify data unless method is 'GET'
       contentType: 'application/json; charset=UTF-8' unless method is 'GET'
       processData: if method is 'GET' then true else false
@@ -39,7 +40,7 @@ _(utils).extend
       409: "The request you're making caused some conflict on the server."
       410: "The resource is no longer available."
       411: "The server wants to know the exact size of this request beforehand."
-      412: "The server can't fulfil one of the conditions set in your request."
+      412: "The server can't fulfill one of the conditions set in your request."
       413: "Something you're sending to the server is too big."
       414: "The URL is too long."
       415: "The server can't process this type of file."

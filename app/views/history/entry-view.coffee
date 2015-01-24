@@ -24,6 +24,7 @@ module.exports = class EntryView extends View
   events:
     'click': 'clickEntry'
     'dblclick': 'enableEdit'
+    'click [rel=external]': 'clickEntryLink'
     'click .tag': 'clickTag'
     'click .js-edit': 'enableEdit'
     'click .js-close': 'disableEdit'
@@ -99,8 +100,21 @@ module.exports = class EntryView extends View
     @model.fetch().then @render.bind this
 
   clickEntry: (e) ->
-    $('.entry').removeClass('active')
-    $(e.target).addClass('active')
+
+    clickedEntry = $(e.target).closest('.item')
+    selfClick = clickedEntry.hasClass('active')
+
+    $('.item').removeClass('active');
+    
+    if( ! $(e.target).is('a') )
+      $('.item').removeClass('selected');
+
+    clickedEntry.addClass('active') unless selfClick
+
+  clickEntryLink: (e) ->
+    clickedEntry = $(e.target).closest('.item')
+    $('.item').removeClass('selected')
+    clickedEntry.addClass('selected')
 
   clickTag: (e, data) ->
     e?.preventDefault()

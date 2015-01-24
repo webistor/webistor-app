@@ -2,8 +2,8 @@
   "author": "Tuxion",
   "name": "Webistor",
   "description": "Webistor application",
-  "version": "0.2.0-beta",
-  "homepage": "http://webistor.net",
+  "version": "0.3.0-beta",
+  "homepage": "https://webistor.net",
   "repository": {
     "type": "git",
     "url": "https://github.com/webistor/webistor.git"

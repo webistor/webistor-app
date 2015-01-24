@@ -10,7 +10,7 @@ This is an HTML5 application, built with [Brunch](http://brunch.io) and [Chaplin
   [From website](http://nodejs.org/)
 * Install Node Package Manager
   `sudo chown -R $USER /usr/local`
-  `curl http://npmjs.org/install.sh | sh`
+  `curl https://www.npmjs.com/install.sh | sh`
 
 ### Installation
 
