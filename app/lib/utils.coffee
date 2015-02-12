@@ -6,7 +6,7 @@ utils = Chaplin.utils.beget Chaplin.utils
 config = require 'config'
 
 # Extend the utilities.
-_(utils).extend
+tmp =
 
   # A list class for more versatile array management.
   List: class List extends Array
@@ -56,7 +56,10 @@ _(utils).extend
 
     return codes[code] or "Unknown error"
 
+_.extend(utils, tmp);
+
 # Prevent creating new properties and stuff.
 Object.seal? utils
+
 
 module.exports = utils
