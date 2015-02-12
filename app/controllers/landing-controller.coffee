@@ -41,6 +41,8 @@ module.exports = class LandingController extends PageController
     popup = new RegisterView
     popup.model = new User
     popup.model.path = 'users'
+
+    landing = @reuse('landing-page');
     
     # Get the matching email address before rendering if an invitation token is presented.
     if params.token
@@ -48,7 +50,7 @@ module.exports = class LandingController extends PageController
       @invitation.path = "invitations/#{params.token}"
       @invitation.fetch().then((=>
         popup.model.set email:(@invitation.get 'email'), invitation:(@invitation.get 'token')
-        @reuse('landing-page').openPopup popup
+        landing.openPopup popup
       ), (=>
         @redirectTo 'not-found#show', null, replace: true
       ))
