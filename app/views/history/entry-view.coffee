@@ -169,9 +169,9 @@ module.exports = class EntryView extends View
       @model.save()
     )
     .then =>
-      @disableEdit()
       tags.fetch().then -> tags.sort()
-
+      Chaplin.utils.redirectTo 'app#list'
+      
   setDirty: ->
     @$el.addClass 'dirty'
     @dirty = true
