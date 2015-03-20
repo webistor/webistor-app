@@ -29,7 +29,9 @@ Handlebars.registerHelper 'classify', (string) ->
 
 Handlebars.registerHelper 'date', (input) ->
   date = if input instanceof Date then input else new Date input
-  return "#{date.toLocaleDateString()} - #{date.getHours()}:#{date.getMinutes()}"
+  hour = (if date.getHours() < 10 then '0' + date.getHours() else date.getHours())
+  minute = (if date.getMinutes() < 10 then '0' + date.getMinutes() else date.getMinutes())
+  return "#{date.toLocaleDateString()} - #{hour}:#{minute}"
 
 Handlebars.registerHelper 'expandLineBreaks', (text) ->
   return new Handlebars.SafeString(text.replace(/\n/g, '<br>'))
