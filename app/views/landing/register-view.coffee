@@ -4,8 +4,8 @@ module.exports = class RegisterView extends View
   autorender: false
   template: require './templates/register'
   
-  region: 'popup'
   id: 'register'
+  region: 'popup'
   
   bindings:
     '#l_email': 'email'
@@ -32,4 +32,11 @@ module.exports = class RegisterView extends View
       name: 'ValidationError'
       message: "Passwords don't match."
     }
-    @model.save().then -> Chaplin.utils.redirectTo 'landing#login'
+
+    # Log in now (old message: "Great, you are in! <a href="landing#login">Log in</a> to view your brand new space.")
+    @model.save().then ((result) => @doLogin result)
+
+  doLogin: (e) ->
+    @publishEvent '!session:login',
+      login: @$('#l_username').val()
+      password: @$('#l_password1').val()

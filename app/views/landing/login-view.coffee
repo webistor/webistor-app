@@ -1,6 +1,7 @@
 View = require 'views/base/view'
 
 module.exports = class LoginView extends View
+  autorender: false
   template: require './templates/login'
 
   id: 'login'

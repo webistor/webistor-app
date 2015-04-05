@@ -44,11 +44,12 @@ module.exports = class LandingController extends PageController
     
     # Get the matching email address before rendering if an invitation token is presented.
     if params.token
+      @landing = new LandingPageView
       @invitation = new Invitation
       @invitation.path = "invitations/#{params.token}"
       @invitation.fetch().then((=>
         popup.model.set email:(@invitation.get 'email'), invitation:(@invitation.get 'token')
-        @reuse('landing-page').openPopup popup
+        @landing.openPopup popup
       ), (=>
         @redirectTo 'not-found#show', null, replace: true
       ))
