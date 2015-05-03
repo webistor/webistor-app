@@ -4,7 +4,7 @@ support = require 'support'
 module.exports = class ProtipView extends View
 
   autoRender: false
-  className: 'pro-tip'
+  className: 'pro-tip notification'
   template: require './templates/protip'
 
   events:
