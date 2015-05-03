@@ -169,8 +169,15 @@ module.exports = class EntryView extends View
       @model.save()
     )
     .then =>
-      @disableEdit()
-      Chaplin.utils.redirectTo 'app#list'
+      
+      # Disable edit if user edited an existing entry.
+      if(@model)
+        tags.fetch().then -> tags.sort()
+        @disableEdit()
+
+      # Redirect to item list if user added a _new_ entry.
+      else
+        Chaplin.utils.redirectTo 'app#list'
       
   setDirty: ->
     @$el.addClass 'dirty'
