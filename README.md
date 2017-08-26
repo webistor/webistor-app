@@ -1,6 +1,19 @@
 # Webistor App - Version 0.3.0 Beta
 
-This is an HTML5 application, built with [Brunch](http://brunch.io) and [Chaplin](http://chaplinjs.org).
+Webistor is an app that makes it possible to store your links into a database, so that you can find links when you need them. This way extends your memory in an easy way.
+
+## How to use?
+
+1. Go to webistor.net
+2. Create an account
+
+## Are you a developer?
+
+This is an open source HTML5 application, built with [Brunch](http://brunch.io) and [Chaplin](http://chaplinjs.org). Be welcome to update Webistor as you wish. Fork it!
+
+## Technical dept
+
+- It should be possible to launch Webistor immediately, for example using Docker or Nix
 
 ## Installing
 
